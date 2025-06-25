@@ -439,6 +439,13 @@ a {
     font-weight: 600;
     min-height: 40px; /* To align titles if they wrap to two lines */
 }
+
+.certification-card h3 b {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 500; /* Lighter than the title */
+    margin-top: 0.25rem; /* Add a small space above the issuer */
+}
 /* End of Certifications Section */
 
 @media (max-width: 768px) {
