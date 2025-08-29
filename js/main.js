@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Typing effect for the hero tagline
         const typingElement = document.getElementById('hero-typing-effect');
         if (typingElement) {
-            const text = "NYU MFE Candidate | Quantitative & Risk Analysis";
+            const text = "NYU Masters Financial Engineering Candidate | Quantitative & Risk Analysis";
             let index = 0;
             typingElement.textContent = ''; // Clear existing text
             function type() {
