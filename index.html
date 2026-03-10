@@ -2,221 +2,1388 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanishk Yadav | MS Financial Engineering @ NYU</title>
-    <meta name="description"
-        content="MS Financial Engineering candidate at NYU specializing in quantitative finance, risk management, and algorithmic trading.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="icon" type="image/svg+xml" href="assets/img/pfp.svg">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tanishk Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg-elevated: #111113;
+      --bg-card: #161619;
+      --border: #222226;
+      --border-hover: #333338;
+      --text-primary: #e8e6e3;
+      --text-secondary: #8a8a8e;
+      --text-muted: #55555a;
+      --accent: #c9a96e;
+      --accent-dim: #8b7444;
+      --accent-glow: rgba(201, 169, 110, 0.08);
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── Grain overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      background: rgba(10, 10, 11, 0.7);
+      border-bottom: 1px solid rgba(34, 34, 38, 0.5);
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.4s var(--ease-out);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-more-btn {
+      color: var(--accent-dim) !important;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 4px;
+      transition: all 0.3s var(--ease-out) !important;
+    }
+
+    .nav-more-btn::after {
+      display: none !important;
+    }
+
+    .nav-more-btn:hover {
+      color: var(--accent) !important;
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.4s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.6s forwards;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.8s forwards;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .hero-meta-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-meta-value {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .hero-meta-value a {
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .hero-meta-value a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
+    }
+
+    .scroll-line {
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      animation: scrollSlide 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollSlide {
+
+      0%,
+      100% {
+        left: -100%;
+      }
+
+      50% {
+        left: 100%;
+      }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-number {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin-left: 1rem;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-text strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── PROJECTS MARQUEE ─── */
+    .projects-section {
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .projects-section .section-header {
+      padding: 0 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .marquee-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .marquee-wrapper::before,
+    .marquee-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .marquee-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, var(--bg), transparent);
+    }
+
+    .marquee-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, var(--bg), transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem 2.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+    }
+
+    .marquee-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .marquee-track:active {
+      cursor: grabbing;
+    }
+
+    .project-card {
+      flex: 0 0 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      scroll-snap-align: center;
+      transition: all 0.5s var(--ease-out);
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--accent-dim);
+    }
+
+    .project-card-image {
+      width: 100%;
+      height: 220px;
+      background: var(--bg-elevated);
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out), opacity 0.4s;
+      opacity: 0;
+    }
+
+    .project-card-image img.loaded {
+      opacity: 1;
+    }
+
+    .project-card:hover .project-card-image img {
+      transform: scale(1.04);
+    }
+
+    .project-card-image .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
+    }
+
+    .placeholder-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .placeholder-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--text-muted);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .project-card-body {
+      padding: 1.5rem;
+    }
+
+    .project-card-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-card-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+      transition: color 0.3s;
+    }
+
+    .project-card:hover .project-card-title {
+      color: var(--accent);
+    }
+
+    .project-card-summary {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .project-card-footer {
+      padding: 0 1.5rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .project-tech {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tech-pill {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent-dim);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    .project-link:hover {
+      color: var(--accent);
+    }
+
+    .project-link svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .project-link:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    .marquee-controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding: 0 2.5rem;
+    }
+
+    .marquee-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .marquee-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .marquee-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent-dim), var(--border), transparent);
+    }
+
+    .exp-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 1.5rem;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -2.32rem;
+      top: 0.5rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent-dim);
+    }
+
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      margin-bottom: 0.15rem;
+    }
+
+    .exp-company {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .exp-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .skill-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .skill-group:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .skill-tag:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.4s var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .edu-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .edu-school {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-degree {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-details {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── CONTACT / FOOTER ─── */
+    .contact-section {
+      text-align: center;
+      padding: 8rem 2.5rem;
+      position: relative;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--accent-dim));
+    }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    .contact-heading em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    footer {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1.25rem;
+      }
+
+      .hero {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        flex: 0 0 340px;
+      }
+
+      .hero-meta {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links a {
+        font-size: 0.72rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        flex: 0 0 300px;
+      }
+
+      .hero-scroll-hint {
+        display: none;
+      }
+
+      .hero-meta {
+        gap: 1.25rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-gradient"></div>
 
-    <nav>
-        <a href="#home" class="logo">Tanishk<span>.</span></a>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="assets/files/resume.pdf" class="resume-btn" target="_blank">
-            <i class="fas fa-download"></i> Resume
-        </a>
-    </nav>
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">T<span>.</span>Y</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="credentials.html" class="nav-more-btn">More &rarr;</a></li>
+    </ul>
+  </nav>
 
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <p class="hero-intro">MS FINANCIAL ENGINEERING CANDIDATE</p>
-            <h1>Tanishk Yadav</h1>
-            <h2>Quantitative Finance & Risk Management</h2>
-            <p class="hero-description">
-                Master of Science in Financial Engineering candidate at NYU Tandon, specializing in quantitative
-                finance, algorithmic trading strategies, and systematic risk management. Currently seeking Summer 2026
-                internship opportunities in quantitative research and trading.
-            </p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn-secondary">View Projects</a>
-            </div>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/tanishkyadav" target="_blank" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://github.com/tanishhky" target="_blank" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="mailto:tanishkyadav@nyu.edu" aria-label="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
+  <!-- HERO -->
+  <header class="hero">
+    <p class="hero-label">M.S. Financial Engineering &mdash; NYU Tandon</p>
+    <h1>Tanishk Yadav<br><em>Quantitative Finance</em><br>& Machine Learning</h1>
+    <p class="hero-description">
+      Building at the intersection of stochastic modeling, statistical learning, and systematic trading.
+      Focused on regime-based allocation, risk analytics, and signal research.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Location</span>
+        <span class="hero-meta-value">New York City</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Email</span>
+        <span class="hero-meta-value"><a href="mailto:tanishkyadav@nyu.edu">tanishkyadav@nyu.edu</a></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">GitHub</span>
+        <span class="hero-meta-value"><a href="https://github.com/tanishhky" target="_blank">tanishhky</a></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">LinkedIn</span>
+        <span class="hero-meta-value"><a href="https://linkedin.com/in/tanishkyadav"
+            target="_blank">tanishkyadav</a></span>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Financial Engineering</strong> graduate student at <strong>NYU Tandon</strong>,
+          with an undergraduate degree in Computer Science (AI/ML specialization) from SRM University on a 100%
+          scholarship.
+        </p>
+        <p>
+          My work sits at the convergence of <strong>quantitative finance</strong> and <strong>machine
+            learning</strong>&mdash;from
+          Hidden Markov regime models and bootstrap-validated trading strategies, to sector-level clustering
+          of S&P 500 market structures. I care deeply about statistical rigor: if it can't survive a null hypothesis
+          test, it doesn't ship.
+        </p>
+        <p>
+          Currently seeking <strong>quant research, strats, and risk</strong> roles where I can apply
+          probabilistic modeling and systematic thinking to real market problems.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Quant Projects</div>
         </div>
-    </section>
-
-    <section id="about">
-        <h2 class="section-title"><span class="section-number">01.</span> About Me</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>
-                    I'm currently pursuing my Master of Science in Financial Engineering at New York University's Tandon
-                    School of Engineering, graduating in May 2027. My academic journey combines a strong foundation in
-                    Computer Science with specialized training in quantitative finance and derivatives pricing.
-                </p>
-                <p>
-                    I completed my Bachelor of Technology in Computer Science & Engineering with a specialization in AI
-                    & Machine Learning from SRM University on a 100% merit scholarship, where I developed expertise in
-                    statistical modeling, machine learning architectures, and algorithmic problem-solving.
-                </p>
-                <p>
-                    My research interests lie in regime-switching models, tail risk hedging, and the application of
-                    machine learning to financial forecasting. I've developed quantitative strategies that incorporate
-                    transaction cost analysis and systematic risk management frameworks, with a focus on practical
-                    implementation and robust backtesting methodologies.
-                </p>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h4>Programming</h4>
-                        <ul>
-                            <li>Python</li>
-                            <li>C++</li>
-                            <li>R</li>
-                            <li>SQL</li>
-                            <li>Java</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Quantitative</h4>
-                        <ul>
-                            <li>Scikit-Learn</li>
-                            <li>TensorFlow</li>
-                            <li>LSTM</li>
-                            <li>XGBoost</li>
-                            <li>Monte Carlo</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4>Finance</h4>
-                        <ul>
-                            <li>Derivatives</li>
-                            <li>Risk Mgmt</li>
-                            <li>VaR/CVaR</li>
-                            <li>Bloomberg</li>
-                            <li>Black-Scholes</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="profile-wrapper">
-                <div class="profile-img">
-                    <div class="profile-overlay"></div>
-                    <img src="assets/img/ty2766.png" alt="Tanishk Yadav">
-                </div>
-            </div>
+        <div class="stat-card">
+          <div class="stat-number">49</div>
+          <div class="stat-label">GitHub Repos</div>
         </div>
-    </section>
-
-    <section id="experience">
-        <h2 class="section-title"><span class="section-number">02.</span> Experience</h2>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <div>
-                    <h3 class="experience-title">Summer Intern, Framework Development</h3>
-                    <p class="experience-company">@ India Urban Data Exchange (IUDX)</p>
-                </div>
-                <span class="experience-date">Jun 2023 - Aug 2023</span>
-            </div>
-            <ul class="experience-description">
-                <li>Pioneered development of a secure, cross-platform digital consent collector using SHA-256 asymmetric
-                    cryptography, ensuring compliance for critical data aggregation on platform</li>
-                <li>Engineered full-stack JavaScript solutions for consent collection and retrieval, ensuring 100%
-                    compliance with central government regulations</li>
-                <li>Enabled ADeX to create 38 critical datasets for a government-academia joint venture as part of a
-                    team of 4</li>
-            </ul>
+        <div class="stat-card">
+          <div class="stat-number">93%</div>
+          <div class="stat-label">MLP Classifier Acc.</div>
         </div>
-    </section>
-
-    <section id="projects">
-        <h2 class="section-title"><span class="section-number">03.</span> Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3 class="project-title">Dynamic Regime-Based Sector Allocation & Tail Risk Hedging</h3>
-                <p class="project-description">
-                    Developed a Regime-Switching Risk Model using Gaussian Mixture Models to classify market states into
-                    Bull, Transition, and Crisis regimes. Backtested dynamic sector rotation strategy (2018–2026)
-                    reducing Maximum Drawdown from -35.75% to -19.25% while achieving Sharpe Ratio of 0.85. Validated
-                    via 1,000 Monte Carlo simulations.
-                </p>
-                <div class="project-tech">
-                    <span>Python</span>
-                    <span>Scikit-Learn</span>
-                    <span>Monte Carlo</span>
-                    <span>GMM</span>
-                    <span>Risk Management</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-title">FX Volatility Forecasting & Arbitrage Identification System</h3>
-                <p class="project-description">
-                    Engineered a quantitative pipeline to detect Triangular Arbitrage inefficiencies across G10 currency
-                    pairs using graph traversal algorithms. Benchmarked 7 predictive architectures (ARIMA, LSTM,
-                    XGBoost, Random Forest, SVR) on historical OHLC data. Developed backtesting engine incorporating
-                    transaction costs and bid-ask spreads.
-                </p>
-                <div class="project-tech">
-                    <span>Python</span>
-                    <span>Keras</span>
-                    <span>XGBoost</span>
-                    <span>CCXT</span>
-                    <span>Graph Theory</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-title">Sector-Level Equity Analysis & Clustering</h3>
-                <p class="project-description">
-                    Developing a quantitative model to analyze large-cap equities across GICS sectors, identifying
-                    volatility clusters and shifting correlations during different economic cycles. Engineered data
-                    pipeline to process time-series returns, isolating key performance drivers to inform sector-rotation
-                    strategies.
-                </p>
-                <div class="project-tech">
-                    <span>Python</span>
-                    <span>NumPy</span>
-                    <span>Pandas</span>
-                    <span>Hierarchical Clustering</span>
-                </div>
-            </div>
+        <div class="stat-card">
+          <div class="stat-number">46%</div>
+          <div class="stat-label">Max DD Reduction</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-        <h2 class="section-title"><span class="section-number">04.</span> What's Next?</h2>
-        <div class="contact-content">
-            <h2>Get In Touch</h2>
-            <p>
-                I'm currently seeking Summer 2026 internship opportunities in quantitative finance, trading, or risk
-                management. Whether you have a question or just want to connect, feel free to reach out!
-            </p>
-            <a href="mailto:tanishkyadav@nyu.edu" class="btn-primary">Say Hello</a>
+  <!-- PROJECTS MARQUEE -->
+  <section id="projects" class="projects-section reveal">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="marquee-wrapper">
+      <div class="marquee-track" id="marqueeTrack">
+        <!-- Cards are injected by JS -->
+      </div>
+    </div>
+
+    <div class="marquee-controls">
+      <button class="marquee-btn" id="scrollLeft" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <button class="marquee-btn" id="scrollRight" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="reveal">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <div class="exp-date">Jun 2023 &mdash; Aug 2023</div>
+        <div class="exp-role">Summer Intern, Framework Development</div>
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
+          <img src="assets/img/placeholder_logo.svg" alt="IUDX Logo" width="24" height="24" style="border-radius: 4px;">
+          <div class="exp-company" style="margin-bottom: 0;">IUDX (India Urban Data Exchange) &mdash; Bengaluru, India
+          </div>
         </div>
-    </section>
+        <p class="exp-desc">
+          Developed a secure, cross-platform digital consent collector using SHA-256 cryptographic hashing,
+          ensuring regulatory compliance for the ADeX government platform. Engineered full-stack JavaScript solutions
+          enabling 38 critical datasets for a government-academia joint venture.
+        </p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-date">2022 &mdash; 2023</div>
+        <div class="exp-role">Student Council PR Convener</div>
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
+          <img src="assets/img/placeholder_logo.svg" alt="SRM Logo" width="24" height="24" style="border-radius: 4px;">
+          <div class="exp-company" style="margin-bottom: 0;">SRM University &mdash; Amaravati, India</div>
+        </div>
+        <p class="exp-desc">
+          Represented 10,000+ students as primary liaison to administration.
+          Directed cross-functional teams to execute cultural fests with $100,000+ budgets.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>Designed & Built by Tanishk Yadav</p>
-        <p>© 2025</p>
-    </footer>
+  <!-- SKILLS -->
+  <section id="skills" class="reveal">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Libraries & Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">SciPy</span>
+          <span class="skill-tag">Statsmodels</span>
+          <span class="skill-tag">Scikit-Learn</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Keras</span>
+          <span class="skill-tag">XGBoost</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Financial Concepts</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Black-Scholes</span>
+          <span class="skill-tag">Monte Carlo</span>
+          <span class="skill-tag">VaR/CVaR</span>
+          <span class="skill-tag">HMM Regimes</span>
+          <span class="skill-tag">Tail Hedging</span>
+          <span class="skill-tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Bloomberg</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">LaTeX</span>
+          <span class="skill-tag">Jupyter</span>
+          <span class="skill-tag">Excel</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">ML Techniques</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GMM</span>
+          <span class="skill-tag">LSTM</span>
+          <span class="skill-tag">Random Forest</span>
+          <span class="skill-tag">Hierarchical Clustering</span>
+          <span class="skill-tag">ARIMA</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Certifications</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Bloomberg BMC</span>
+          <span class="skill-tag">Akuna Options 101</span>
+          <span class="skill-tag">Financial Markets (Honors)</span>
+          <span class="skill-tag">IBM ML</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="reveal">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-school">NYU Tandon School of Engineering</div>
+        <div class="edu-degree">M.S. Financial Engineering</div>
+        <div class="edu-details">Brooklyn, NY &middot; Expected May 2027</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">SRM University</div>
+        <div class="edu-degree">B.Tech CSE (AI & ML) &mdash; 100% Scholarship</div>
+        <div class="edu-details">Amaravati, India &middot; June 2025 &middot; GPA: 8.33/10</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section reveal">
+    <p class="contact-label">Get in touch</p>
+    <h2 class="contact-heading">Let's build something<br><em>quantitatively interesting.</em></h2>
+    <div class="contact-links">
+      <a href="mailto:tanishkyadav@nyu.edu" class="contact-link">tanishkyadav@nyu.edu</a>
+      <a href="tel:+16465334214" class="contact-link">(646) 533-4214</a>
+      <a href="https://github.com/tanishhky" target="_blank" class="contact-link">GitHub</a>
+      <a href="https://linkedin.com/in/tanishkyadav" target="_blank" class="contact-link">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Tanishk Yadav. Crafted with intent.</p>
+  </footer>
+
+  <script>
+    // ─── PROJECT DATA ───
+    const projects = [
+      {
+        name: "Dynamic Regime-Based Sector Allocation & Tail Risk Hedging",
+        repo: "tanishhky/regime_portfolio_optimization",
+        tag: "Portfolio Optimization",
+        tech: ["Python", "Scikit-Learn", "HMM", "Monte Carlo"],
+        summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Walk-forward backtest reduced Maximum Drawdown by 46% with Sharpe 1.49. Validated via 1,000 parametric bootstrap simulations."
+      },
+      {
+        name: "RSI Oscillator Trading Strategy",
+        repo: null,
+        tag: "Quantitative Trading",
+        tech: ["Python", "NumPy", "Pandas", "LaTeX"],
+        summary: "RSI(11) mean-reversion strategy on XLF ETF with grid search optimization. AR(1) return modeling and 200-sample parametric bootstrap establishing alpha at 5% significance. Microstructure-aware limit order execution.",
+        customImage: null
+      },
+      {
+        name: "S&P 500 Sector Clustering & Market Structure Analysis",
+        repo: "tanishhky/sp500-sector-analysis",
+        tag: "Financial Analytics",
+        tech: ["Python", "Keras", "Scikit-Learn", "Pandas"],
+        summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. Custom overperformance index with squared-weight allocation. MLP classifier achieved 93% accuracy across 4 sector clusters."
+      },
+      {
+        name: "FX Volatility Forecasting & Arbitrage System",
+        repo: "tanishhky/ArbitrageForexCalculator",
+        tag: "Systematic Trading",
+        tech: ["Python", "Keras", "XGBoost", "CCXT"],
+        summary: "Quantitative pipeline detecting Triangular Arbitrage across G10 FX pairs using graph traversal. Benchmarked 7 predictive architectures. Backtesting engine with transaction cost and spread filtering."
+      },
+      {
+        name: "Cancer Detection Using Hyperspectral Imaging",
+        repo: "tanishhky/cancerDetectionUsingHSI",
+        tag: "Deep Learning",
+        tech: ["Python", "TensorFlow", "HSI"],
+        summary: "Applied deep learning to hyperspectral imaging data for automated cancer tissue detection and classification. Leveraging spectral signatures beyond visible light for higher diagnostic precision."
+      },
+      {
+        name: "Consent Collector — IUDX",
+        repo: "tanishhky/consentCollector",
+        tag: "Full-Stack Development",
+        tech: ["JavaScript", "HTML", "SHA-256"],
+        summary: "Secure digital consent collection framework for India's Urban Data Exchange. SHA-256 cryptographic hashing for regulatory compliance. Enabled 38 critical government datasets."
+      },
+      {
+        name: "SuperMart Accounting System",
+        repo: "tanishhky/SuperMartAccSys",
+        tag: "Software Engineering",
+        tech: ["JavaScript", "Node.js"],
+        summary: "Full-stack accounting and inventory management system for retail operations. Real-time transaction tracking with automated reporting and analytics dashboard."
+      }
+    ];
+
+    // ─── RENDER PROJECT CARDS ───
+    const track = document.getElementById('marqueeTrack');
+
+    projects.forEach(proj => {
+      const ghImage = proj.repo
+        ? `https://opengraph.githubassets.com/1/${proj.repo}`
+        : null;
+
+      const card = document.createElement('a');
+      card.className = 'project-card';
+      card.href = proj.repo ? `https://github.com/${proj.repo}` : '#';
+      card.target = proj.repo ? '_blank' : '_self';
+      card.rel = 'noopener';
+
+      card.innerHTML = `
+    <div class="project-card-image">
+      ${ghImage ? `<img src="${ghImage}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
+      <div class="placeholder">
+        <div class="placeholder-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>${proj.tag}</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card-body">
+      <div class="project-card-tag">${proj.tag}</div>
+      <h3 class="project-card-title">${proj.name}</h3>
+      <p class="project-card-summary">${proj.summary}</p>
+    </div>
+    <div class="project-card-footer">
+      <div class="project-tech">
+        ${proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('')}
+      </div>
+      ${proj.repo ? `<span class="project-link">View <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>` : ''}
+    </div>
+  `;
+
+      track.appendChild(card);
+    });
+
+    // ─── MARQUEE DRAG SCROLL ───
+    let isDown = false, startX, scrollLeft;
+
+    track.addEventListener('mousedown', e => {
+      isDown = true;
+      track.style.cursor = 'grabbing';
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+
+    // Arrow buttons
+    document.getElementById('scrollLeft').addEventListener('click', () => {
+      track.scrollBy({ left: -440, behavior: 'smooth' });
+    });
+    document.getElementById('scrollRight').addEventListener('click', () => {
+      track.scrollBy({ left: 440, behavior: 'smooth' });
+    });
+
+    // ─── SCROLL REVEAL ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 
 </html>
