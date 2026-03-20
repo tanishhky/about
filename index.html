@@ -7,7 +7,6 @@
   <meta name="theme-color" content="#0a0a0b">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Tanishk Yadav</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -500,6 +499,12 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card-image img.loaded ~ .placeholder {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .placeholder-icon {
@@ -912,6 +917,164 @@
       transform: translateY(0);
     }
 
+    /* ─── PROJECT MODAL ─── */
+    .project-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-out);
+    }
+
+    .project-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .project-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 14px;
+      width: 90%;
+      max-width: 720px;
+      max-height: 85vh;
+      overflow-y: auto;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.4s var(--ease-out);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .project-modal-overlay.active .project-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .project-modal-image {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      background: var(--bg-elevated);
+    }
+
+    .project-modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(10,10,11,0.7);
+      backdrop-filter: blur(8px);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .project-modal-close:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(10,10,11,0.9);
+    }
+
+    .project-modal-close svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .project-modal-body {
+      padding: 2rem;
+    }
+
+    .project-modal-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-modal-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      line-height: 1.25;
+    }
+
+    .project-modal-detail {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-modal-tech {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .project-modal-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.35s var(--ease-out);
+      text-decoration: none;
+    }
+
+    .project-modal-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 169, 110, 0.2);
+    }
+
+    .project-modal-cta svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav {
@@ -1253,31 +1416,102 @@
     <p>&copy; 2026 Tanishk Yadav. Crafted with intent.</p>
   </footer>
 
+  <!-- PROJECT MODAL -->
+  <div class="project-modal-overlay" id="projectModal">
+    <div class="project-modal">
+      <div class="project-modal-image" id="modalImage">
+        <button class="project-modal-close" id="modalClose">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="project-modal-body">
+        <div class="project-modal-tag" id="modalTag"></div>
+        <h3 class="project-modal-title" id="modalTitle"></h3>
+        <p class="project-modal-detail" id="modalDetail"></p>
+        <div class="project-modal-tech" id="modalTech"></div>
+        <a class="project-modal-cta" id="modalCta" href="#" target="_blank" rel="noopener">
+          View on GitHub
+          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ─── PROJECT DATA ───
     const projects = [
+      {
+        name: "VolEdge — Volatility Trading System",
+        repo: "tanishhky/price-distribution-analysis-tool",
+        tag: "Volatility Trading",
+        tech: ["Python", "FastAPI", "React", "Black-Scholes", "GMM"],
+        summary: "Full-stack quantitative trading platform combining Gaussian Mixture Model price distribution analysis with options volatility surface mapping and automated trade signal generation.",
+        detail: "A production-grade volatility trading system built on Polygon.io with locally computed Black-Scholes pricing, implied volatility via Brent root-finding, and a 3D volatility surface renderer. The GMM engine fits N Gaussian components to Time-at-Price (D1) and Volume-Weighted (D2) distributions with BIC-optimal component selection and sliding-window moment evolution tracking.\n\nThe signal generator evaluates four strategy archetypes in real-time: Vol Crush (VRP > 5% → short strangles), Skew Trade (25Δ put skew vs. GMM tail risk → put credit spreads), Calendar Spread (term structure inversion detection), and Mean Reversion (displacement from High Volume Nodes). All signals output full leg structures with greeks and projected P&L.\n\nIncludes walk-forward optimization with AST-validated sandboxed strategy execution, parameter sensitivity sweeps via 3D surface plots, and an animated equity curve replay with interactive scrubbing. Multi-API key support with parallel chunked data fetching for rate limit management."
+      },
       {
         name: "Regime-Aware Fundamental Strategy & Point-in-Time Data Engine",
         repo: "tanishhky/Regime-Aware-Factor-Backtest",
         tag: "Quantitative Trading",
         tech: ["Python", "HMM", "SEC EDGAR", "Fama-French"],
-        summary: "Walk-forward HMM equity strategy across 18 years (2008–2026) delivering 633% total return net of a 2/25 fee structure, with 8.33% annualized FF5 alpha (p=0.008). Production-grade SEC EDGAR pipeline enforcing zero lookahead bias at 4 independent layers. Composite ranking on ROIC, leverage, earnings stability, and FCF yield."
+        summary: "Walk-forward HMM equity strategy across 18 years delivering 633% total return net of a 2/25 fee structure, with 8.33% annualized FF5 alpha (p=0.008).",
+        detail: "A walk-forward Hidden Markov Model equity strategy backtested across 18 years (2008–2026) delivering 633% total return net of a 2/25 fee structure (2% management, 25% performance above high-water mark), with 8.33% annualized Fama–French 5-factor alpha (t=2.67, p=0.008) and a defensive market beta of 0.77.\n\nThe production-grade SEC EDGAR data pipeline enforces zero lookahead bias at 4 independent layers: FilingsIndex → FilingSelector → XBRLParser → BloombergMapper, each gated by cutoff-date assertions with CutoffViolationError exceptions. Outputs normalized income, balance sheet, and cash flow tables with derived metrics (ROIC, FCF yield, leverage ratios).\n\nComposite ranking engine scores stocks on 4 fundamental factors (ROIC, leverage, earnings stability, FCF yield), each smoothed with 4-period EWMA (α≈0.4). Survivorship bias is addressed via a −30% forced-liquidation penalty after 20 consecutive NaN-price days. Regime-conditional position sizing across Crisis, Bear, Normal, and Bull states reduced maximum drawdown by 2.45pp vs. SPY. First-half sub-period alpha of 10.34% (p=0.019) confirms signal strength during crisis recovery regimes."
       },
       {
         name: "Dynamic Regime-Based Sector Allocation & Tail Risk Hedging",
         repo: "tanishhky/regime_portfolio_optimization",
         tag: "Portfolio Optimization",
         tech: ["Python", "Scikit-Learn", "HMM", "Monte Carlo"],
-        summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Strict Walk-Forward backtest with Ledoit-Wolf shrinkage achieved Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46%. Validated via 1,000 parametric bootstrap simulations with p<0.05 null rejection."
+        summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Achieved Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46%.",
+        detail: "A Regime-Switching Risk Model using a 4-state Gaussian Hidden Markov Model to classify market conditions into Crisis (VIX > 35, correlations → 1), Inflationary Bear, Secular Bull, and Transition states. Custom Synthetic History Generator backfills sector ETF data to 2005 for capturing GFC-era volatility dynamics.\n\nStrict Walk-Forward (Out-of-Sample) backtest from 2023–Present using Ledoit-Wolf shrinkage for covariance estimation achieved a Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46% (−10.12% vs. −18.76% benchmark).\n\nRobustness validated via Parametric Bootstrapping (1,000 simulations) and Null Hypothesis Falsification using random-walk null models, proving true alpha generation (+$26K excess return per $100K deployed) with p < 0.05 rejection of noise-driven outperformance. The work also demonstrates that naïve backtesting inflates Sharpe ratios 50–100% through look-ahead bias."
       },
       {
         name: "S&P 500 Sector-Level Clustering & Market Structure Analysis",
         repo: "tanishhky/sp500-sector-analysis",
         tag: "Financial Analytics",
         tech: ["Python", "Keras", "Scikit-Learn", "Pandas"],
-        summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. Custom overperformance index with squared-weight allocation. Applied Hierarchical + K-Means clustering and trained an MLP neural network achieving 93% classification accuracy on held-out test data."
+        summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. MLP neural network achieving 93% classification accuracy.",
+        detail: "Comprehensive analysis of sector-level performance within the S&P 500 using a methodology that combines financial metrics, clustering techniques, and neural networks. The study classified 66 GICS sub-sectors into monopolistic, duopolistic, and oligopolistic market structures.\n\nKey metrics include YoY market capitalization growth, revenue growth, weighted-vs-simple performance variance, and short-term (6-month) and long-term (4-year) sector beta covariances. A custom overperformance index using squared-weight allocation identifies dominant firms within each sector.\n\nApplied Hierarchical + K-Means clustering to uncover inter-sector similarity patterns, and trained a multi-layer perceptron (MLP) neural network for sector cluster classification, achieving 93% accuracy on held-out test data. Built as an end-to-end pipeline across 13 modular notebooks."
       }
     ];
+
+    // ─── MODAL LOGIC ───
+    const overlay = document.getElementById('projectModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTag = document.getElementById('modalTag');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDetail = document.getElementById('modalDetail');
+    const modalTech = document.getElementById('modalTech');
+    const modalCta = document.getElementById('modalCta');
+
+    function openModal(proj) {
+      const ghImage = proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null;
+      // Keep close button, set image
+      const closeBtn = modalImage.querySelector('.project-modal-close');
+      modalImage.innerHTML = '';
+      modalImage.appendChild(closeBtn);
+      if (ghImage) {
+        const img = document.createElement('img');
+        img.src = ghImage;
+        img.alt = proj.name;
+        modalImage.insertBefore(img, closeBtn);
+      }
+      modalTag.textContent = proj.tag;
+      modalTitle.textContent = proj.name;
+      modalDetail.innerHTML = proj.detail.replace(/\n\n/g, '<br><br>');
+      modalTech.innerHTML = proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('');
+      modalCta.href = `https://github.com/${proj.repo}`;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
     // ─── RENDER PROJECT CARDS ───
     const track = document.getElementById('marqueeTrack');
@@ -1287,15 +1521,13 @@
         ? `https://opengraph.githubassets.com/1/${proj.repo}`
         : null;
 
-      const card = document.createElement('a');
+      const card = document.createElement('div');
       card.className = 'project-card';
-      card.href = proj.repo ? `https://github.com/${proj.repo}` : '#';
-      card.target = proj.repo ? '_blank' : '_self';
-      card.rel = 'noopener';
+      card.style.cursor = 'pointer';
 
       card.innerHTML = `
     <div class="project-card-image">
-      ${ghImage ? `<img src="${ghImage}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
+      ${ghImage ? `<img src="${ghImage}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.querySelector('.placeholder').style.opacity='0'" onerror="this.style.display='none'">` : ''}
       <div class="placeholder">
         <div class="placeholder-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -1312,18 +1544,20 @@
       <div class="project-tech">
         ${proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('')}
       </div>
-      ${proj.repo ? `<span class="project-link">View <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>` : ''}
+      <span class="project-link">Details <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
     </div>
   `;
 
+      card.addEventListener('click', () => openModal(proj));
       track.appendChild(card);
     });
 
     // ─── MARQUEE DRAG SCROLL ───
-    let isDown = false, startX, scrollLeft;
+    let isDown = false, startX, scrollLeft, hasDragged = false;
 
     track.addEventListener('mousedown', e => {
       isDown = true;
+      hasDragged = false;
       track.style.cursor = 'grabbing';
       startX = e.pageX - track.offsetLeft;
       scrollLeft = track.scrollLeft;
@@ -1334,9 +1568,15 @@
     track.addEventListener('mousemove', e => {
       if (!isDown) return;
       e.preventDefault();
+      hasDragged = true;
       const x = e.pageX - track.offsetLeft;
       track.scrollLeft = scrollLeft - (x - startX) * 1.5;
     });
+
+    // Prevent click-to-open after drag
+    track.addEventListener('click', e => {
+      if (hasDragged) { e.stopPropagation(); hasDragged = false; }
+    }, true);
 
     // Arrow buttons
     document.getElementById('scrollLeft').addEventListener('click', () => {
