@@ -1260,7 +1260,6 @@
         name: "Regime-Aware Fundamental Strategy & Point-in-Time Data Engine",
         repo: "tanishhky/Regime-Aware-Factor-Backtest",
         tag: "Quantitative Trading",
-        image: "https://socialify.git.ci/tanishhky/Regime-Aware-Factor-Backtest/image?font=Inter&language=1&owner=1&name=1&stargazers=1&theme=Dark",
         tech: ["Python", "HMM", "SEC EDGAR", "Fama-French"],
         summary: "Walk-forward HMM equity strategy across 18 years (2008–2026) delivering 633% total return net of a 2/25 fee structure, with 8.33% annualized FF5 alpha (p=0.008). Production-grade SEC EDGAR pipeline enforcing zero lookahead bias at 4 independent layers. Composite ranking on ROIC, leverage, earnings stability, and FCF yield."
       },
@@ -1268,7 +1267,6 @@
         name: "Dynamic Regime-Based Sector Allocation & Tail Risk Hedging",
         repo: "tanishhky/regime_portfolio_optimization",
         tag: "Portfolio Optimization",
-        image: "assets/projects/dynamic-regime-based-sector-allocation-and-tail-risk-hedging.png.png",
         tech: ["Python", "Scikit-Learn", "HMM", "Monte Carlo"],
         summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Strict Walk-Forward backtest with Ledoit-Wolf shrinkage achieved Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46%. Validated via 1,000 parametric bootstrap simulations with p<0.05 null rejection."
       },
@@ -1276,7 +1274,6 @@
         name: "S&P 500 Sector-Level Clustering & Market Structure Analysis",
         repo: "tanishhky/sp500-sector-analysis",
         tag: "Financial Analytics",
-        image: "assets/projects/sp500-sector-level-clustering-and-market-structure-analysis.png.png",
         tech: ["Python", "Keras", "Scikit-Learn", "Pandas"],
         summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. Custom overperformance index with squared-weight allocation. Applied Hierarchical + K-Means clustering and trained an MLP neural network achieving 93% classification accuracy on held-out test data."
       }
@@ -1286,7 +1283,9 @@
     const track = document.getElementById('marqueeTrack');
 
     projects.forEach(proj => {
-      const imgUrl = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
+      const ghImage = proj.repo
+        ? `https://opengraph.githubassets.com/1/${proj.repo}`
+        : null;
 
       const card = document.createElement('a');
       card.className = 'project-card';
@@ -1296,7 +1295,7 @@
 
       card.innerHTML = `
     <div class="project-card-image">
-      ${imgUrl ? `<img src="${imgUrl}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
+      ${ghImage ? `<img src="${ghImage}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
       <div class="placeholder">
         <div class="placeholder-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
