@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#0a0a0b">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Tanishk Yadav</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -1056,12 +1057,12 @@
       </div>
       <div class="about-stats">
         <div class="stat-card">
-          <div class="stat-number">6+</div>
-          <div class="stat-label">Quant Projects</div>
+          <div class="stat-number">633%</div>
+          <div class="stat-label">Strategy Return (Net)</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">49</div>
-          <div class="stat-label">GitHub Repos</div>
+          <div class="stat-number">1.49</div>
+          <div class="stat-label">Sharpe Ratio</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">93%</div>
@@ -1231,7 +1232,7 @@
       <div class="edu-card">
         <div class="edu-school">SRM University</div>
         <div class="edu-degree">B.Tech CSE (AI & ML) &mdash; 100% Scholarship</div>
-        <div class="edu-details">Amaravati, India &middot; June 2025 &middot; GPA: 8.33/10</div>
+        <div class="edu-details">Amaravati, India &middot; June 2025</div>
       </div>
     </div>
   </section>
@@ -1256,54 +1257,28 @@
     // ─── PROJECT DATA ───
     const projects = [
       {
+        name: "Regime-Aware Fundamental Strategy & Point-in-Time Data Engine",
+        repo: "tanishhky/Regime-Aware-Factor-Backtest",
+        tag: "Quantitative Trading",
+        image: "https://socialify.git.ci/tanishhky/Regime-Aware-Factor-Backtest/image?font=Inter&language=1&owner=1&name=1&stargazers=1&theme=Dark",
+        tech: ["Python", "HMM", "SEC EDGAR", "Fama-French"],
+        summary: "Walk-forward HMM equity strategy across 18 years (2008–2026) delivering 633% total return net of a 2/25 fee structure, with 8.33% annualized FF5 alpha (p=0.008). Production-grade SEC EDGAR pipeline enforcing zero lookahead bias at 4 independent layers. Composite ranking on ROIC, leverage, earnings stability, and FCF yield."
+      },
+      {
         name: "Dynamic Regime-Based Sector Allocation & Tail Risk Hedging",
         repo: "tanishhky/regime_portfolio_optimization",
         tag: "Portfolio Optimization",
+        image: "assets/projects/dynamic-regime-based-sector-allocation-and-tail-risk-hedging.png.png",
         tech: ["Python", "Scikit-Learn", "HMM", "Monte Carlo"],
-        summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Walk-forward backtest reduced Maximum Drawdown by 46% with Sharpe 1.49. Validated via 1,000 parametric bootstrap simulations."
+        summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Strict Walk-Forward backtest with Ledoit-Wolf shrinkage achieved Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46%. Validated via 1,000 parametric bootstrap simulations with p<0.05 null rejection."
       },
       {
-        name: "RSI Oscillator Trading Strategy",
-        repo: null,
-        tag: "Quantitative Trading",
-        tech: ["Python", "NumPy", "Pandas", "LaTeX"],
-        summary: "RSI(11) mean-reversion strategy on XLF ETF with grid search optimization. AR(1) return modeling and 200-sample parametric bootstrap establishing alpha at 5% significance. Microstructure-aware limit order execution.",
-        customImage: null
-      },
-      {
-        name: "S&P 500 Sector Clustering & Market Structure Analysis",
+        name: "S&P 500 Sector-Level Clustering & Market Structure Analysis",
         repo: "tanishhky/sp500-sector-analysis",
         tag: "Financial Analytics",
+        image: "assets/projects/sp500-sector-level-clustering-and-market-structure-analysis.png.png",
         tech: ["Python", "Keras", "Scikit-Learn", "Pandas"],
-        summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. Custom overperformance index with squared-weight allocation. MLP classifier achieved 93% accuracy across 4 sector clusters."
-      },
-      {
-        name: "FX Volatility Forecasting & Arbitrage System",
-        repo: "tanishhky/ArbitrageForexCalculator",
-        tag: "Systematic Trading",
-        tech: ["Python", "Keras", "XGBoost", "CCXT"],
-        summary: "Quantitative pipeline detecting Triangular Arbitrage across G10 FX pairs using graph traversal. Benchmarked 7 predictive architectures. Backtesting engine with transaction cost and spread filtering."
-      },
-      {
-        name: "Cancer Detection Using Hyperspectral Imaging",
-        repo: "tanishhky/cancerDetectionUsingHSI",
-        tag: "Deep Learning",
-        tech: ["Python", "TensorFlow", "HSI"],
-        summary: "Applied deep learning to hyperspectral imaging data for automated cancer tissue detection and classification. Leveraging spectral signatures beyond visible light for higher diagnostic precision."
-      },
-      {
-        name: "Consent Collector — IUDX",
-        repo: "tanishhky/consentCollector",
-        tag: "Full-Stack Development",
-        tech: ["JavaScript", "HTML", "SHA-256"],
-        summary: "Secure digital consent collection framework for India's Urban Data Exchange. SHA-256 cryptographic hashing for regulatory compliance. Enabled 38 critical government datasets."
-      },
-      {
-        name: "SuperMart Accounting System",
-        repo: "tanishhky/SuperMartAccSys",
-        tag: "Software Engineering",
-        tech: ["JavaScript", "Node.js"],
-        summary: "Full-stack accounting and inventory management system for retail operations. Real-time transaction tracking with automated reporting and analytics dashboard."
+        summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. Custom overperformance index with squared-weight allocation. Applied Hierarchical + K-Means clustering and trained an MLP neural network achieving 93% classification accuracy on held-out test data."
       }
     ];
 
@@ -1311,9 +1286,7 @@
     const track = document.getElementById('marqueeTrack');
 
     projects.forEach(proj => {
-      const ghImage = proj.repo
-        ? `https://opengraph.githubassets.com/1/${proj.repo}`
-        : null;
+      const imgUrl = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
 
       const card = document.createElement('a');
       card.className = 'project-card';
@@ -1323,7 +1296,7 @@
 
       card.innerHTML = `
     <div class="project-card-image">
-      ${ghImage ? `<img src="${ghImage}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
+      ${imgUrl ? `<img src="${imgUrl}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">` : ''}
       <div class="placeholder">
         <div class="placeholder-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
