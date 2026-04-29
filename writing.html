@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<!-- Created 2026-04-29: Writing page with post card template -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0b">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description"
+    content="Tanishk Yadav — Writing & Notes. Reflections on quantitative finance, ML engineering, and what I built wrong.">
+  <meta property="og:title" content="Tanishk Yadav — Writing & Notes">
+  <meta property="og:description"
+    content="Reflections on quantitative finance, ML engineering, and building in public.">
+  <meta property="og:image" content="https://about-silk-one.vercel.app/assets/img/og-card.png">
+  <meta property="og:url" content="https://about-silk-one.vercel.app/writing.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Tanishk Yadav &mdash; Writing</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg-elevated: #111113;
+      --bg-card: #161619;
+      --border: #222226;
+      --border-hover: #333338;
+      --text-primary: #e8e6e3;
+      --text-secondary: #8a8a8e;
+      --text-muted: #55555a;
+      --accent: #c9a96e;
+      --accent-dim: #8b7444;
+      --accent-glow: rgba(201, 169, 110, 0.08);
+      --serif: 'Instrument Serif', Georgia, serif;
+      --sans: 'DM Sans', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      background: rgba(10, 10, 11, 0.7);
+      border-bottom: 1px solid rgba(34, 34, 38, 0.5);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.4s var(--ease-out);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      padding: 8rem 2.5rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.2s forwards;
+    }
+
+    .page-header-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .page-header-desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .back-link svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .back-link:hover svg {
+      transform: translateX(-3px);
+    }
+
+    /* ─── SERIES SECTIONS ─── */
+    .series-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem;
+      padding: 0 2.5rem;
+    }
+
+    .series-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .series-number {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-style: italic;
+      min-width: 24px;
+    }
+
+    .series-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .series-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .series-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .series-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      position: relative;
+    }
+
+    .series-line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 40px;
+      background: var(--accent);
+    }
+
+    /* ─── POST CARDS ─── */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.4s var(--ease-out);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .post-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .post-card-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-elevated);
+    }
+
+    .post-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+
+    .post-card:hover .post-card-image img {
+      transform: scale(1.03);
+    }
+
+    .post-card-image .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
+    }
+
+    .post-card-image .placeholder svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--border-hover);
+      fill: none;
+      stroke-width: 1.2;
+    }
+
+    .post-card-body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-card-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .post-card-platform {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .post-card-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.65rem;
+      color: var(--text-primary);
+    }
+
+    .post-card:hover .post-card-title {
+      color: var(--accent);
+    }
+
+    .post-card-summary {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .post-card-footer {
+      padding: 0 1.5rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .post-card-read {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent-dim);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s;
+    }
+
+    .post-card:hover .post-card-read {
+      color: var(--accent);
+    }
+
+    .post-card-read svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    .post-card:hover .post-card-read svg {
+      transform: translateX(3px);
+    }
+
+    .post-card-reading-time {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── COMING SOON CARD ─── */
+    .coming-soon-card {
+      background: var(--bg-card);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 340px;
+    }
+
+    .coming-soon-card svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--border-hover);
+      fill: none;
+      stroke-width: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .coming-soon-card h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .coming-soon-card p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 2rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1.25rem;
+      }
+
+      .page-header {
+        padding: 7rem 1.5rem 2.5rem;
+      }
+
+      .series-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .series-line {
+        width: 100%;
+      }
+
+      .series-section {
+        padding: 0 1.5rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .posts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links a {
+        font-size: 0.72rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .post-card-image {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">T<span>.</span>Y</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="credentials.html">Credentials</a></li>
+      <li><a href="writing.html" class="active">Writing</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      Back to main
+    </a>
+    <p class="page-header-label">Reflections &amp; technical notes</p>
+    <h1>Writing &<br><em>Notes</em></h1>
+    <p class="page-header-desc">
+      Honest retrospectives on quantitative research, engineering decisions,
+      and what I&rsquo;d do differently next time.
+    </p>
+  </div>
+
+  <!-- SERIES CONTAINER -->
+  <div id="seriesContainer">
+    <!-- Series sections are injected by JS -->
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Tanishk Yadav. Crafted with intent.</p>
+  </footer>
+
+  <script>
+    // ─── SERIES DATA ───
+    // To add a new series: push an object to this array.
+    // To add a new post: add it to the `posts` array of the respective series.
+    const seriesData = [
+      {
+        id: "what-i-built",
+        title: "What I Built and What's Wrong With It",
+        description: "A 9-week LinkedIn series: honest teardowns of each major project. What the code actually does well, where the methodology breaks down, and what I'd change today.",
+        platform: "LinkedIn",
+        posts: [
+          // Example post template:
+          {
+            title: "Week 1: Sector-Level Analysis and Clustering of S&P 500 companies using Financial Metrics and Machine Learning",
+            summary: "This paper presents a comprehensive analysis of sector-level competitive dynamics within the S&P 500 index, combining financial metrics, statistical testing, and unsuper-vised learning. We analyze 68 sub-sectors encompassing over 400 companies using five normalized parameters: year-over-year market capitalization growth, revenue growth, a novel squared-weight overperformance index, and short- and long-term beta covariances, with data spanning September 2019 through December 2025 (26 quarters). Market structures are classified as monopolistic, duopolistic, or oligopolistic using both binomial significance tests on outperformance counts and the Herfindahl-Hirschman Index (HHI), with strong agreement between methods (Pearson 0.537, p < 10 ^ - 4 ). Hierarchical and K-Means clustering identifies 2 statistically optimal sector groups, validated through leave-one-out cross-validation with a Random Forest classifier achieving 95.6% accuracy and Fowlkes-Mallows index of 0.941. Temporal out-of-sample validation (training on 2019-2023, testing on 2024-2025) shows that 75% of sectors main-tain their market structure classification, while overperformance rankings show significant reshuffling ( r = 0.181 indicating that market dominance is not persistent causality tests uncover 297 significant lead-lag relationships between sectors, providing evidence of cross-sector information transmission. These findings carry implications for portfolio construction, sector rotation strategies, and regulatory policy. p = 0.14 ), Index Terms-S&P 500, Financial Metrics, Clustering, Herfindahl-Hirschman Index, Overperformance Index, Granger Causality, Market Structure, Sector Analysis",
+            date: "April 14, 2026",
+            url: "https://www.linkedin.com/posts/tanishkyadav_sector-level-analysis-and-clustering-of-s-ugcPost-7447846466427162624-z4sa?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADOL3t8BfKP6x7CQQOopLVnMAgcqXmWop9k",
+            image: "https://media.licdn.com/...",  // og:image from the article
+            readingTime: "8 min"
+          }
+        ]
+      },
+      {
+        id: "quant-for-dummies",
+        title: "Quant Finance for Dummies",
+        description: "Breaking down stochastic calculus, options pricing, and risk models into plain English.",
+        platform: "Medium",
+        posts: []
+      }
+    ];
+
+    // ─── RENDER SERIES & POSTS ───
+    const container = document.getElementById('seriesContainer');
+
+    function renderSeries() {
+      container.innerHTML = '';
+
+      seriesData.forEach((series, index) => {
+        const section = document.createElement('div');
+        section.className = 'series-section reveal';
+        // Add a slight animation delay increment for each series
+        section.style.animationDelay = `${0.2 + (index * 0.1)}s`;
+
+        // Create Section Header
+        const header = document.createElement('div');
+        header.className = 'series-header';
+        header.innerHTML = `
+          <span class="series-number">0${index + 1}</span>
+          <div class="series-title-group">
+            <h2 class="series-title">${series.title}</h2>
+            <p class="series-desc">${series.description}</p>
+          </div>
+          <div class="series-line"></div>
+        `;
+        section.appendChild(header);
+
+        // Create Grid
+        const grid = document.createElement('div');
+        grid.className = 'posts-grid';
+
+        // Render Posts
+        series.posts.forEach(post => {
+          const card = document.createElement('a');
+          card.className = 'post-card';
+          card.href = post.url;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+
+          card.innerHTML = `
+            <div class="post-card-image">
+              ${post.image
+              ? `<img src="${post.image}" alt="${post.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+              : ''}
+              <div class="placeholder" style="${post.image ? 'display:none' : ''}">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+            </div>
+            <div class="post-card-body">
+              <div class="post-card-meta">
+                <span class="post-card-date">${post.date}</span>
+                <span class="post-card-platform">${series.platform}</span>
+              </div>
+              <h3 class="post-card-title">${post.title}</h3>
+              <p class="post-card-summary">${post.summary}</p>
+            </div>
+            <div class="post-card-footer">
+              <span class="post-card-read">
+                Read on ${series.platform}
+                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+              ${post.readingTime ? `<span class="post-card-reading-time">${post.readingTime}</span>` : ''}
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        // Always add a "more coming" placeholder card at the end of each series
+        const placeholder = document.createElement('div');
+        placeholder.className = 'coming-soon-card';
+        placeholder.innerHTML = `
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <h3>${series.posts.length === 0 ? 'Coming Soon' : 'More Coming'}</h3>
+          <p>${series.posts.length === 0
+            ? 'First post drops soon. Follow along on ' + series.platform + '.'
+            : 'New posts added regularly.'
+          }</p>
+        `;
+        grid.appendChild(placeholder);
+
+        section.appendChild(grid);
+        container.appendChild(section);
+      });
+    }
+
+    renderSeries();
+
+    // ─── SCROLL REVEAL ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>

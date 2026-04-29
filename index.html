@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- Updated 2026-04-29: Hero copy + recruiting signal, Now strip, 9 projects (was 4),
+     headshot in About, revised stat cards, meta/OG/JSON-LD, dual resume links,
+     writing nav scaffold, skills refresh, accessibility & rel-noopener fixes -->
 <html lang="en">
 
 <head>
@@ -6,8 +9,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0a0b">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Tanishk Yadav</title>
+  <meta name="description"
+    content="Tanishk Yadav &mdash; M.S. Financial Engineering at NYU Tandon. Quantitative research and systematic trading: regime-based allocation, point-in-time fundamental data, signal validation.">
+  <meta property="og:title" content="Tanishk Yadav &mdash; Quantitative Finance & ML">
+  <meta property="og:description"
+    content="MFE @ NYU Tandon. Building at the intersection of stochastic modeling and systematic trading.">
+  <meta property="og:image" content="https://about-silk-one.vercel.app/assets/img/og-card.png">
+  <meta property="og:url" content="https://about-silk-one.vercel.app">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Tanishk Yadav &mdash; Quantitative Finance & ML</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -503,7 +516,7 @@
       transition: opacity 0.4s ease;
     }
 
-    .project-card-image img.loaded ~ .placeholder {
+    .project-card-image img.loaded~.placeholder {
       opacity: 0;
       pointer-events: none;
     }
@@ -979,8 +992,8 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(10,10,11,0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(10, 10, 11, 0.7);
       backdrop-filter: blur(8px);
       color: var(--text-secondary);
       cursor: pointer;
@@ -994,7 +1007,7 @@
     .project-modal-close:hover {
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(10,10,11,0.9);
+      background: rgba(10, 10, 11, 0.9);
     }
 
     .project-modal-close svg {
@@ -1076,10 +1089,122 @@
       stroke-width: 2;
     }
 
+    /* ─── NOW STRIP ─── */
+    .now-strip {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem 2.5rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out) 1s forwards;
+    }
+
+    .now-strip strong {
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+    }
+
+    /* ─── HEADSHOT ─── */
+    .headshot {
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      transition: all 0.4s var(--ease-out);
+      filter: grayscale(0.15);
+    }
+
+    .headshot:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-dim);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      filter: grayscale(0);
+    }
+
+    /* ─── PROJECT CATEGORY FILTER ─── */
+    .project-filters {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .filter-pill:hover {
+      color: var(--text-secondary);
+      border-color: var(--border-hover);
+    }
+
+    .filter-pill.active {
+      color: var(--accent);
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+    }
+
+    /* ─── MODAL KEYBOARD FOCUS ─── */
+    .project-modal-close:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* ─── NAV COMING SOON ─── */
+    .nav-coming-soon {
+      opacity: 0.35 !important;
+      pointer-events: none;
+      position: relative;
+    }
+
+    .nav-coming-soon::before {
+      content: 'soon';
+      position: absolute;
+      top: -10px;
+      right: -8px;
+      font-size: 0.45rem;
+      color: var(--accent-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav {
         padding: 1rem 1.5rem;
+      }
+
+      .now-strip {
+        padding: 1rem 1.5rem;
+        font-size: 0.72rem;
+      }
+
+      .headshot {
+        width: 120px;
+        height: 120px;
       }
 
       .nav-links {
@@ -1156,17 +1281,20 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="writing.html">Writing</a></li>
       <li><a href="credentials.html" class="nav-more-btn">More &rarr;</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
-    <p class="hero-label">M.S. Financial Engineering &mdash; NYU Tandon</p>
+    <p class="hero-label">M.S. Financial Engineering &middot; NYU Tandon &middot; Seeking Summer 2026 Quant Internships
+    </p>
     <h1>Tanishk Yadav<br><em>Quantitative Finance</em><br>& Machine Learning</h1>
     <p class="hero-description">
-      Building at the intersection of stochastic modeling, statistical learning, and systematic trading.
-      Focused on regime-based allocation, risk analytics, and signal research.
+      Building at the intersection of stochastic modeling, statistical learning, and systematic trading&mdash;with
+      a focus on regime-based allocation, point-in-time fundamental data integrity, and signal research
+      that survives walk-forward validation.
     </p>
     <div class="hero-meta">
       <div class="hero-meta-item">
@@ -1179,12 +1307,13 @@
       </div>
       <div class="hero-meta-item">
         <span class="hero-meta-label">GitHub</span>
-        <span class="hero-meta-value"><a href="https://github.com/tanishhky" target="_blank">tanishhky</a></span>
+        <span class="hero-meta-value"><a href="https://github.com/tanishhky" target="_blank"
+            rel="noopener noreferrer">tanishhky</a></span>
       </div>
       <div class="hero-meta-item">
         <span class="hero-meta-label">LinkedIn</span>
-        <span class="hero-meta-value"><a href="https://linkedin.com/in/tanishkyadav"
-            target="_blank">tanishkyadav</a></span>
+        <span class="hero-meta-value"><a href="https://linkedin.com/in/tanishkyadav" target="_blank"
+            rel="noopener noreferrer">tanishkyadav</a></span>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -1192,6 +1321,14 @@
       Scroll to explore
     </div>
   </header>
+
+  <!-- NOW STRIP -->
+  <div class="now-strip">
+    <strong>Now</strong> &mdash; Building TSFM benchmarks (Chronos, Moirai, TimesFM, Lag-Llama) for financial time
+    series.
+    Fixing GitHub repos critiqued in my &ldquo;What I Built and What&rsquo;s Wrong With It&rdquo; series.
+    Applying to CFM, Apollo, 26North, BNP for Summer 2026.
+  </div>
 
   <!-- ABOUT -->
   <section id="about" class="reveal">
@@ -1202,8 +1339,10 @@
     </div>
     <div class="about-grid">
       <div class="about-text">
+        <img src="assets/img/headshot.jpg" alt="Tanishk Yadav headshot" class="headshot" width="150" height="150"
+          loading="lazy">
         <p>
-          I'm a <strong>Financial Engineering</strong> graduate student at <strong>NYU Tandon</strong>,
+          I&rsquo;m a <strong>Financial Engineering</strong> graduate student at <strong>NYU Tandon</strong>,
           with an undergraduate degree in Computer Science (AI/ML specialization) from SRM University on a 100%
           scholarship.
         </p>
@@ -1211,8 +1350,9 @@
           My work sits at the convergence of <strong>quantitative finance</strong> and <strong>machine
             learning</strong>&mdash;from
           Hidden Markov regime models and bootstrap-validated trading strategies, to sector-level clustering
-          of S&P 500 market structures. I care deeply about statistical rigor: if it can't survive a null hypothesis
-          test, it doesn't ship.
+          of S&amp;P 500 market structures. I care deeply about statistical rigor: if it can&rsquo;t survive a null
+          hypothesis
+          test, it doesn&rsquo;t ship.
         </p>
         <p>
           Currently seeking <strong>quant research, strats, and risk</strong> roles where I can apply
@@ -1221,20 +1361,20 @@
       </div>
       <div class="about-stats">
         <div class="stat-card">
-          <div class="stat-number">633%</div>
-          <div class="stat-label">Strategy Return (Net)</div>
+          <div class="stat-number">8.33%</div>
+          <div class="stat-label">Annualized FF5 Alpha (p=0.008)</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">1.49</div>
-          <div class="stat-label">Sharpe Ratio</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">93%</div>
-          <div class="stat-label">MLP Classifier Acc.</div>
+          <div class="stat-label">Walk-Forward Sharpe</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">46%</div>
-          <div class="stat-label">Max DD Reduction</div>
+          <div class="stat-label">Max Drawdown Reduction</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Lookahead-Bias Gates</div>
         </div>
       </div>
     </div>
@@ -1246,6 +1386,13 @@
       <span class="section-number">02</span>
       <h2 class="section-title">Projects</h2>
       <div class="section-line"></div>
+    </div>
+
+    <div class="project-filters" id="projectFilters">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="quant-research">Quant Research</button>
+      <button class="filter-pill" data-filter="quant-dev">Quant Dev</button>
+      <button class="filter-pill" data-filter="ml">ML / Research</button>
     </div>
 
     <div class="marquee-wrapper">
@@ -1272,7 +1419,7 @@
   <section id="experience" class="reveal">
     <div class="section-header">
       <span class="section-number">03</span>
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title">Selected Experience</h2>
       <div class="section-line"></div>
     </div>
     <div class="exp-timeline">
@@ -1346,12 +1493,15 @@
           <span class="skill-tag">HMM Regimes</span>
           <span class="skill-tag">Tail Hedging</span>
           <span class="skill-tag">Bootstrap</span>
+          <span class="skill-tag">Stochastic Calculus</span>
+          <span class="skill-tag">Factor Models</span>
+          <span class="skill-tag">Walk-Forward Validation</span>
         </div>
       </div>
       <div class="skill-group">
         <div class="skill-group-title">Tools & Platforms</div>
         <div class="skill-tags">
-          <span class="skill-tag">Bloomberg</span>
+          <span class="skill-tag">Bloomberg Terminal</span>
           <span class="skill-tag">Git</span>
           <span class="skill-tag">LaTeX</span>
           <span class="skill-tag">Jupyter</span>
@@ -1372,9 +1522,7 @@
         <div class="skill-group-title">Certifications</div>
         <div class="skill-tags">
           <span class="skill-tag">Bloomberg BMC</span>
-          <span class="skill-tag">Akuna Options 101</span>
           <span class="skill-tag">Financial Markets (Honors)</span>
-          <span class="skill-tag">IBM ML</span>
         </div>
       </div>
     </div>
@@ -1408,8 +1556,9 @@
     <div class="contact-links">
       <a href="mailto:tanishkyadav@nyu.edu" class="contact-link">tanishkyadav@nyu.edu</a>
       <a href="tel:+16465334214" class="contact-link">(646) 533-4214</a>
-      <a href="https://github.com/tanishhky" target="_blank" class="contact-link">GitHub</a>
-      <a href="https://linkedin.com/in/tanishkyadav" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://github.com/tanishhky" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
+      <a href="https://linkedin.com/in/tanishkyadav" target="_blank" rel="noopener noreferrer"
+        class="contact-link">LinkedIn</a>
     </div>
   </section>
 
@@ -1422,7 +1571,10 @@
     <div class="project-modal">
       <div class="project-modal-image" id="modalImage">
         <button class="project-modal-close" id="modalClose">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
       </div>
       <div class="project-modal-body">
@@ -1432,7 +1584,10 @@
         <div class="project-modal-tech" id="modalTech"></div>
         <a class="project-modal-cta" id="modalCta" href="#" target="_blank" rel="noopener">
           View on GitHub
-          <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          <svg viewBox="0 0 24 24">
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
         </a>
       </div>
     </div>
@@ -1442,36 +1597,94 @@
     // ─── PROJECT DATA ───
     const projects = [
       {
-        name: "VolEdge — Volatility Trading System",
-        repo: "tanishhky/price-distribution-analysis-tool",
-        tag: "Volatility Trading",
-        tech: ["Python", "FastAPI", "React", "Black-Scholes", "GMM"],
-        summary: "Full-stack quantitative trading platform combining Gaussian Mixture Model price distribution analysis with options volatility surface mapping and automated trade signal generation.",
-        detail: "A production-grade volatility trading system built on Polygon.io with locally computed Black-Scholes pricing, implied volatility via Brent root-finding, and a 3D volatility surface renderer. The GMM engine fits N Gaussian components to Time-at-Price (D1) and Volume-Weighted (D2) distributions with BIC-optimal component selection and sliding-window moment evolution tracking.\n\nThe signal generator evaluates four strategy archetypes in real-time: Vol Crush (VRP > 5% → short strangles), Skew Trade (25Δ put skew vs. GMM tail risk → put credit spreads), Calendar Spread (term structure inversion detection), and Mean Reversion (displacement from High Volume Nodes). All signals output full leg structures with greeks and projected P&L.\n\nIncludes walk-forward optimization with AST-validated sandboxed strategy execution, parameter sensitivity sweeps via 3D surface plots, and an animated equity curve replay with interactive scrubbing. Multi-API key support with parallel chunked data fetching for rate limit management."
+        name: "ChronoFund \u2014 Point-in-Time Fundamental Data Engine",
+        repo: "tanishhky/chronofund-fundamental-engine",
+        tag: "Data Engineering / Quant Infrastructure",
+        category: "quant-dev",
+        tech: ["Python", "SEC EDGAR", "XBRL", "pytest", "Pandas"],
+        image: "assets/img/projects/chronofund.svg",
+        summary: "Production-grade SEC EDGAR + XBRL data engine enforcing zero lookahead bias across 4 independent layers, with 65 unit tests and CutoffViolationError gating.",
+        detail: "A production-grade SEC EDGAR + XBRL data engine enforcing zero lookahead bias across 4 independent layers: FilingsIndex \u2192 FilingSelector \u2192 XBRLParser \u2192 BloombergMapper. Each layer is gated by cutoff-date assertions that raise CutoffViolationError if any future data leaks through.\n\nThe engine outputs normalized income statement, balance sheet, and cash flow tables with derived metrics including ROIC, FCF yield, and leverage ratios. All financial data is point-in-time: you specify a cutoff date and the engine guarantees only filings publicly available before that date are used.\n\nThis architectural guarantee is critical for backtesting integrity \u2014 most fundamental datasets inadvertently introduce lookahead bias through retroactive restatements or filing-date confusion. ChronoFund eliminates this with 65 unit tests covering edge cases across all 4 layers.\n\nDesigned as the data foundation for the Regime-Aware Factor Backtest strategy. Built to be the differentiator for engineering-heavy quant dev roles."
       },
       {
-        name: "Regime-Aware Fundamental Strategy & Point-in-Time Data Engine",
+        name: "Regime-Aware Fundamental Factor Strategy",
         repo: "tanishhky/Regime-Aware-Factor-Backtest",
         tag: "Quantitative Trading",
-        tech: ["Python", "HMM", "SEC EDGAR", "Fama-French"],
-        summary: "Walk-forward HMM equity strategy across 18 years delivering 633% total return net of a 2/25 fee structure, with 8.33% annualized FF5 alpha (p=0.008).",
-        detail: "A walk-forward Hidden Markov Model equity strategy backtested across 18 years (2008–2026) delivering 633% total return net of a 2/25 fee structure (2% management, 25% performance above high-water mark), with 8.33% annualized Fama–French 5-factor alpha (t=2.67, p=0.008) and a defensive market beta of 0.77.\n\nThe production-grade SEC EDGAR data pipeline enforces zero lookahead bias at 4 independent layers: FilingsIndex → FilingSelector → XBRLParser → BloombergMapper, each gated by cutoff-date assertions with CutoffViolationError exceptions. Outputs normalized income, balance sheet, and cash flow tables with derived metrics (ROIC, FCF yield, leverage ratios).\n\nComposite ranking engine scores stocks on 4 fundamental factors (ROIC, leverage, earnings stability, FCF yield), each smoothed with 4-period EWMA (α≈0.4). Survivorship bias is addressed via a −30% forced-liquidation penalty after 20 consecutive NaN-price days. Regime-conditional position sizing across Crisis, Bear, Normal, and Bull states reduced maximum drawdown by 2.45pp vs. SPY. First-half sub-period alpha of 10.34% (p=0.019) confirms signal strength during crisis recovery regimes."
+        category: "quant-research",
+        tech: ["Python", "HMM", "Fama-French", "Pandas"],
+        image: "assets/img/projects/regime-aware-factor.svg",
+        summary: "Walk-forward HMM equity strategy across 18 years delivering 633% total return net of 2/25 fees, with 8.33% annualized FF5 alpha (p=0.008).",
+        detail: "A walk-forward Hidden Markov Model equity strategy backtested across 18 years (2008\u20132026) delivering 633% total return net of a 2/25 fee structure (2% management, 25% performance above high-water mark), with 8.33% annualized Fama\u2013French 5-factor alpha (t=2.67, p=0.008) and a defensive market beta of 0.77.\n\nBuilt on ChronoFund\u2019s point-in-time data engine for zero-lookahead fundamental data. Composite ranking engine scores stocks on 4 fundamental factors (ROIC, leverage, earnings stability, FCF yield), each smoothed with 4-period EWMA (\u03b1\u22480.4). Survivorship bias is addressed via a \u221230% forced-liquidation penalty after 20 consecutive NaN-price days.\n\nRegime-conditional position sizing across Crisis, Bear, Normal, and Bull states reduced maximum drawdown by 2.45pp vs. SPY. First-half sub-period alpha of 10.34% (p=0.019) confirms signal strength during crisis recovery regimes."
+      },
+      {
+        name: "VolEdge \u2014 Volatility Trading System",
+        repo: "tanishhky/voledge",
+        tag: "Volatility Trading",
+        category: "quant-research",
+        tech: ["Python", "FastAPI", "React", "Black-Scholes", "GMM"],
+        image: "assets/img/projects/voledge.svg",
+        summary: "Full-stack quantitative trading platform combining Gaussian Mixture Model price distribution analysis with options volatility surface mapping and automated trade signal generation.",
+        detail: "A production-grade volatility trading system built on Polygon.io with locally computed Black-Scholes pricing, implied volatility via Brent root-finding, and a 3D volatility surface renderer. The GMM engine fits N Gaussian components to Time-at-Price (D1) and Volume-Weighted (D2) distributions with BIC-optimal component selection and sliding-window moment evolution tracking.\n\nThe signal generator evaluates four strategy archetypes in real-time: Vol Crush (VRP > 5% \u2192 short strangles), Skew Trade (25\u0394 put skew vs. GMM tail risk \u2192 put credit spreads), Calendar Spread (term structure inversion detection), and Mean Reversion (displacement from High Volume Nodes). All signals output full leg structures with greeks and projected P&L.\n\nIncludes walk-forward optimization with AST-validated sandboxed strategy execution, parameter sensitivity sweeps via 3D surface plots, and an animated equity curve replay with interactive scrubbing. Multi-API key support with parallel chunked data fetching for rate limit management."
       },
       {
         name: "Dynamic Regime-Based Sector Allocation & Tail Risk Hedging",
         repo: "tanishhky/regime_portfolio_optimization",
         tag: "Portfolio Optimization",
+        category: "quant-research",
         tech: ["Python", "Scikit-Learn", "HMM", "Monte Carlo"],
+        image: "assets/img/projects/regime-sector-allocation.svg",
         summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Achieved Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46%.",
-        detail: "A Regime-Switching Risk Model using a 4-state Gaussian Hidden Markov Model to classify market conditions into Crisis (VIX > 35, correlations → 1), Inflationary Bear, Secular Bull, and Transition states. Custom Synthetic History Generator backfills sector ETF data to 2005 for capturing GFC-era volatility dynamics.\n\nStrict Walk-Forward (Out-of-Sample) backtest from 2023–Present using Ledoit-Wolf shrinkage for covariance estimation achieved a Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46% (−10.12% vs. −18.76% benchmark).\n\nRobustness validated via Parametric Bootstrapping (1,000 simulations) and Null Hypothesis Falsification using random-walk null models, proving true alpha generation (+$26K excess return per $100K deployed) with p < 0.05 rejection of noise-driven outperformance. The work also demonstrates that naïve backtesting inflates Sharpe ratios 50–100% through look-ahead bias."
+        detail: "A Regime-Switching Risk Model using a 4-state Gaussian Hidden Markov Model to classify market conditions into Crisis (VIX > 35, correlations \u2192 1), Inflationary Bear, Secular Bull, and Transition states. Custom Synthetic History Generator backfills sector ETF data to 2005 for capturing GFC-era volatility dynamics.\n\nStrict Walk-Forward (Out-of-Sample) backtest from 2023\u2013Present using Ledoit-Wolf shrinkage for covariance estimation achieved a Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46% (\u221210.12% vs. \u221218.76% benchmark).\n\nRobustness validated via Parametric Bootstrapping (1,000 simulations) and Null Hypothesis Falsification using random-walk null models, proving true alpha generation (+$26K excess return per $100K deployed) with p < 0.05 rejection of noise-driven outperformance. The work also demonstrates that na\u00efve backtesting inflates Sharpe ratios 50\u2013100% through look-ahead bias."
       },
       {
         name: "S&P 500 Sector-Level Clustering & Market Structure Analysis",
         repo: "tanishhky/sp500-sector-analysis",
         tag: "Financial Analytics",
+        category: "quant-research",
         tech: ["Python", "Keras", "Scikit-Learn", "Pandas"],
+        image: "assets/img/projects/sp500-sector.svg",
         summary: "Analyzed 66 sub-sectors across 425+ companies using 5 normalized financial metrics. MLP neural network achieving 93% classification accuracy.",
         detail: "Comprehensive analysis of sector-level performance within the S&P 500 using a methodology that combines financial metrics, clustering techniques, and neural networks. The study classified 66 GICS sub-sectors into monopolistic, duopolistic, and oligopolistic market structures.\n\nKey metrics include YoY market capitalization growth, revenue growth, weighted-vs-simple performance variance, and short-term (6-month) and long-term (4-year) sector beta covariances. A custom overperformance index using squared-weight allocation identifies dominant firms within each sector.\n\nApplied Hierarchical + K-Means clustering to uncover inter-sector similarity patterns, and trained a multi-layer perceptron (MLP) neural network for sector cluster classification, achieving 93% accuracy on held-out test data. Built as an end-to-end pipeline across 13 modular notebooks."
+      },
+      {
+        name: "Regime-Adaptive Portfolio",
+        repo: "tanishhky/regime-adaptive-portfolio",
+        tag: "Portfolio Optimization",
+        category: "quant-research",
+        tech: ["Python", "HMM", "SciPy", "Matplotlib"],
+        image: "assets/img/projects/regime-adaptive.svg",
+        summary: "Standalone HMM-based portfolio optimization system using regime detection to dynamically adjust asset allocation weights across market states.",
+        detail: "A regime-adaptive portfolio optimization framework that uses Hidden Markov Models to detect prevailing market regimes and dynamically rebalance portfolio weights. Unlike the sector-allocation project, this system operates at the individual asset level with a focus on pure portfolio construction.\n\nThe HMM classifies market states based on returns and volatility features, then applies regime-conditional optimization to shift between aggressive and defensive allocations. Includes transition probability analysis and regime persistence metrics.\n\nDesigned as a modular research tool for exploring how regime awareness improves traditional mean-variance optimization."
+      },
+      {
+        name: "Equity Factor Volatility Analysis",
+        repo: "tanishhky/Equity-Factor-Volatility-Analysis",
+        tag: "Factor Research",
+        category: "quant-research",
+        tech: ["Python", "GARCH", "Pandas", "Statsmodels"],
+        image: "assets/img/projects/equity-factor-vol.svg",
+        summary: "Quantitative analysis of equity factor volatility dynamics including GARCH modeling, factor return decomposition, and cross-sectional risk attribution.",
+        detail: "Analysis of equity factor volatility dynamics using GARCH(1,1) modeling and factor return decomposition. Examines how factor exposures (value, momentum, size, quality) evolve through different volatility regimes and how cross-sectional dispersion relates to factor crowding.\n\nKnown limitations: The current implementation uses a limited sample period and the GARCH convergence diagnostics need strengthening. Part of the \u201cWhat I Built and What\u2019s Wrong With It\u201d series \u2014 actively being improved with better data sourcing and robustness checks."
+      },
+      {
+        name: "Forex Arbitrage Calculator",
+        repo: "tanishhky/ArbitrageForexCalculator",
+        tag: "Quantitative Finance",
+        category: "quant-dev",
+        tech: ["Python", "NetworkX", "Bellman-Ford"],
+        image: "assets/img/projects/forex-arbitrage.svg",
+        summary: "Graph-based triangular arbitrage detection engine using negative-weight cycle detection across currency pairs to identify risk-free profit opportunities.",
+        detail: "A triangular arbitrage detection engine that models currency exchange rates as a directed graph and applies the Bellman-Ford algorithm to detect negative-weight cycles \u2014 which correspond to arbitrage opportunities.\n\nThe system ingests live or historical FX rate data, constructs the log-transformed rate graph, and efficiently scans for profitable multi-hop currency conversion paths. Includes visualization of detected arbitrage cycles and profit margin estimation.\n\nKnown limitations: Does not account for transaction costs, execution latency, or liquidity constraints that would prevent real-world exploitation of detected opportunities. Primarily an educational implementation of graph algorithms applied to finance."
+      },
+      {
+        name: "Cancer Detection using Hyperspectral Imaging",
+        repo: "tanishhky/cancerDetectionUsingHSI",
+        tag: "Machine Learning / Medical Imaging",
+        category: "ml",
+        tech: ["Python", "PyTorch", "Spectral Transformer", "HSI"],
+        image: "assets/img/projects/cancer-detection-hsi.svg",
+        summary: "Spectral Transformer architecture for hyperspectral image segmentation, classifying healthy vs. infected tissue using per-pixel spectral band analysis.",
+        detail: "A hyperspectral imaging (HSI) segmentation pipeline using a Spectral Transformer architecture that treats spectral bands as sequential tokens for tissue classification. The model performs per-pixel classification to distinguish healthy from infected tissue regions.\n\nImplements per-pixel min-max spectral normalization and batch processing for memory efficiency. The transformer-based approach captures long-range spectral dependencies that traditional CNN architectures miss, improving classification on spectral signatures unique to cancerous tissue.\n\nKnown limitations: Dataset is limited in size; the model has not been validated on external clinical datasets. This project showcases ML research capabilities outside the finance domain."
       }
     ];
 
@@ -1485,14 +1698,13 @@
     const modalCta = document.getElementById('modalCta');
 
     function openModal(proj) {
-      const ghImage = proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null;
-      // Keep close button, set image
+      const imgSrc = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
       const closeBtn = modalImage.querySelector('.project-modal-close');
       modalImage.innerHTML = '';
       modalImage.appendChild(closeBtn);
-      if (ghImage) {
+      if (imgSrc) {
         const img = document.createElement('img');
-        img.src = ghImage;
+        img.src = imgSrc;
         img.alt = proj.name;
         modalImage.insertBefore(img, closeBtn);
       }
@@ -1517,40 +1729,56 @@
     // ─── RENDER PROJECT CARDS ───
     const track = document.getElementById('marqueeTrack');
 
-    projects.forEach(proj => {
-      const ghImage = proj.repo
-        ? `https://opengraph.githubassets.com/1/${proj.repo}`
-        : null;
+    function renderCards(filter = 'all') {
+      track.innerHTML = '';
+      const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
 
-      const card = document.createElement('div');
-      card.className = 'project-card';
-      card.style.cursor = 'pointer';
+      filtered.forEach(proj => {
+        const imgSrc = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
+        const ghFallback = proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null;
 
-      card.innerHTML = `
-    <div class="project-card-image">
-      ${ghImage ? `<img src="${ghImage}" alt="${proj.name}" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.querySelector('.placeholder').style.opacity='0'" onerror="this.style.display='none'">` : ''}
-      <div class="placeholder">
-        <div class="placeholder-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>${proj.tag}</span>
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.style.cursor = 'pointer';
+        card.dataset.category = proj.category;
+
+        card.innerHTML = `
+      <div class="project-card-image">
+        ${imgSrc ? `<img src="${imgSrc}" alt="${proj.name}" width="420" height="220" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.querySelector('.placeholder').style.opacity='0'" onerror="this.src='${ghFallback || ''}'; this.onerror=null;">` : ''}
+        <div class="placeholder">
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>${proj.tag}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="project-card-body">
-      <div class="project-card-tag">${proj.tag}</div>
-      <h3 class="project-card-title">${proj.name}</h3>
-      <p class="project-card-summary">${proj.summary}</p>
-    </div>
-    <div class="project-card-footer">
-      <div class="project-tech">
-        ${proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('')}
+      <div class="project-card-body">
+        <div class="project-card-tag">${proj.tag}</div>
+        <h3 class="project-card-title">${proj.name}</h3>
+        <p class="project-card-summary">${proj.summary}</p>
       </div>
-      <span class="project-link">Details <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
-    </div>
-  `;
+      <div class="project-card-footer">
+        <div class="project-tech">
+          ${proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('')}
+        </div>
+        <span class="project-link">Details <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+      </div>
+    `;
 
-      card.addEventListener('click', () => openModal(proj));
-      track.appendChild(card);
+        card.addEventListener('click', () => openModal(proj));
+        track.appendChild(card);
+      });
+    }
+
+    renderCards();
+
+    // ─── CATEGORY FILTER ───
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCards(btn.dataset.filter);
+      });
     });
 
     // ─── MARQUEE DRAG SCROLL ───
@@ -1599,6 +1827,45 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tanishk Yadav",
+    "url": "https://about-silk-one.vercel.app",
+    "email": "tanishkyadav@nyu.edu",
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "NYU Tandon School of Engineering",
+        "department": "Financial Engineering"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "SRM University",
+        "department": "Computer Science (AI & ML)"
+      }
+    ],
+    "knowsAbout": [
+      "Quantitative Finance",
+      "Machine Learning",
+      "Stochastic Calculus",
+      "Hidden Markov Models",
+      "Portfolio Optimization",
+      "Systematic Trading",
+      "SEC EDGAR",
+      "Options Pricing"
+    ],
+    "jobTitle": "M.S. Financial Engineering Student",
+    "sameAs": [
+      "https://github.com/tanishhky",
+      "https://linkedin.com/in/tanishkyadav"
+    ]
+  }
+  </script>
+
 </body>
+
 
 </html>
