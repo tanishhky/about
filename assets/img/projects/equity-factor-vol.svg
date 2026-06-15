@@ -11,16 +11,16 @@
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#222226" stroke-width="1"/>
-  <!-- Geometric motif -->
-  <g opacity="0.2" fill="#8b7444"><rect x="1030" y="90" width="8" height="30"/><rect x="1045" y="70" width="8" height="50"/><rect x="1060" y="85" width="8" height="35"/><rect x="1075" y="50" width="8" height="70"/><rect x="1090" y="75" width="8" height="45"/><rect x="1105" y="95" width="8" height="25"/><rect x="1120" y="80" width="8" height="40"/></g>
+  <!-- Geometric motif: a vol-scaled signal -->
+  <g opacity="0.2" stroke="#8b7444" stroke-width="1" fill="none"><polyline points="1020,90 1035,60 1050,100 1065,70 1080,95 1095,62 1110,98 1125,72 1140,88"/></g>
   <!-- Accent line -->
   <rect x="60" y="280" width="120" height="3" rx="1.5" fill="url(#accent)"/>
   <!-- Title -->
-  <text x="60" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="400" fill="#e8e6e3" letter-spacing="-1">Equity Factor Volatility</text>
+  <text x="60" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="400" fill="#e8e6e3" letter-spacing="-1">Volatility-Managed Factors</text>
   <!-- Subtitle -->
-  <text x="60" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" font-style="italic" fill="#8a8a8e">Factor Return Decomposition</text>
+  <text x="60" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" font-style="italic" fill="#8a8a8e">Moreira-Muir Factor Timing (FF5 + Momentum)</text>
   <!-- Tech stack -->
-  <text x="60" y="440" font-family="monospace" font-size="14" fill="#55555a" letter-spacing="1">GARCH · Statsmodels · Pandas</text>
+  <text x="60" y="440" font-family="monospace" font-size="14" fill="#55555a" letter-spacing="1">Ken French &#183; Statsmodels &#183; Newey-West</text>
   <!-- Bottom border -->
   <rect x="0" y="626" width="1200" height="4" fill="url(#accent)" opacity="0.5"/>
 </svg>

@@ -1708,14 +1708,14 @@
         detail: "A unified observability dashboard that plugs into the PinSight and DriftEdge paper-trading systems and renders their live state in one place: equity curves, open and closed positions, per-trader summaries, P&L, drawdown, and a streaming log tail.\n\nIt reads each system's Parquet state and JSONL logs directly (configurable via environment, defaulting to sibling repos), exposes a small JSON API, and streams log updates over server-sent events. It is the ops layer of a three-repo plug-in architecture (Sentinel + PinSight + DriftEdge)."
       },
       {
-        name: "Equity Factor Volatility Analysis",
+        name: "Volatility-Managed Factor Portfolios",
         repo: "tanishhky/Equity-Factor-Volatility-Analysis",
-        tag: "Factor Research",
+        tag: "Factor Timing / Asset Pricing",
         category: "quant-research",
-        tech: ["Python", "GARCH", "Pandas", "Statsmodels"],
+        tech: ["Python", "Statsmodels", "Ken French", "Newey-West"],
         image: "assets/img/projects/equity-factor-vol.svg",
-        summary: "Quantitative analysis of equity factor volatility dynamics including GARCH modeling, factor return decomposition, and cross-sectional risk attribution.",
-        detail: "Analysis of equity factor volatility dynamics using GARCH(1,1) modeling and factor return decomposition. Examines how factor exposures (value, momentum, size, quality) evolve through different volatility regimes and how cross-sectional dispersion relates to factor crowding.\n\nKnown limitations: The current implementation uses a limited sample period and the GARCH convergence diagnostics need strengthening. Part of the \u201cWhat I Built and What\u2019s Wrong With It\u201d series \u2014 actively being improved with better data sourcing and robustness checks."
+        summary: "Replication and extension of Moreira-Muir (2017): scaling factor exposure by inverse recent variance earns large, significant alpha on momentum and profitability, but not on size or value.",
+        detail: "A replication and extension of Moreira & Muir (2017) on the Fama-French 5 factors plus Momentum (Ken French daily data, 1963-2026). Each factor is volatility-managed by scaling exposure to the inverse of its prior-month realized variance; the 1/RV timing signal uses only past data.\n\nThe Moreira-Muir spanning test (managed factor regressed on the original, with Newey-West t-stats) gives an honest, factor-dependent result: volatility timing earns large significant alpha on the crash-prone factors, Momentum (+8.9%/yr, t=5.0; net Sharpe 0.81 vs 0.51) and profitability RMW (+2.3%/yr, t=2.9), but adds nothing for size, value, or investment, and the market factor's edge has faded over the full sample.\n\nReported net of 14 bps per unit of leverage turnover. Secondary analyses include FF3/Carhart/FF5 attribution of the 11 SPDR sector ETFs and rolling-beta heatmaps (2020 correlation spike, 2022 growth-to-value rotation)."
       },
     ];
 
