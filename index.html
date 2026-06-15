@@ -1334,7 +1334,7 @@
 
   <!-- NOW STRIP -->
   <div class="now-strip">
-    <strong>Now</strong> - Co-authoring Prof. David Shimko's <em>Valuation Principles</em> (Wiley) and TA-ing
+    <strong>Now</strong> - Contributing to Prof. David Shimko's <em>Valuation Principles</em> (Wiley) and TA-ing
     FRE-GY 6103 this fall. Hardening my quant research repos (point-in-time data, no-lookahead backtests, honest
     statistics) ahead of full-time 2027 recruiting.
   </div>
@@ -1364,7 +1364,7 @@
         </p>
         <p>
           I care about statistical honesty: I would rather report that an effect decays to noise than dress it up.
-          I&rsquo;m currently co-authoring Prof. David Shimko&rsquo;s valuation textbook and TA-ing his graduate
+          I&rsquo;m currently contributing to Prof. David Shimko&rsquo;s valuation textbook and TA-ing his graduate
           course, and I&rsquo;m targeting <strong>full-time quantitative research</strong> roles for 2027.
         </p>
       </div>
@@ -1716,16 +1716,6 @@
         image: "assets/img/projects/equity-factor-vol.svg",
         summary: "Quantitative analysis of equity factor volatility dynamics including GARCH modeling, factor return decomposition, and cross-sectional risk attribution.",
         detail: "Analysis of equity factor volatility dynamics using GARCH(1,1) modeling and factor return decomposition. Examines how factor exposures (value, momentum, size, quality) evolve through different volatility regimes and how cross-sectional dispersion relates to factor crowding.\n\nKnown limitations: The current implementation uses a limited sample period and the GARCH convergence diagnostics need strengthening. Part of the \u201cWhat I Built and What\u2019s Wrong With It\u201d series \u2014 actively being improved with better data sourcing and robustness checks."
-      },
-      {
-        name: "Forex Arbitrage Calculator",
-        repo: "tanishhky/ArbitrageForexCalculator",
-        tag: "Quantitative Finance",
-        category: "quant-dev",
-        tech: ["Python", "NetworkX", "Bellman-Ford"],
-        image: "assets/img/projects/forex-arbitrage.svg",
-        summary: "Graph-based triangular arbitrage detection engine using negative-weight cycle detection across currency pairs to identify risk-free profit opportunities.",
-        detail: "A triangular arbitrage detection engine that models currency exchange rates as a directed graph and applies the Bellman-Ford algorithm to detect negative-weight cycles \u2014 which correspond to arbitrage opportunities.\n\nThe system ingests live or historical FX rate data, constructs the log-transformed rate graph, and efficiently scans for profitable multi-hop currency conversion paths. Includes visualization of detected arbitrage cycles and profit margin estimation.\n\nKnown limitations: Does not account for transaction costs, execution latency, or liquidity constraints that would prevent real-world exploitation of detected opportunities. Primarily an educational implementation of graph algorithms applied to finance."
       },
     ];
 
