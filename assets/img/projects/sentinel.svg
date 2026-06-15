@@ -12,15 +12,15 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#222226" stroke-width="1"/>
   <!-- Geometric motif -->
-  <g opacity="0.2" stroke="#8b7444" stroke-width="1" fill="none"><rect x="1040" y="55" width="60" height="60"/><line x1="1060" y1="55" x2="1060" y2="115"/><line x1="1080" y1="55" x2="1080" y2="115"/><line x1="1040" y1="75" x2="1100" y2="75"/><line x1="1040" y1="95" x2="1100" y2="95"/></g>
+  <g opacity="0.22" stroke="#8b7444" stroke-width="1" fill="none"><rect x="1030" y="58" width="48" height="28" rx="2"/><rect x="1088" y="58" width="52" height="28" rx="2"/><rect x="1030" y="94" width="110" height="16" rx="2"/></g>
   <!-- Accent line -->
   <rect x="60" y="280" width="120" height="3" rx="1.5" fill="url(#accent)"/>
   <!-- Title -->
-  <text x="60" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="400" fill="#e8e6e3" letter-spacing="-1">S&amp;P 500 Connectedness</text>
+  <text x="60" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="400" fill="#e8e6e3" letter-spacing="-1">Sentinel</text>
   <!-- Subtitle -->
-  <text x="60" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" font-style="italic" fill="#8a8a8e">Diebold-Yilmaz Spillover &amp; Corrected Granger</text>
+  <text x="60" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" font-style="italic" fill="#8a8a8e">Unified Paper-Trading Dashboard</text>
   <!-- Tech stack -->
-  <text x="60" y="440" font-family="monospace" font-size="14" fill="#55555a" letter-spacing="1">VAR &#183; GFEVD &#183; Statsmodels</text>
+  <text x="60" y="440" font-family="monospace" font-size="14" fill="#55555a" letter-spacing="1">FastAPI &#183; SSE &#183; Parquet</text>
   <!-- Bottom border -->
   <rect x="0" y="626" width="1200" height="4" fill="url(#accent)" opacity="0.5"/>
 </svg>

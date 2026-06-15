@@ -20,10 +20,10 @@
     gtag('config', 'G-87P07T86WH');
   </script>
   <meta name="description"
-    content="Tanishk Yadav &mdash; M.S. Financial Engineering at NYU Tandon. Quantitative research and systematic trading: regime-based allocation, point-in-time fundamental data, signal validation.">
+    content="Tanishk Yadav &mdash; M.S. Financial Engineering at New York University (Tandon). Quantitative research and systematic trading: regime-based allocation, point-in-time fundamental data, signal validation.">
   <meta property="og:title" content="Tanishk Yadav &mdash; Quantitative Finance & ML">
   <meta property="og:description"
-    content="MFE @ NYU Tandon. Building at the intersection of stochastic modeling and systematic trading.">
+    content="MFE @ New York University. Building at the intersection of stochastic modeling and systematic trading.">
   <meta property="og:image" content="https://about-silk-one.vercel.app/assets/img/og-card.png">
   <meta property="og:url" content="https://about-silk-one.vercel.app">
   <meta property="og:type" content="website">
@@ -1298,7 +1298,7 @@
 
   <!-- HERO -->
   <header class="hero">
-    <p class="hero-label">M.S. Financial Engineering &middot; NYU Tandon &middot; Seeking Full-Time Quant Roles, 2027
+    <p class="hero-label">M.S. Financial Engineering &middot; New York University &middot; Seeking Full-Time Quant Roles, 2027
     </p>
     <h1>Tanishk Yadav<br><em>Quantitative Finance</em><br>& Machine Learning</h1>
     <p class="hero-description">
@@ -1351,21 +1351,21 @@
         <img src="assets/img/headshot.jpg" alt="Tanishk Yadav headshot" class="headshot" width="150" height="150"
           loading="lazy">
         <p>
-          I&rsquo;m a <strong>Financial Engineering</strong> graduate student at <strong>NYU Tandon</strong>,
-          with an undergraduate degree in Computer Science (AI/ML specialization) from SRM University on a 100%
-          scholarship.
+          I&rsquo;m a <strong>Financial Engineering</strong> master&rsquo;s student at <strong>New York
+            University</strong> (Tandon), with a Computer Science (AI/ML) undergraduate degree from SRM University
+          on a full scholarship. I work across quantitative research and the systems that support it.
         </p>
         <p>
-          My work sits at the convergence of <strong>quantitative finance</strong> and <strong>machine
-            learning</strong>&mdash;from
-          Hidden Markov regime models and bootstrap-validated trading strategies, to sector-level clustering
-          of S&amp;P 500 market structures. I care deeply about statistical rigor: if it can&rsquo;t survive a null
-          hypothesis
-          test, it doesn&rsquo;t ship.
+          My projects cluster around a few themes: <strong>options and volatility</strong> (model-free
+          risk-neutral moments and a full-stack vol platform), <strong>regime detection and
+            capital-preservation risk overlays</strong>, <strong>point-in-time fundamental data engineering</strong>
+          with zero lookahead bias, and <strong>time-series econometrics</strong> of market structure. Several run
+          as live paper-trading systems, with the no-lookahead discipline enforced in code rather than by convention.
         </p>
         <p>
-          Currently seeking <strong>quant research, strats, and risk</strong> roles where I can apply
-          probabilistic modeling and systematic thinking to real market problems.
+          I care about statistical honesty: I would rather report that an effect decays to noise than dress it up.
+          I&rsquo;m currently co-authoring Prof. David Shimko&rsquo;s valuation textbook and TA-ing his graduate
+          course, and I&rsquo;m targeting <strong>full-time quantitative research</strong> roles for 2027.
         </p>
       </div>
       <div class="about-stats">
@@ -1401,7 +1401,6 @@
       <button class="filter-pill active" data-filter="all">All</button>
       <button class="filter-pill" data-filter="quant-research">Quant Research</button>
       <button class="filter-pill" data-filter="quant-dev">Quant Dev</button>
-      <button class="filter-pill" data-filter="ml">ML / Research</button>
     </div>
 
     <div class="marquee-wrapper">
@@ -1436,7 +1435,7 @@
         <div class="exp-date">Jun 2026 - Present</div>
         <div class="exp-role">Quantitative Research & Teaching Assistant</div>
         <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
-          <div class="exp-company" style="margin-bottom: 0;">NYU Tandon, with Prof. David Shimko - New York, NY</div>
+          <div class="exp-company" style="margin-bottom: 0;">New York University (Tandon), with Prof. David Shimko - New York, NY</div>
         </div>
         <p class="exp-desc">
           Contributing to <em>Valuation Principles</em> (Wiley, forthcoming), Prof. Shimko's graduate valuation
@@ -1559,8 +1558,8 @@
     </div>
     <div class="edu-grid">
       <div class="edu-card">
-        <div class="edu-school">NYU Tandon School of Engineering</div>
-        <div class="edu-degree">M.S. Financial Engineering</div>
+        <div class="edu-school">New York University</div>
+        <div class="edu-degree">M.S. Financial Engineering, Tandon School of Engineering</div>
         <div class="edu-details">Brooklyn, NY &middot; Expected May 2027</div>
       </div>
       <div class="edu-card">
@@ -1684,6 +1683,7 @@
         tag: "Options / Quant Infrastructure",
         category: "quant-dev",
         tech: ["Python", "yfinance", "pytest", "launchd", "Parquet"],
+        image: "assets/img/projects/pinsight.svg",
         summary: "Options risk-neutral-density and pricing engine with a live paper-trading loop, built as a 4-layer no-lookahead reference implementation.",
         detail: "An options risk-neutral-density (RND) and pricing engine paired with a live paper-trading loop, architected as a 4-layer no-lookahead reference implementation.\n\nEvery historical-data read takes an explicit as_of_ts and filters snapshot_ts <= as_of_ts, and decision functions are pure functions of state and as_of_ts (they never read the wall clock internally). A future-data-injection invariance test proves a past decision is unchanged when later snapshots are appended, so no-lookahead is enforced by construction rather than by convention.\n\nThe system keeps market price (c) strictly distinct from estimated probability (p) throughout (Kelly sizing requires an explicit probability estimate and never defaults to price), and it paper-trades SPY automatically each day via macOS launchd (morning, midday, close, plus a continuous poll) with a structured JSONL observability spine."
       },
@@ -1693,6 +1693,7 @@
         tag: "Systematic Trading",
         category: "quant-research",
         tech: ["Python", "Kalshi", "Polymarket", "No-Lookahead"],
+        image: "assets/img/projects/driftedge.svg",
         summary: "A multi-strategy prediction-market (Kalshi / Polymarket) paper-trading system with several independent traders and the same no-lookahead discipline.",
         detail: "A systematic prediction-market research system that polls Kalshi and Polymarket order books and paper-trades them with several independent strategies (Kelly, equal-weight, and vol-weighted sizers, plus volatility-harvest and resolution agents).\n\nIt follows the same no-lookahead discipline as the rest of the platform: every decision is a pure function of point-in-time state, and price is kept strictly distinct from estimated probability. State and trades persist to Parquet, and a structured JSONL observability spine records every API call, fit, and signal."
       },
@@ -1702,6 +1703,7 @@
         tag: "Quant Infrastructure / Observability",
         category: "quant-dev",
         tech: ["Python", "FastAPI", "SSE", "Parquet"],
+        image: "assets/img/projects/sentinel.svg",
         summary: "A FastAPI dashboard that aggregates live paper-trading state, equity curves, trades, and logs from PinSight and DriftEdge into one view.",
         detail: "A unified observability dashboard that plugs into the PinSight and DriftEdge paper-trading systems and renders their live state in one place: equity curves, open and closed positions, per-trader summaries, P&L, drawdown, and a streaming log tail.\n\nIt reads each system's Parquet state and JSONL logs directly (configurable via environment, defaulting to sibling repos), exposes a small JSON API, and streams log updates over server-sent events. It is the ops layer of a three-repo plug-in architecture (Sentinel + PinSight + DriftEdge)."
       },
@@ -1725,16 +1727,6 @@
         summary: "Graph-based triangular arbitrage detection engine using negative-weight cycle detection across currency pairs to identify risk-free profit opportunities.",
         detail: "A triangular arbitrage detection engine that models currency exchange rates as a directed graph and applies the Bellman-Ford algorithm to detect negative-weight cycles \u2014 which correspond to arbitrage opportunities.\n\nThe system ingests live or historical FX rate data, constructs the log-transformed rate graph, and efficiently scans for profitable multi-hop currency conversion paths. Includes visualization of detected arbitrage cycles and profit margin estimation.\n\nKnown limitations: Does not account for transaction costs, execution latency, or liquidity constraints that would prevent real-world exploitation of detected opportunities. Primarily an educational implementation of graph algorithms applied to finance."
       },
-      {
-        name: "Cancer Detection using Hyperspectral Imaging",
-        repo: "tanishhky/cancerDetectionUsingHSI",
-        tag: "Machine Learning / Medical Imaging",
-        category: "ml",
-        tech: ["Python", "PyTorch", "Spectral Transformer", "HSI"],
-        image: "assets/img/projects/cancer-detection-hsi.svg",
-        summary: "Spectral Transformer architecture for hyperspectral image segmentation, classifying healthy vs. infected tissue using per-pixel spectral band analysis.",
-        detail: "A hyperspectral imaging (HSI) segmentation pipeline using a Spectral Transformer architecture that treats spectral bands as sequential tokens for tissue classification. The model performs per-pixel classification to distinguish healthy from infected tissue regions.\n\nImplements per-pixel min-max spectral normalization and batch processing for memory efficiency. The transformer-based approach captures long-range spectral dependencies that traditional CNN architectures miss, improving classification on spectral signatures unique to cancerous tissue.\n\nKnown limitations: Dataset is limited in size; the model has not been validated on external clinical datasets. This project showcases ML research capabilities outside the finance domain."
-      }
     ];
 
     // ─── MODAL LOGIC ───
@@ -1887,8 +1879,8 @@
     "alumniOf": [
       {
         "@type": "CollegeOrUniversity",
-        "name": "NYU Tandon School of Engineering",
-        "department": "Financial Engineering"
+        "name": "New York University",
+        "department": "Financial Engineering, Tandon School of Engineering"
       },
       {
         "@type": "CollegeOrUniversity",

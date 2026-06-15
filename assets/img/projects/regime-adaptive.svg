@@ -12,15 +12,15 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#222226" stroke-width="1"/>
   <!-- Geometric motif -->
-  <g opacity="0.18" stroke="#8b7444" stroke-width="0.8" fill="none"><rect x="1040" y="50" width="80" height="60" rx="2"/><line x1="1067" y1="50" x2="1067" y2="110"/><line x1="1093" y1="50" x2="1093" y2="110"/><line x1="1040" y1="70" x2="1120" y2="70"/><line x1="1040" y1="90" x2="1120" y2="90"/></g>
+  <g opacity="0.2" stroke="#8b7444" stroke-width="1" fill="none"><polyline points="1020,100 1050,100 1050,70 1090,70 1090,95 1140,95"/></g>
   <!-- Accent line -->
   <rect x="60" y="280" width="120" height="3" rx="1.5" fill="url(#accent)"/>
   <!-- Title -->
   <text x="60" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="400" fill="#e8e6e3" letter-spacing="-1">Regime-Adaptive Portfolio</text>
   <!-- Subtitle -->
-  <text x="60" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" font-style="italic" fill="#8a8a8e">HMM Portfolio Optimization</text>
+  <text x="60" y="385" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="400" font-style="italic" fill="#8a8a8e">4-Detector Capital-Preservation Overlay</text>
   <!-- Tech stack -->
-  <text x="60" y="440" font-family="monospace" font-size="14" fill="#55555a" letter-spacing="1">HMM · SciPy · Matplotlib</text>
+  <text x="60" y="440" font-family="monospace" font-size="14" fill="#55555a" letter-spacing="1">CUSUM &#183; Fuzzy Consensus &#183; Walk-Forward</text>
   <!-- Bottom border -->
   <rect x="0" y="626" width="1200" height="4" fill="url(#accent)" opacity="0.5"/>
 </svg>
