@@ -694,6 +694,7 @@
           card.href = post.url;
           card.target = '_blank';
           card.rel = 'noopener noreferrer';
+          card.addEventListener('click', () => gtag('event', 'writing_post_click', { platform: series.platform, title: post.title }));
 
           card.innerHTML = `
             <div class="post-card-image">

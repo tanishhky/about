@@ -1313,17 +1313,20 @@
       </div>
       <div class="hero-meta-item">
         <span class="hero-meta-label">Email</span>
-        <span class="hero-meta-value"><a href="mailto:tanishkyadav@nyu.edu">tanishkyadav@nyu.edu</a></span>
+        <span class="hero-meta-value"><a href="mailto:tanishkyadav@nyu.edu"
+            onclick="gtag('event', 'outbound_click', {link: 'email', location: 'hero'})">tanishkyadav@nyu.edu</a></span>
       </div>
       <div class="hero-meta-item">
         <span class="hero-meta-label">GitHub</span>
         <span class="hero-meta-value"><a href="https://github.com/tanishhky" target="_blank"
-            rel="noopener noreferrer">tanishhky</a></span>
+            rel="noopener noreferrer"
+            onclick="gtag('event', 'outbound_click', {link: 'github', location: 'hero'})">tanishhky</a></span>
       </div>
       <div class="hero-meta-item">
         <span class="hero-meta-label">LinkedIn</span>
         <span class="hero-meta-value"><a href="https://linkedin.com/in/tanishkyadav" target="_blank"
-            rel="noopener noreferrer">tanishkyadav</a></span>
+            rel="noopener noreferrer"
+            onclick="gtag('event', 'outbound_click', {link: 'linkedin', location: 'hero'})">tanishkyadav</a></span>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -1575,11 +1578,14 @@
     <p class="contact-label">Get in touch</p>
     <h2 class="contact-heading">Let's build something<br><em>quantitatively interesting.</em></h2>
     <div class="contact-links">
-      <a href="mailto:tanishkyadav@nyu.edu" class="contact-link">tanishkyadav@nyu.edu</a>
-      <a href="tel:+16465334214" class="contact-link">(646) 533-4214</a>
-      <a href="https://github.com/tanishhky" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
-      <a href="https://linkedin.com/in/tanishkyadav" target="_blank" rel="noopener noreferrer"
-        class="contact-link">LinkedIn</a>
+      <a href="mailto:tanishkyadav@nyu.edu" class="contact-link"
+        onclick="gtag('event', 'outbound_click', {link: 'email', location: 'contact'})">tanishkyadav@nyu.edu</a>
+      <a href="tel:+16465334214" class="contact-link"
+        onclick="gtag('event', 'outbound_click', {link: 'phone', location: 'contact'})">(646) 533-4214</a>
+      <a href="https://github.com/tanishhky" target="_blank" rel="noopener noreferrer" class="contact-link"
+        onclick="gtag('event', 'outbound_click', {link: 'github', location: 'contact'})">GitHub</a>
+      <a href="https://linkedin.com/in/tanishkyadav" target="_blank" rel="noopener noreferrer" class="contact-link"
+        onclick="gtag('event', 'outbound_click', {link: 'linkedin', location: 'contact'})">LinkedIn</a>
     </div>
   </section>
 
@@ -1617,6 +1623,16 @@
   <script>
     // ─── PROJECT DATA ───
     const projects = [
+      {
+        name: "RateWalk \u2014 Markov Rate Forecasting & Fixed-Income Monte Carlo",
+        repo: "tanishhky/RateWalk",
+        tag: "Fixed Income / Rates Research",
+        category: "quant-research",
+        tech: ["Python", "FRED/ALFRED", "Markov Chains", "Monte Carlo", "pytest"],
+        image: "assets/img/projects/ratewalk.svg",
+        summary: "A Markov-driven Monte Carlo engine for fixed-income path simulation, risk, and hedging: a walk-forward finding shows empirical-Bayes shrinkage of CPI-conditioning beats an unconditional Fed-move forecast, replicated across the US, UK, and Germany.",
+        detail: "A Markov-driven Monte Carlo engine for fixed-income path simulation, risk, and hedging: it estimates a Markov chain on Fed policy-rate moves and CPI regimes from real FRED/ALFRED point-in-time data, maps each state to a full yield curve, and runs large Monte Carlo ensembles of a bond strategy with regime-realistic jumps (GFC, Covid, SVB) to compute VaR/CVaR, distributional moments, and best-duration selection.\n\nThe walk-forward research finding (1990-2026, no lookahead) is deliberately honest. Naively conditioning the rate chain on the CPI regime overfits and hurts out-of-sample log-loss, but shrinking each regime's row toward the pooled chain with an empirical-Bayes prior recovers a real edge over the unconditional model (log-loss 1.059 vs 1.071), and the flip replicates out of sample across the US, UK, and Germany rather than being tuned to one market.\n\nAgainst a walk-forward-calibrated, curve-implied proxy of market pricing, a parameter-free blend of the market proxy and the shrunk chain beats both individually (log-loss 1.056, accuracy 72.7% over 319 out-of-sample decisions): the market proxy wins on actual move months, the chain wins on holds, so the honest claim is that they're complementary, not that either 'beats the market.' The duration-timing strategy built on the same signal does not beat a constant-2y bond risk-adjusted, an honest negative the writeup keeps rather than hides. Multi-sovereign (US/UK/Germany via config), and the held instrument scales from a single bond to a ladder or portfolio. Working paper submitted to SSRN, currently under editorial review."
+      },
       {
         name: "ChronoFund \u2014 Point-in-Time Fundamental Data Engine",
         repo: "tanishhky/chronofund-fundamental-engine",
@@ -1744,8 +1760,10 @@
       modalDetail.innerHTML = proj.detail.replace(/\n\n/g, '<br><br>');
       modalTech.innerHTML = proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('');
       modalCta.href = `https://github.com/${proj.repo}`;
+      modalCta.onclick = () => gtag('event', 'project_github_click', { project: proj.repo });
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+      gtag('event', 'project_card_view', { project: proj.repo });
     }
 
     function closeModal() {
