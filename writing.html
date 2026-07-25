@@ -638,6 +638,20 @@
             url: "https://www.linkedin.com/posts/tanishkyadav_sector-level-analysis-and-clustering-of-s-ugcPost-7447846466427162624-z4sa?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADOL3t8BfKP6x7CQQOopLVnMAgcqXmWop9k",
             image: "https://media.licdn.com/...",  // og:image from the article
             readingTime: "8 min"
+          },
+          {
+            title: "What Actually Drives Sector Returns? A Factor-Model Teardown",
+            summary: "A factor-model teardown of the 11 GICS sector ETFs (XLK, XLF, XLV, XLY, XLP, XLE, XLI, XLB, XLU, XLRE, XLC), 2015 to 2025, run through Fama-French 3-Factor, Carhart 4-Factor, and Fama-French 5-Factor models with Ridge/Lasso robustness checks. Tech's factor DNA: 92-93% of daily return variance explained by the models, market beta above 1, negative SMB (large-cap bias) and negative HML (growth, not value) loadings - most of what looks like stock-picking alpha in tech is factor exposure wearing a costume. Built a monthly top-3-sector momentum rotation strategy on top of it and found comparable returns to SPY with meaningfully less drawdown. The more interesting result: sector factor betas are not static, they shift across market regimes, so a static factor model is always wrong on the margins. Where it broke: the 6-month lookback was arbitrary, there was no transaction-cost or factor-crowding adjustment, and regimes were treated as background noise instead of being modeled directly. Correction (what was wrong): the original strategy numbers here (CAGR 16.51% vs SPY 17.40%, max drawdown -15.97% vs SPY -23.97%) came from an early, unrefined pass. The project was since rebuilt as a replication and extension of Moreira and Muir (2017): scaling factor exposure by inverse recent variance earns large, statistically significant alpha on Momentum (+8.9%/yr, t=5.0, net Sharpe 0.81 vs 0.51) and Profitability RMW (+2.3%/yr, t=2.9), but nothing on size, value, or investment, reported net of 14bps per unit of leverage turnover. That is the accurate, current version of this project.",
+            date: "April 2026",
+            url: "https://www.linkedin.com/feed/update/urn:li:activity:7451289420227477504/",
+            readingTime: "6 min"
+          },
+          {
+            title: "RateWalk: Does a Fed-Rate Forecaster Actually Beat the Market?",
+            summary: "A Markov chain over Fed policy moves and CPI regimes, walk-forward validated with point-in-time (ALFRED) CPI data, no lookahead. Naive regime-conditioning overfits and makes out-of-sample forecasts worse; shrinking it toward the pooled chain recovers a small edge that replicates across the US, UK, and Germany. Then built the actual market-implied benchmark: a curve proxy from the 3-month bill minus the policy rate, calibrated only on past pairs, scored on the same 319 monthly out-of-sample decisions. Results (log-loss, lower is better): market proxy 1.199, shrunk chain 1.063, blended 1.056; accuracy 54.6% / 68.7% / 72.7%. Neither wins outright - the market proxy calls 82% of actual rate moves correctly, the chain calls 85% of holds correctly, they're reading different information, not competing for the same signal. Honest limit: this is a forecasting edge, not a trading strategy yet. A duration-timing backtest built on top of it does not beat a plain 2-year bond risk-adjusted.",
+            date: "July 2026",
+            url: "https://www.linkedin.com/feed/update/urn:li:activity:7481746164057464832/",
+            readingTime: "5 min"
           }
         ]
       },
