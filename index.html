@@ -44,10 +44,11 @@
       --border: #222226;
       --border-hover: #333338;
       --text-primary: #e8e6e3;
-      --text-secondary: #8a8a8e;
-      --text-muted: #55555a;
-      --accent: #c9a96e;
-      --accent-dim: #8b7444;
+      --text-secondary: #a6a6ac;
+      --text-muted: #8a8a90;
+      --accent: #d4b47a;
+      --accent-dim: #b0925a;
+      --accent-deco: #8b7444;
       --accent-glow: rgba(201, 169, 110, 0.08);
       --serif: 'Instrument Serif', Georgia, serif;
       --sans: 'DM Sans', -apple-system, sans-serif;
@@ -97,6 +98,60 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    /* ─── GLOBAL KEYBOARD FOCUS ─── */
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    /* ─── SKIP LINK ─── */
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -60px;
+      z-index: 300;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: top 0.25s var(--ease-out);
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      .hero-label,
+      .hero h1,
+      .hero-description,
+      .hero-meta,
+      .hero-scroll-hint,
+      .now-strip,
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
 
     /* ─── NAV ─── */
@@ -409,74 +464,67 @@
       letter-spacing: 0.06em;
     }
 
-    /* ─── PROJECTS MARQUEE ─── */
-    .projects-section {
-      max-width: none;
-      padding-left: 0;
-      padding-right: 0;
+    /* ─── PROJECTS GRID ─── */
+    /* The hidden attribute must win over display:inline-flex etc. */
+    [hidden] {
+      display: none !important;
     }
 
-    .projects-section .section-header {
-      padding: 0 2.5rem;
-      max-width: 1200px;
-      margin: 0 auto 2rem;
-    }
-
-    .marquee-wrapper {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .marquee-wrapper::before,
-    .marquee-wrapper::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 80px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .marquee-wrapper::before {
-      left: 0;
-      background: linear-gradient(to right, var(--bg), transparent);
-    }
-
-    .marquee-wrapper::after {
-      right: 0;
-      background: linear-gradient(to left, var(--bg), transparent);
-    }
-
-    .marquee-track {
-      display: flex;
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1.5rem;
-      padding: 1.5rem 2.5rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      cursor: grab;
     }
 
-    .marquee-track::-webkit-scrollbar {
-      display: none;
+    /* Secondary "Also built" tier: more compact, lower emphasis */
+    .projects-grid.secondary {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
     }
 
-    .marquee-track:active {
-      cursor: grabbing;
+    .projects-subhead {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 3.5rem 0 1.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-card.compact .project-card-body {
+      padding: 1.35rem 1.35rem 0.5rem;
+    }
+
+    .project-card.compact .project-card-title {
+      font-size: 1.12rem;
+    }
+
+    .project-card.compact .project-card-footer {
+      padding: 0 1.35rem 1.35rem;
+    }
+
+    .project-count {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
     }
 
     .project-card {
-      flex: 0 0 420px;
+      display: block;
+      width: 100%;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
-      scroll-snap-align: center;
-      transition: all 0.5s var(--ease-out);
+      transition: transform 0.4s var(--ease-out), border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
       position: relative;
     }
 
@@ -498,7 +546,7 @@
     .project-card-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: transform 0.6s var(--ease-out), opacity 0.4s;
       opacity: 0;
     }
@@ -618,6 +666,14 @@
       gap: 0.4rem;
       transition: color 0.3s;
       white-space: nowrap;
+      background: none;
+      border: none;
+      padding: 0.35rem 0;
+      cursor: pointer;
+    }
+
+    .project-card:focus-within {
+      border-color: var(--accent-dim);
     }
 
     .project-link:hover {
@@ -734,6 +790,25 @@
       font-weight: 300;
       color: var(--text-muted);
       line-height: 1.7;
+    }
+
+    .exp-footnote {
+      margin-top: 1.5rem;
+      padding-left: 2rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    .exp-footnote a {
+      color: var(--accent-dim);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .exp-footnote a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
     }
 
     /* ─── SKILLS ─── */
@@ -992,7 +1067,7 @@
     .project-modal-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .project-modal-close {
@@ -1094,6 +1169,47 @@
     .project-modal-cta svg {
       width: 15px;
       height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .project-modal-ctas {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .project-modal-cta.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* ─── PAPER HINT BADGE (cards) ─── */
+    .paper-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .paper-badge svg {
+      width: 11px;
+      height: 11px;
       stroke: currentColor;
       fill: none;
       stroke-width: 2;
@@ -1282,22 +1398,23 @@
 
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Primary">
     <a href="#" class="nav-logo">T<span>.</span>Y</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
       <li><a href="writing.html">Writing</a></li>
-      <li><a href="credentials.html#research" class="nav-more-btn">Research &rarr;</a></li>
+      <li><a href="credentials.html" class="nav-more-btn">Credentials &rarr;</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
-  <header class="hero">
+  <header class="hero" id="main-content" tabindex="-1">
     <p class="hero-label">M.S. Financial Engineering &middot; <a href="https://engineering.nyu.edu" target="_blank"
         rel="noopener noreferrer">New York University</a> &middot; Seeking Full-Time Quant Roles, 2027
     </p>
@@ -1381,8 +1498,8 @@
           <div class="stat-label">GRE Quant (top 3%)</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">SRM Merit Scholarship</div>
+          <div class="stat-number">3</div>
+          <div class="stat-label">SSRN Preprints</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">12+</div>
@@ -1400,33 +1517,17 @@
   <section id="projects" class="projects-section reveal">
     <div class="section-header">
       <span class="section-number">02</span>
-      <h2 class="section-title">Projects</h2>
+      <h2 class="section-title">Projects & Research</h2>
       <div class="section-line"></div>
     </div>
 
-    <div class="project-filters" id="projectFilters">
-      <button class="filter-pill active" data-filter="all">All</button>
-      <button class="filter-pill" data-filter="quant-research">Quant Research</button>
-      <button class="filter-pill" data-filter="quant-dev">Quant Dev</button>
+    <div class="projects-grid" id="flagshipGrid">
+      <!-- Flagship cards injected by JS -->
     </div>
 
-    <div class="marquee-wrapper">
-      <div class="marquee-track" id="marqueeTrack">
-        <!-- Cards are injected by JS -->
-      </div>
-    </div>
-
-    <div class="marquee-controls">
-      <button class="marquee-btn" id="scrollLeft" aria-label="Scroll left">
-        <svg viewBox="0 0 24 24">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      </button>
-      <button class="marquee-btn" id="scrollRight" aria-label="Scroll right">
-        <svg viewBox="0 0 24 24">
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      </button>
+    <h3 class="projects-subhead">Also built</h3>
+    <div class="projects-grid secondary" id="secondaryGrid">
+      <!-- Secondary cards injected by JS -->
     </div>
   </section>
 
@@ -1454,35 +1555,11 @@
           built on the textbook.
         </p>
       </div>
-      <div class="exp-item">
-        <div class="exp-date">Jun 2023 &mdash; Aug 2023</div>
-        <div class="exp-role">Summer Intern, Framework Development</div>
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
-          <img src="assets/img/placeholder_logo.svg" alt="IUDX Logo" width="24" height="24" style="border-radius: 4px;">
-          <div class="exp-company" style="margin-bottom: 0;"><a href="https://iudx.org.in/" target="_blank"
-              rel="noopener noreferrer">IUDX (India Urban Data Exchange)</a> &mdash; Bengaluru, India
-          </div>
-        </div>
-        <p class="exp-desc">
-          Developed a secure, cross-platform digital consent collector using SHA-256 cryptographic hashing,
-          ensuring regulatory compliance for the ADeX government platform. Engineered full-stack JavaScript solutions
-          enabling 38 critical datasets for a government-academia joint venture.
-        </p>
-      </div>
-      <div class="exp-item">
-        <div class="exp-date">2022 &mdash; 2023</div>
-        <div class="exp-role">Student Council PR Convener</div>
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
-          <img src="assets/img/placeholder_logo.svg" alt="SRM Logo" width="24" height="24" style="border-radius: 4px;">
-          <div class="exp-company" style="margin-bottom: 0;"><a href="https://www.srmap.edu.in" target="_blank"
-              rel="noopener noreferrer">SRM University</a> &mdash; Amaravati, India</div>
-        </div>
-        <p class="exp-desc">
-          Represented 10,000+ students as primary liaison to administration.
-          Directed cross-functional teams to execute cultural fests with $100,000+ budgets.
-        </p>
-      </div>
     </div>
+    <p class="exp-footnote">
+      Earlier roles (framework-development internship, student-council leadership) are on the
+      <a href="credentials.html#background">Background</a> page.
+    </p>
   </section>
 
   <!-- SKILLS -->
@@ -1552,16 +1629,11 @@
           <span class="skill-tag">ARIMA</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Certifications</div>
-        <div class="skill-tags">
-          <a class="skill-tag" href="https://professional.bloomberg.com/products/bloomberg-terminal/education/certificate-courses/"
-            target="_blank" rel="noopener noreferrer">Bloomberg BMC</a>
-          <a class="skill-tag" href="https://www.coursera.org/learn/financial-markets-global" target="_blank"
-            rel="noopener noreferrer">Financial Markets (Honors)</a>
-        </div>
-      </div>
     </div>
+    <p class="exp-footnote" style="padding-left: 0;">
+      Full certifications, coursework, and resume are on the
+      <a href="credentials.html">Credentials</a> page.
+    </p>
   </section>
 
   <!-- EDUCATION -->
@@ -1609,9 +1681,9 @@
 
   <!-- PROJECT MODAL -->
   <div class="project-modal-overlay" id="projectModal">
-    <div class="project-modal">
+    <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="project-modal-image" id="modalImage">
-        <button class="project-modal-close" id="modalClose">
+        <button class="project-modal-close" id="modalClose" aria-label="Close project details">
           <svg viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
@@ -1623,13 +1695,23 @@
         <h3 class="project-modal-title" id="modalTitle"></h3>
         <p class="project-modal-detail" id="modalDetail"></p>
         <div class="project-modal-tech" id="modalTech"></div>
-        <a class="project-modal-cta" id="modalCta" href="#" target="_blank" rel="noopener">
-          View on GitHub
-          <svg viewBox="0 0 24 24">
-            <line x1="7" y1="17" x2="17" y2="7" />
-            <polyline points="7 7 17 7 17 17" />
-          </svg>
-        </a>
+        <div class="project-modal-ctas">
+          <a class="project-modal-cta primary" id="modalPaperCta" href="#" target="_blank"
+            rel="noopener noreferrer" hidden>
+            Read the paper
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+          </a>
+          <a class="project-modal-cta" id="modalCta" href="#" target="_blank" rel="noopener noreferrer">
+            View on GitHub
+            <svg viewBox="0 0 24 24">
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1640,6 +1722,8 @@
       {
         name: "RateWalk \u2014 Markov Rate Forecasting & Fixed-Income Monte Carlo",
         repo: "tanishhky/RateWalk",
+        paper: "https://github.com/tanishhky/RateWalk/blob/main/paper/ratewalk.pdf",
+        paperLabel: "Working paper (PDF)",
         tag: "Fixed Income / Rates Research",
         category: "quant-research",
         tech: ["Python", "FRED/ALFRED", "Markov Chains", "Monte Carlo", "pytest"],
@@ -1688,8 +1772,10 @@
         detail: "A Regime-Switching Risk Model using a 4-state Gaussian Hidden Markov Model to classify market conditions into Crisis (VIX > 35, correlations \u2192 1), Inflationary Bear, Secular Bull, and Transition states. Custom Synthetic History Generator backfills sector ETF data to 2005 for capturing GFC-era volatility dynamics.\n\nStrict Walk-Forward (Out-of-Sample) backtest from 2023\u2013Present using Ledoit-Wolf shrinkage for covariance estimation achieved a Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46% (\u221210.12% vs. \u221218.76% benchmark).\n\nRobustness validated via Parametric Bootstrapping (1,000 simulations) and Null Hypothesis Falsification using random-walk null models, proving true alpha generation (+$26K excess return per $100K deployed) with p < 0.05 rejection of noise-driven outperformance. The work also demonstrates that na\u00efve backtesting inflates Sharpe ratios 50\u2013100% through look-ahead bias."
       },
       {
-        name: "S&P 500 Sector Connectedness & Market Structure",
+        name: "S&P 500 Sector Dynamics: Return Connectedness, Market Concentration, and Structural Clustering (2019 to 2025)",
         repo: "tanishhky/sp500-sector-analysis",
+        paper: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6475898",
+        paperLabel: "SSRN preprint",
         tag: "Time-Series Econometrics",
         category: "quant-research",
         tech: ["Python", "Statsmodels (VAR)", "Scikit-Learn", "Pandas"],
@@ -1700,6 +1786,8 @@
       {
         name: "Regime-Adaptive Sector Portfolio",
         repo: "tanishhky/regime-adaptive-portfolio",
+        paper: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6484679",
+        paperLabel: "SSRN preprint",
         tag: "Risk / Portfolio Construction",
         category: "quant-research",
         tech: ["Python", "Scikit-Learn", "Walk-Forward", "NumPy"],
@@ -1715,7 +1803,7 @@
         tech: ["Python", "yfinance", "pytest", "launchd", "Parquet"],
         image: "assets/img/projects/pinsight.svg",
         summary: "Options risk-neutral-density and pricing engine with a live paper-trading loop, built as a 4-layer no-lookahead reference implementation.",
-        detail: "An options risk-neutral-density (RND) and pricing engine paired with a live paper-trading loop, architected as a 4-layer no-lookahead reference implementation.\n\nEvery historical-data read takes an explicit as_of_ts and filters snapshot_ts <= as_of_ts, and decision functions are pure functions of state and as_of_ts (they never read the wall clock internally). A future-data-injection invariance test proves a past decision is unchanged when later snapshots are appended, so no-lookahead is enforced by construction rather than by convention.\n\nThe system keeps market price (c) strictly distinct from estimated probability (p) throughout (Kelly sizing requires an explicit probability estimate and never defaults to price), and it paper-trades SPY automatically each day via macOS launchd (morning, midday, close, plus a continuous poll) with a structured JSONL observability spine."
+        detail: "An options risk-neutral-density (RND) and pricing engine paired with a live paper-trading loop, architected as a 4-layer no-lookahead reference implementation.\n\nEvery historical-data read takes an explicit as_of_ts and filters snapshot_ts <= as_of_ts, and decision functions are pure functions of state and as_of_ts (they never read the wall clock internally). A future-data-injection invariance test proves a past decision is unchanged when later snapshots are appended, so no-lookahead is enforced by construction rather than by convention.\n\nThe system keeps market price (c) strictly distinct from estimated probability (p) throughout (Kelly sizing requires an explicit probability estimate and never defaults to price), and it paper-trades SPY automatically each day via macOS launchd (morning, midday, close, plus a continuous poll) with a structured JSONL observability spine. Its live equity, positions, and logs surface in a companion FastAPI dashboard, Sentinel, that fronts the whole paper-trading stack over server-sent events."
       },
       {
         name: "DriftEdge - Prediction-Market Trading Research",
@@ -1725,21 +1813,13 @@
         tech: ["Python", "Kalshi", "Polymarket", "No-Lookahead"],
         image: "assets/img/projects/driftedge.svg",
         summary: "A multi-strategy prediction-market (Kalshi / Polymarket) paper-trading system with several independent traders and the same no-lookahead discipline.",
-        detail: "A systematic prediction-market research system that polls Kalshi and Polymarket order books and paper-trades them with several independent strategies (Kelly, equal-weight, and vol-weighted sizers, plus volatility-harvest and resolution agents).\n\nIt follows the same no-lookahead discipline as the rest of the platform: every decision is a pure function of point-in-time state, and price is kept strictly distinct from estimated probability. State and trades persist to Parquet, and a structured JSONL observability spine records every API call, fit, and signal."
-      },
-      {
-        name: "Sentinel - Unified Paper-Trading Dashboard",
-        repo: "tanishhky/Sentinel",
-        tag: "Quant Infrastructure / Observability",
-        category: "quant-dev",
-        tech: ["Python", "FastAPI", "SSE", "Parquet"],
-        image: "assets/img/projects/sentinel.svg",
-        summary: "A FastAPI dashboard that aggregates live paper-trading state, equity curves, trades, and logs from PinSight and DriftEdge into one view.",
-        detail: "A unified observability dashboard that plugs into the PinSight and DriftEdge paper-trading systems and renders their live state in one place: equity curves, open and closed positions, per-trader summaries, P&L, drawdown, and a streaming log tail.\n\nIt reads each system's Parquet state and JSONL logs directly (configurable via environment, defaulting to sibling repos), exposes a small JSON API, and streams log updates over server-sent events. It is the ops layer of a three-repo plug-in architecture (Sentinel + PinSight + DriftEdge)."
+        detail: "A systematic prediction-market research system that polls Kalshi and Polymarket order books and paper-trades them with several independent strategies (Kelly, equal-weight, and vol-weighted sizers, plus volatility-harvest and resolution agents).\n\nIt follows the same no-lookahead discipline as the rest of the platform: every decision is a pure function of point-in-time state, and price is kept strictly distinct from estimated probability. State and trades persist to Parquet, and a structured JSONL observability spine records every API call, fit, and signal. Its live state plugs into the same Sentinel dashboard as PinSight, giving the stack one shared observability view."
       },
       {
         name: "Volatility-Managed Factor Portfolios",
         repo: "tanishhky/Equity-Factor-Volatility-Analysis",
+        paper: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7113079",
+        paperLabel: "SSRN preprint",
         tag: "Factor Timing / Asset Pricing",
         category: "quant-research",
         tech: ["Python", "Statsmodels", "Ken French", "Newey-West"],
@@ -1749,25 +1829,61 @@
       },
     ];
 
-    // ─── MODAL LOGIC ───
+    // ─── FLAGSHIP-FIRST ORDERING ───
+    // Ordering within the section. Paper-backed flagships lead; Sentinel is folded into
+    // PinSight/DriftEdge and has no card of its own.
+    const priorityOrder = [
+      "tanishhky/RateWalk",
+      "tanishhky/regime-adaptive-portfolio",
+      "tanishhky/sp500-sector-analysis",
+      "tanishhky/chronofund-fundamental-engine",
+      "tanishhky/voledge",
+      "tanishhky/Regime-Aware-Factor-Backtest",
+      "tanishhky/Equity-Factor-Volatility-Analysis",
+      "tanishhky/PinSight",
+      "tanishhky/DriftEdge",
+      "tanishhky/regime_portfolio_optimization"
+    ];
+    const rank = repo => {
+      const i = priorityOrder.indexOf(repo);
+      return i === -1 ? priorityOrder.length : i;
+    };
+    projects.sort((a, b) => rank(a.repo) - rank(b.repo));
+
+    // Tier 1 = flagship (featured grid). Everything else = the compact "Also built" tier.
+    const flagshipRepos = new Set([
+      "tanishhky/RateWalk",
+      "tanishhky/regime-adaptive-portfolio",
+      "tanishhky/sp500-sector-analysis",
+      "tanishhky/chronofund-fundamental-engine",
+      "tanishhky/voledge",
+      "tanishhky/Regime-Aware-Factor-Backtest",
+      "tanishhky/Equity-Factor-Volatility-Analysis"
+    ]);
+
+    // ─── MODAL LOGIC (accessible dialog) ───
     const overlay = document.getElementById('projectModal');
+    const modalDialog = overlay.querySelector('.project-modal');
     const modalImage = document.getElementById('modalImage');
     const modalTag = document.getElementById('modalTag');
     const modalTitle = document.getElementById('modalTitle');
     const modalDetail = document.getElementById('modalDetail');
     const modalTech = document.getElementById('modalTech');
     const modalCta = document.getElementById('modalCta');
+    const modalPaperCta = document.getElementById('modalPaperCta');
+    const modalCloseBtn = document.getElementById('modalClose');
+    let lastFocused = null;
 
-    function openModal(proj) {
+    function openModal(proj, trigger) {
+      lastFocused = trigger || document.activeElement;
       const imgSrc = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
-      const closeBtn = modalImage.querySelector('.project-modal-close');
       modalImage.innerHTML = '';
-      modalImage.appendChild(closeBtn);
+      modalImage.appendChild(modalCloseBtn);
       if (imgSrc) {
         const img = document.createElement('img');
         img.src = imgSrc;
-        img.alt = proj.name;
-        modalImage.insertBefore(img, closeBtn);
+        img.alt = '';
+        modalImage.insertBefore(img, modalCloseBtn);
       }
       modalTag.textContent = proj.tag;
       modalTitle.textContent = proj.name;
@@ -1775,48 +1891,76 @@
       modalTech.innerHTML = proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('');
       modalCta.href = `https://github.com/${proj.repo}`;
       modalCta.onclick = () => gtag('event', 'project_github_click', { project: proj.repo });
+      // Paper is the primary call-to-action when one exists; GitHub becomes secondary.
+      if (proj.paper) {
+        modalPaperCta.href = proj.paper;
+        modalPaperCta.textContent = proj.paperLabel && /pdf/i.test(proj.paperLabel) ? 'Read the paper (PDF)' : 'Read the paper';
+        modalPaperCta.insertAdjacentHTML('beforeend', ' <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>');
+        modalPaperCta.hidden = false;
+        modalPaperCta.onclick = () => gtag('event', 'project_paper_click', { project: proj.repo });
+        modalCta.classList.remove('primary');
+      } else {
+        modalPaperCta.hidden = true;
+        modalPaperCta.onclick = null;
+        modalCta.classList.add('primary');
+      }
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+      modalCloseBtn.focus();
       gtag('event', 'project_card_view', { project: proj.repo });
     }
 
     function closeModal() {
+      if (!overlay.classList.contains('active')) return;
       overlay.classList.remove('active');
       document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
     }
 
-    document.getElementById('modalClose').addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
+    modalCloseBtn.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeModal(); return; }
+      // Focus trap while the dialog is open
+      if (e.key === 'Tab' && overlay.classList.contains('active')) {
+        const focusables = modalDialog.querySelectorAll('a[href], button:not([disabled])');
+        if (!focusables.length) return;
+        const first = focusables[0], last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
 
-    // ─── RENDER PROJECT CARDS ───
-    const track = document.getElementById('marqueeTrack');
+    // ─── RENDER PROJECT CARDS (accessible, two tiers) ───
+    const flagshipGrid = document.getElementById('flagshipGrid');
+    const secondaryGrid = document.getElementById('secondaryGrid');
 
-    function renderCards(filter = 'all') {
-      track.innerHTML = '';
-      const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+    function buildCard(proj, compact) {
+      const imgSrc = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
+      const ghFallback = proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null;
+      const paperWord = proj.paperLabel && /pdf/i.test(proj.paperLabel) ? 'Paper' : 'SSRN Paper';
 
-      filtered.forEach(proj => {
-        const imgSrc = proj.image || (proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null);
-        const ghFallback = proj.repo ? `https://opengraph.githubassets.com/1/${proj.repo}` : null;
+      const card = document.createElement('article');
+      card.className = 'project-card' + (compact ? ' compact' : '');
+      card.dataset.category = proj.category;
 
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        card.style.cursor = 'pointer';
-        card.dataset.category = proj.category;
-
-        card.innerHTML = `
+      // Compact (secondary) cards drop the banner image to reduce visual weight.
+      const imageBlock = compact ? '' : `
       <div class="project-card-image">
-        ${imgSrc ? `<img src="${imgSrc}" alt="${proj.name}" width="420" height="220" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.querySelector('.placeholder').style.opacity='0'" onerror="this.src='${ghFallback || ''}'; this.onerror=null;">` : ''}
+        ${proj.paper ? `<span class="paper-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>${paperWord}</span>` : ''}
+        ${imgSrc ? `<img src="${imgSrc}" alt="" width="420" height="220" loading="lazy" onload="this.classList.add('loaded'); this.parentElement.querySelector('.placeholder').style.opacity='0'" onerror="this.src='${ghFallback || ''}'; this.onerror=null;">` : ''}
         <div class="placeholder">
           <div class="placeholder-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
             <span>${proj.tag}</span>
           </div>
         </div>
-      </div>
+      </div>`;
+
+      card.innerHTML = `
+      ${imageBlock}
       <div class="project-card-body">
-        <div class="project-card-tag">${proj.tag}</div>
+        <div class="project-card-tag">${proj.tag}${compact && proj.paper ? ' · ' + paperWord : ''}</div>
         <h3 class="project-card-title">${proj.name}</h3>
         <p class="project-card-summary">${proj.summary}</p>
       </div>
@@ -1824,70 +1968,34 @@
         <div class="project-tech">
           ${proj.tech.map(t => `<span class="tech-pill">${t}</span>`).join('')}
         </div>
-        <span class="project-link">Details <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        <button class="project-link" type="button" aria-label="View details for ${proj.name.replace(/"/g, '&quot;')}">Details <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></button>
       </div>
     `;
 
-        card.addEventListener('click', () => openModal(proj));
-        track.appendChild(card);
-      });
+      const detailsBtn = card.querySelector('.project-link');
+      detailsBtn.addEventListener('click', (e) => { e.stopPropagation(); openModal(proj, detailsBtn); });
+      // Mouse convenience: clicking anywhere on the card (but not a nested control) opens it.
+      card.addEventListener('click', (e) => { if (!e.target.closest('button, a')) openModal(proj, detailsBtn); });
+      return card;
     }
 
-    renderCards();
-
-    // ─── CATEGORY FILTER ───
-    document.querySelectorAll('.filter-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderCards(btn.dataset.filter);
-      });
-    });
-
-    // ─── MARQUEE DRAG SCROLL ───
-    let isDown = false, startX, scrollLeft, hasDragged = false;
-
-    track.addEventListener('mousedown', e => {
-      isDown = true;
-      hasDragged = false;
-      track.style.cursor = 'grabbing';
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    });
-
-    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
-    track.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      hasDragged = true;
-      const x = e.pageX - track.offsetLeft;
-      track.scrollLeft = scrollLeft - (x - startX) * 1.5;
-    });
-
-    // Prevent click-to-open after drag
-    track.addEventListener('click', e => {
-      if (hasDragged) { e.stopPropagation(); hasDragged = false; }
-    }, true);
-
-    // Arrow buttons
-    document.getElementById('scrollLeft').addEventListener('click', () => {
-      track.scrollBy({ left: -440, behavior: 'smooth' });
-    });
-    document.getElementById('scrollRight').addEventListener('click', () => {
-      track.scrollBy({ left: 440, behavior: 'smooth' });
+    projects.forEach(proj => {
+      const isFlagship = flagshipRepos.has(proj.repo);
+      (isFlagship ? flagshipGrid : secondaryGrid).appendChild(buildCard(proj, !isFlagship));
     });
 
     // ─── SCROLL REVEAL ───
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    } else {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
   </script>
 
   <!-- JSON-LD Structured Data -->
