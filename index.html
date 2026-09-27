@@ -1506,8 +1506,8 @@
       </div>
       <div class="about-stats">
         <div class="stat-card">
-          <div class="stat-number">168</div>
-          <div class="stat-label">GRE Quant (top 3%)</div>
+          <div class="stat-number">1</div>
+          <div class="stat-label">Journal Submission (SNDE)</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">3</div>
@@ -1553,7 +1553,7 @@
     <div class="exp-timeline">
       <div class="exp-item">
         <div class="exp-date">Jun 2026 - Present</div>
-        <div class="exp-role">Quantitative Research & Teaching Assistant</div>
+        <div class="exp-role">Course Assistant (FRE-GY 6103) & Textbook Contributor</div>
         <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
           <div class="exp-company" style="margin-bottom: 0;">New York University (Tandon), with <a
               href="https://www.linkedin.com/in/davidcshimko/" target="_blank" rel="noopener noreferrer">Prof. David
@@ -1561,9 +1561,9 @@
         </div>
         <p class="exp-desc">
           Contributing to <em>Valuation Principles</em> (<a href="https://www.wiley.com" target="_blank"
-            rel="noopener noreferrer">Wiley</a>, forthcoming), Prof. Shimko's graduate valuation
+            rel="noopener noreferrer">Wiley</a>, in preparation), Prof. Shimko's graduate valuation
           textbook: editing and developing chapter content, drafting worked additions, and building the authoring
-          and publishing toolchain. Appointed Teaching Assistant for FRE-GY 6103 (Fall 2026), the graduate course
+          and publishing toolchain. Designated lead of the four course assistants for FRE-GY 6103 (Fall 2026), the graduate course
           built on the textbook.
         </p>
       </div>
@@ -1615,7 +1615,7 @@
           <span class="skill-tag">HMM Regimes</span>
           <span class="skill-tag">Tail Hedging</span>
           <span class="skill-tag">Bootstrap</span>
-          <span class="skill-tag">Stochastic Calculus</span>
+          <span class="skill-tag">Stochastic Processes</span>
           <span class="skill-tag">Factor Models</span>
           <span class="skill-tag">Walk-Forward Validation</span>
         </div>
@@ -1736,7 +1736,7 @@
     // ─── PROJECT DATA ───
     const projects = [
       {
-        name: "RateWalk \u2014 Markov Rate Forecasting & Fixed-Income Monte Carlo",
+        name: "RateWalk: Markov Rate Forecasting & Fixed-Income Monte Carlo",
         repo: "tanishhky/RateWalk",
         paper: "https://github.com/tanishhky/RateWalk/blob/main/paper/ratewalk.pdf",
         paperLabel: "Working paper (PDF)",
@@ -1748,14 +1748,14 @@
         detail: "A Markov-driven Monte Carlo engine for fixed-income path simulation, risk, and hedging: it estimates a Markov chain on Fed policy-rate moves and CPI regimes from real FRED/ALFRED point-in-time data, maps each state to a full yield curve, and runs large Monte Carlo ensembles of a bond strategy with regime-realistic jumps (GFC, Covid, SVB) to compute VaR/CVaR, distributional moments, and best-duration selection.\n\nThe walk-forward research finding (1990-2026, no lookahead) is deliberately honest. Naively conditioning the rate chain on the CPI regime overfits and hurts out-of-sample log-loss, but shrinking each regime's row toward the pooled chain with an empirical-Bayes prior recovers a real edge over the unconditional model (log-loss 1.059 vs 1.071), and the flip replicates out of sample across the US, UK, and Germany rather than being tuned to one market.\n\nAgainst a walk-forward-calibrated, curve-implied proxy of market pricing, a parameter-free blend of the market proxy and the shrunk chain beats both individually (log-loss 1.056, accuracy 72.7% over 319 out-of-sample decisions): the market proxy wins on actual move months, the chain wins on holds, so the honest claim is that they're complementary, not that either 'beats the market.' The duration-timing strategy built on the same signal does not beat a constant-2y bond risk-adjusted, an honest negative the writeup keeps rather than hides. Multi-sovereign (US/UK/Germany via config), and the held instrument scales from a single bond to a ladder or portfolio. The full writeup is available as a working paper (PDF) in the repository."
       },
       {
-        name: "ChronoFund \u2014 Point-in-Time Fundamental Data Engine",
+        name: "ChronoFund: Point-in-Time Fundamental Data Engine",
         repo: "tanishhky/chronofund-fundamental-engine",
         tag: "Data Engineering / Quant Infrastructure",
         category: "quant-dev",
         tech: ["Python", "SEC EDGAR", "XBRL", "pytest", "Pandas"],
         image: "assets/img/projects/chronofund.svg",
         summary: "Production-grade SEC EDGAR + XBRL data engine enforcing zero lookahead bias across 4 independent layers, with 65 unit tests and CutoffViolationError gating.",
-        detail: "A production-grade SEC EDGAR + XBRL data engine enforcing zero lookahead bias across 4 independent layers: FilingsIndex \u2192 FilingSelector \u2192 XBRLParser \u2192 BloombergMapper. Each layer is gated by cutoff-date assertions that raise CutoffViolationError if any future data leaks through.\n\nThe engine outputs normalized income statement, balance sheet, and cash flow tables with derived metrics including ROIC, FCF yield, and leverage ratios. All financial data is point-in-time: you specify a cutoff date and the engine guarantees only filings publicly available before that date are used.\n\nThis architectural guarantee is critical for backtesting integrity \u2014 most fundamental datasets inadvertently introduce lookahead bias through retroactive restatements or filing-date confusion. ChronoFund eliminates this with 65 unit tests covering edge cases across all 4 layers.\n\nDesigned as the data foundation for the Regime-Aware Factor Backtest strategy. Built to be the differentiator for engineering-heavy quant dev roles."
+        detail: "A production-grade SEC EDGAR + XBRL data engine enforcing zero lookahead bias across 4 independent layers: FilingsIndex \u2192 FilingSelector \u2192 XBRLParser \u2192 BloombergMapper. Each layer is gated by cutoff-date assertions that raise CutoffViolationError if any future data leaks through.\n\nThe engine outputs normalized income statement, balance sheet, and cash flow tables with derived metrics including ROIC, FCF yield, and leverage ratios. All financial data is point-in-time: you specify a cutoff date and the engine guarantees only filings publicly available before that date are used.\n\nThis architectural guarantee is critical for backtesting integrity: most fundamental datasets inadvertently introduce lookahead bias through retroactive restatements or filing-date confusion. ChronoFund eliminates this with 65 unit tests covering edge cases across all 4 layers.\n\nDesigned as the data foundation for the Regime-Aware Factor Backtest strategy. Built to be the differentiator for engineering-heavy quant dev roles."
       },
       {
         name: "Regime-Aware Fundamental Factor Strategy",
@@ -1768,7 +1768,7 @@
         detail: "A walk-forward Hidden Markov Model fundamental equity strategy across 18 years (2008-2026), returning 763% total return net of a 2/15 fee structure (2% management, 15% performance above a high-water mark).\n\nThe headline finding is alpha decay, presented honestly. Fama-French 5-factor attribution shows a significant net-of-fee alpha of 8.37% (t=2.73, p=0.006) in the first half (2008-17) that decays to a statistically insignificant 2.42% (t=0.91, p=0.365) over the full period. The net edge over SPY is explained by a defensive market beta (0.85) and a small-cap tilt (SMB 0.18), not by residual alpha, consistent with factor-lifecycle crowding.\n\nBuilt on ChronoFund's point-in-time data engine for zero-lookahead fundamentals. A composite ranking engine scores stocks on 4 factors (ROIC, leverage aversion, FCF margin, revenue growth), each smoothed with a 4-period EWMA, with 4-state regime-conditional position sizing. Survivorship bias is handled via a -30% forced-liquidation penalty after 20 consecutive NaN-price days."
       },
       {
-        name: "VolEdge \u2014 Volatility Trading System",
+        name: "VolEdge: Volatility Trading System",
         repo: "tanishhky/voledge",
         tag: "Volatility Trading",
         category: "quant-research",
@@ -1778,26 +1778,26 @@
         detail: "A full-stack options and volatility platform built around a risk-premium (Q vs P) thesis. It extracts Bakshi-Kapadia-Madan (2003) model-free risk-neutral moments (variance, skew, kurtosis) from live option chains and compares them against GMM physical-distribution moments; all Greeks and implied vol are computed locally via Brent-root Black-Scholes, with no vendor dependency (runs key-free on yfinance chains).\n\nThe strategy engine is validated on real data, net of costs. A GARCH vol-managed sleeve (SPY/BIL, 2020-24) returned Sharpe 0.85 vs SPY 0.68 with max drawdown -19.7% vs -33.7%. A naive short-VIX-variance harvest lost money (Sharpe -0.16), an honest result that the variance premium is compensation for crash risk.\n\nIncludes a walk-forward optimizer with AST-validated sandboxed user-strategy execution and strict t-1 data boundaries, five rule-based signal types (VRP compression, skew mispricing, term-structure inversion, and more), a 3D IV surface with 25-delta skew, and a React frontend with 18+ panels including an animated P&L replay with interactive scrubbing."
       },
       {
-        name: "Dynamic Regime-Based Sector Allocation & Tail Risk Hedging",
+        name: "Regime-Based Sector Allocation (HMM, archived first version)",
         repo: "tanishhky/regime_portfolio_optimization",
         tag: "Portfolio Optimization",
         category: "quant-research",
         tech: ["Python", "Scikit-Learn", "HMM", "Monte Carlo"],
         image: "assets/img/projects/regime-sector-allocation.svg",
-        summary: "Regime-Switching Risk Model using Hidden Markov Models to classify 4 market states. Achieved Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46%.",
-        detail: "A Regime-Switching Risk Model using a 4-state Gaussian Hidden Markov Model to classify market conditions into Crisis (VIX > 35, correlations \u2192 1), Inflationary Bear, Secular Bull, and Transition states. Custom Synthetic History Generator backfills sector ETF data to 2005 for capturing GFC-era volatility dynamics.\n\nStrict Walk-Forward (Out-of-Sample) backtest from 2023\u2013Present using Ledoit-Wolf shrinkage for covariance estimation achieved a Sharpe Ratio of 1.49 while reducing Maximum Drawdown by 46% (\u221210.12% vs. \u221218.76% benchmark).\n\nRobustness validated via Parametric Bootstrapping (1,000 simulations) and Null Hypothesis Falsification using random-walk null models, proving true alpha generation (+$26K excess return per $100K deployed) with p < 0.05 rejection of noise-driven outperformance. The work also demonstrates that na\u00efve backtesting inflates Sharpe ratios 50\u2013100% through look-ahead bias."
+        summary: "The first version of the regime line, now archived: a 4-state Gaussian HMM with a walk-forward that removes three sources of lookahead. Superseded by the Regime-Adaptive portfolio.",
+        detail: "The first version of the regime line: a 4-state Gaussian Hidden Markov Model classifying Crisis, Inflationary Bear, Secular Bull, and Transition states, with an expanding-window walk-forward that removes three sources of lookahead (HMM training, portfolio optimization, and Viterbi decoding). Its lasting lesson: fitting or decoding a regime model on the full sample quietly leaks the future into the past.\n\nThe repository is archived. Its headline backtest numbers rest on a synthetically backfilled pre-ETF history, so they are kept in the repo as a record rather than presented as a result. The ideas were rebuilt on real data as the Regime-Adaptive Sector Portfolio (SSRN preprint 6484679)."
       },
       {
-        name: "S&P 500 Sector Dynamics: Return Connectedness, Market Concentration, and Structural Clustering (2019 to 2025)",
+        name: "Concentrated Sectors Transmit Less: Concentration and Shock Transmission in the S&P 500 (2018 to 2026)",
         repo: "tanishhky/sp500-sector-analysis",
-        paper: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6475898",
-        paperLabel: "SSRN preprint",
+        paper: "https://github.com/tanishhky/sp500-sector-analysis/blob/main/paper/v2/manuscript.pdf",
+        paperLabel: "Journal submission (SNDE)",
         tag: "Time-Series Econometrics",
         category: "quant-research",
-        tech: ["Python", "Statsmodels (VAR)", "Scikit-Learn", "Pandas"],
+        tech: ["Python", "TVP-VAR", "Kalman Filter", "Panel Econometrics"],
         image: "assets/img/projects/sp500-sector.svg",
-        summary: "Time-series econometrics on the 11 GICS sectors: Diebold-Yilmaz spillover connectedness (TCI 78.6%) plus multiple-testing-corrected Granger causality on 1,590 daily observations.",
-        detail: "A time-series econometrics study of the eleven GICS sectors of the S&P 500 (Sep 2019 to Dec 2025, 401 constituents, 1,590 daily observations).\n\nUsing daily cap-weighted sector returns, it estimates a Diebold-Yilmaz (2012) generalized connectedness system (VAR plus Pesaran-Shin generalized FEVD): the total connectedness index is 78.6%, Industrials and Financials are the largest net transmitters of shocks while Energy is the largest net receiver, and a rolling 200-day index rises from about 55% to an 87% peak during the 2020 COVID crisis.\n\nPairwise Granger causality on the daily series, corrected for multiple testing, finds 88 of 110 directed links significant under Benjamini-Hochberg FDR (54 under Bonferroni); the same test on quarterly data is underpowered and yields zero links surviving correction, a deliberate illustration of why sampling frequency and multiple-testing control matter. Sub-sector HHI shows concentration rising on net (45 of 69 sub-sectors), led by Semiconductors and Auto Manufacturers; a Random Forest reaches 95.6% leave-one-out accuracy as a cluster separability check, not a predictive claim. This is a working paper, not published."
+        summary: "Does mega-cap concentration change how shocks spread across the S&P 500? A time-varying connectedness model and a sector panel show concentrated sectors transmit less (t=-3.6). Submitted to Studies in Nonlinear Dynamics & Econometrics.",
+        detail: "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025. This study asks how that concentration changed the way shocks travel between the eleven GICS sectors, using daily returns and range volatilities of the Select Sector SPDR funds from October 2018 to August 2026, a point-in-time constituent panel (78 since-removed firms recovered, historical share counts, the 2023 GICS reclassification), and a filtered TVP-VAR connectedness model.\n\nTotal connectedness peaked at 88.9% in March 2020 and fell to a sample low of 53.7% in August 2026. With sector and month fixed effects, a one-point rise in a sector's top-three share lowers its net directional connectedness by 0.47 points (t=-3.6), and by 0.66 points on uncapped constituent returns (t=-4.8). Concentrated sectors also co-move less with the rest of the market, consistent with granular firm-level shocks dominating their returns.\n\nSector connectedness is contemporaneous, not a lead-lag signal: classical Granger tests appear to find 90 of 110 significant links, but a data-calibrated Monte Carlo shows they are oversized under GARCH errors, heteroskedasticity-robust tests leave none, and lagged cross-sector returns have negative out-of-sample R-squared for every sector. An earlier version (SSRN preprint 6475898) reported the classical-test result; this rebuild supersedes it. Submitted to Studies in Nonlinear Dynamics & Econometrics in September 2026; not yet peer reviewed."
       },
       {
         name: "Regime-Adaptive Sector Portfolio",
@@ -1819,7 +1819,7 @@
         tech: ["Python", "yfinance", "pytest", "launchd", "Parquet"],
         image: "assets/img/projects/pinsight.svg",
         summary: "Options risk-neutral-density and pricing engine with a live paper-trading loop, built as a 4-layer no-lookahead reference implementation.",
-        detail: "An options risk-neutral-density (RND) and pricing engine paired with a live paper-trading loop, architected as a 4-layer no-lookahead reference implementation.\n\nEvery historical-data read takes an explicit as_of_ts and filters snapshot_ts <= as_of_ts, and decision functions are pure functions of state and as_of_ts (they never read the wall clock internally). A future-data-injection invariance test proves a past decision is unchanged when later snapshots are appended, so no-lookahead is enforced by construction rather than by convention.\n\nThe system keeps market price (c) strictly distinct from estimated probability (p) throughout (Kelly sizing requires an explicit probability estimate and never defaults to price), and it paper-trades SPY automatically each day via macOS launchd (morning, midday, close, plus a continuous poll) with a structured JSONL observability spine. Its live equity, positions, and logs surface in a companion FastAPI dashboard, Sentinel, that fronts the whole paper-trading stack over server-sent events."
+        detail: "An options risk-neutral-density (RND) and pricing engine paired with a live paper-trading loop, architected as a 4-layer no-lookahead reference implementation.\n\nEvery historical-data read takes an explicit as_of_ts and filters snapshot_ts <= as_of_ts, and decision functions are pure functions of state and as_of_ts (they never read the wall clock internally). A future-data-injection invariance test proves a past decision is unchanged when later snapshots are appended, so no-lookahead is enforced by construction rather than by convention.\n\nThe system keeps market price (c) strictly distinct from estimated probability (p) throughout (Kelly sizing requires an explicit probability estimate and never defaults to price), and it paper-trades SPY automatically each day via macOS launchd (morning, midday, close, plus a continuous poll) with a structured JSONL observability spine. Its live equity, positions, and logs surface in a companion FastAPI dashboard, Sentinel, that refreshes every five seconds across the whole paper-trading stack."
       },
       {
         name: "DriftEdge - Prediction-Market Trading Research",
@@ -1829,7 +1829,7 @@
         tech: ["Python", "Kalshi", "Polymarket", "No-Lookahead"],
         image: "assets/img/projects/driftedge.svg",
         summary: "A multi-strategy prediction-market (Kalshi / Polymarket) paper-trading system with several independent traders and the same no-lookahead discipline.",
-        detail: "A systematic prediction-market research system that polls Kalshi and Polymarket order books and paper-trades them with several independent strategies (Kelly, equal-weight, and vol-weighted sizers, plus volatility-harvest and resolution agents).\n\nIt follows the same no-lookahead discipline as the rest of the platform: every decision is a pure function of point-in-time state, and price is kept strictly distinct from estimated probability. State and trades persist to Parquet, and a structured JSONL observability spine records every API call, fit, and signal. Its live state plugs into the same Sentinel dashboard as PinSight, giving the stack one shared observability view."
+        detail: "A systematic prediction-market research system that polls Kalshi and Polymarket order books and paper-trades them with several independent strategies (Kelly sizing on empirically calibrated probabilities, equal-weight, and a volatility-harvest hedge; a vol-weighted sizer and a resolution agent were retired after replay audits showed no edge).\n\nIt follows the same no-lookahead discipline as the rest of the platform: every decision is a pure function of point-in-time state, and price is kept strictly distinct from estimated probability. State and trades persist to Parquet, and a structured JSONL observability spine records every API call, fit, and signal. Its live state plugs into the same Sentinel dashboard as PinSight, giving the stack one shared observability view."
       },
       {
         name: "Volatility-Managed Factor Portfolios",
@@ -2039,7 +2039,7 @@
     "knowsAbout": [
       "Quantitative Finance",
       "Machine Learning",
-      "Stochastic Calculus",
+      "Stochastic Processes",
       "Hidden Markov Models",
       "Portfolio Optimization",
       "Systematic Trading",
