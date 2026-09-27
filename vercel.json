@@ -1,0 +1,51 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/credentials",
+      "destination": "/cv",
+      "permanent": true
+    },
+    {
+      "source": "/credentials.html",
+      "destination": "/cv",
+      "permanent": true
+    },
+    {
+      "source": "/resumes/:file*",
+      "destination": "/Tanishk_Yadav_Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/resume",
+      "destination": "/Tanishk_Yadav_Resume.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/papers",
+      "destination": "/research",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/papers/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
+}

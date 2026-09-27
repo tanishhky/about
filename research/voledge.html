@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VolEdge: The Variance Risk Premium: Tanishk Yadav</title>
+<meta name="description" content="A full-stack platform that extracts risk-neutral moments from live option chains without a pricing model; a GARCH vol-targeted sleeve beat SPY on risk (Sharpe 0.85&nbsp;vs&nbsp;0.68) while naive short-variance harvesting lost money.">
+<link rel="canonical" href="https://www.tanishkyadav.me/research/voledge">
+<meta name="author" content="Tanishk Yadav">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tanishk Yadav">
+<meta property="og:title" content="VolEdge: The Variance Risk Premium: Tanishk Yadav">
+<meta property="og:description" content="A full-stack platform that extracts risk-neutral moments from live option chains without a pricing model; a GARCH vol-targeted sleeve beat SPY on risk (Sharpe 0.85&nbsp;vs&nbsp;0.68) while naive short-variance harvesting lost money.">
+<meta property="og:url" content="https://www.tanishkyadav.me/research/voledge">
+<meta property="og:image" content="https://www.tanishkyadav.me/assets/img/og/voledge.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f0f13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20260927">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<meta name="citation_title" content="VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments">
+<meta name="citation_author" content="Yadav, Tanishk">
+<meta name="citation_publication_date" content="2026/07/07">
+<meta name="citation_pdf_url" content="https://www.tanishkyadav.me/papers/yadav-2026-voledge.pdf">
+<meta name="citation_abstract_html_url" content="https://www.tanishkyadav.me/research/voledge">
+<meta name="citation_language" content="en">
+<meta name="citation_technical_report_institution" content="NYU Tandon School of Engineering">
+<meta name="citation_keywords" content="variance risk premium">
+<meta name="citation_keywords" content="risk-neutral moments">
+<meta name="citation_keywords" content="BKM">
+<meta name="citation_keywords" content="volatility targeting">
+<meta name="citation_keywords" content="walk-forward backtesting">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ScholarlyArticle", "headline": "VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments", "name": "VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments", "author": {"@type": "Person", "name": "Tanishk Yadav", "url": "https://www.tanishkyadav.me/"}, "datePublished": "2026-07-07", "abstract": "VolEdge is a full-stack research platform built around a single thesis: the gap between what options price and what the underlying realizes is the risk premium, and that gap can be measured and traded. The platform extracts the risk-neutral distribution model-free via Bakshi-Kapadia-Madan (BKM) moments and compares it, horizon-matched, against the physical distribution estimated from realized returns; the spread Q minus P is surfaced for variance, skew, and kurtosis. A no-look-ahead walk-forward engine then backtests premium-driven strategies. We report two honest results on free data (2019 to 2024, net of modeled costs): a GARCH(1,1) volatility-targeted strategy beat SPY buy-and-hold on a risk-adjusted basis (Sharpe 0.85 vs. 0.68) with 41% lower maximum drawdown, while a naive long-only variance-premium harvest lost money (Sharpe -0.16), empirically confirming the premium as compensation for crash risk rather than harvestable alpha. The BKM extractor is validated against Black-Scholes chains of known volatility, and the backtest engine reproduces buy-and-hold to 0.000 pp at any rebalance frequency.", "keywords": "variance risk premium, risk-neutral moments, BKM, volatility targeting, walk-forward backtesting", "url": "https://www.tanishkyadav.me/research/voledge", "encoding": {"@type": "MediaObject", "contentUrl": "https://www.tanishkyadav.me/papers/yadav-2026-voledge.pdf", "encodingFormat": "application/pdf"}, "creativeWorkStatus": "Working paper"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87P07T86WH"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-87P07T86WH");</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="/">Tanishk Yadav</a>
+    <nav class="primary-nav" aria-label="Primary"><ul><li><a href="/research" aria-current="page">Research</a></li><li><a href="/thesis">Thesis</a></li><li><a href="/#systems">Systems</a></li><li><a href="/cv">CV</a></li><li><a href="/writing">Writing</a></li></ul></nav>
+    <div class="nav-actions">
+      <a class="btn btn-small" href="/Tanishk_Yadav_Resume.pdf">Resume</a>
+      <button class="theme-toggle" type="button" aria-label="Switch theme"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+<section class="paper-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="/research">Research</a> / VolEdge: The Variance Risk Premium</p>
+    <div class="card-meta"><span class="chip chip-working">Working paper</span><span class="status-line">Working paper, July 2026. Not peer reviewed.</span></div>
+    <h1>VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments</h1>
+    <p class="byline"><a href="/">Tanishk Yadav</a>, NYU Tandon School of Engineering, July 2026</p>
+    <div class="actions"><a class="btn btn-primary" href="/papers/yadav-2026-voledge.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6m0 0-2.5-2.5M12 17l2.5-2.5"/></svg> Download PDF</a><a class="btn" href="https://github.com/tanishhky/voledge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg> Code</a><a class="btn" href="#cite">Cite</a></div>
+  </div>
+</section>
+<section style="padding-top:0;border-top:0">
+  <div class="wrap">
+    <p class="question narrow">The gap between what options price and what the underlying realizes is the variance risk premium. Can it be measured model-free, and does it pay to trade?</p>
+    <div class="block"><h2>Key results</h2><div class="results n4"><div class="result"><div class="result-num">0.85&nbsp;vs&nbsp;0.68</div><div class="result-label">Sharpe of the GARCH volatility-targeted SPY/BIL sleeve vs SPY, net of costs (evaluation 2020&nbsp;to&nbsp;2024, including Covid)</div></div><div class="result"><div class="result-num">-19.7% vs -33.7%</div><div class="result-label">maximum drawdown, a 41% reduction</div></div><div class="result"><div class="result-num">-0.16</div><div class="result-label">Sharpe of naive short-variance harvesting: the premium pays for crash risk, it is not free yield</div></div><div class="result"><div class="result-num">0.000&nbsp;pp</div><div class="result-label">difference between the backtest engine and buy-and-hold at any rebalance frequency</div></div></div></div>
+    <div class="block"><figure class="figure"><picture><source srcset="/assets/img/research/ve-garch-volmanaged.webp" type="image/webp"><img src="/assets/img/research/ve-garch-volmanaged.png" alt="Growth of $1: the GARCH volatility-targeted sleeve earns less than buy-and-hold but with a far smaller drawdown. Walk-forward, net of costs." class="" loading="eager" decoding="async"></picture><figcaption><span class="fig-no">Figure 1.</span> Growth of $1: the GARCH volatility-targeted sleeve earns less than buy-and-hold but with a far smaller drawdown. Walk-forward, net of costs.</figcaption></figure></div>
+    <div class="block"><h2>Abstract</h2><p class="abstract">VolEdge is a full-stack research platform built around a single thesis: the gap between what options price and what the underlying realizes is the risk premium, and that gap can be measured and traded. The platform extracts the risk-neutral distribution model-free via Bakshi-Kapadia-Madan (BKM) moments and compares it, horizon-matched, against the physical distribution estimated from realized returns; the spread Q minus P is surfaced for variance, skew, and kurtosis. A no-look-ahead walk-forward engine then backtests premium-driven strategies. We report two honest results on free data (2019&nbsp;to&nbsp;2024, net of modeled costs): a GARCH(1,1) volatility-targeted strategy beat SPY buy-and-hold on a risk-adjusted basis (Sharpe 0.85 vs. 0.68) with 41% lower maximum drawdown, while a naive long-only variance-premium harvest lost money (Sharpe -0.16), empirically confirming the premium as compensation for crash risk rather than harvestable alpha. The BKM extractor is validated against Black-Scholes chains of known volatility, and the backtest engine reproduces buy-and-hold to 0.000&nbsp;pp at any rebalance frequency.</p></div>
+    
+    <div class="block prose"><h2>Methods</h2><ul><li>Bakshi-Kapadia-Madan model-free risk-neutral variance, skew and kurtosis from live option chains</li><li>Implied volatility and Greeks computed locally (Black-Scholes with Brent root-finding); runs on free data with no API key</li><li>Walk-forward engine with strict t-1 data boundaries, sandboxed user strategies, and a parameter-sensitivity surface</li><li>FastAPI backend and a React front end with 18+ panels, including a 3D implied-volatility surface</li></ul></div>
+    <div class="block prose"><h2>What it does not show</h2><ul><li>Free data and a five-year evaluation window; the Sharpe comparison depends on including 2020.</li></ul></div>
+    <div class="block"><div class="tags"><span class="chip chip-plain">variance risk premium</span><span class="chip chip-plain">risk-neutral moments</span><span class="chip chip-plain">BKM</span><span class="chip chip-plain">volatility targeting</span><span class="chip chip-plain">walk-forward backtesting</span></div></div>
+    <div class="block" id="cite">
+      <h2>Cite</h2>
+      <details class="cite" open><summary>BibTeX</summary><pre id="bib-voledge">@techreport{yadav2026voledge,
+  title       = {VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments},
+  author      = {Yadav, Tanishk},
+  year        = {2026},
+  institution = {NYU Tandon School of Engineering},
+  type        = {Working paper}
+}</pre>
+      <div class="copy-row"><button class="btn btn-small" type="button" data-copy="bib-voledge" hidden>Copy BibTeX</button></div></details>
+    </div>
+    <div class="block">
+      <div class="author-box">
+        <picture><source srcset="/assets/img/headshot-720.webp" type="image/webp"><img src="/assets/img/headshot-720.jpg" alt="" loading="lazy"></picture>
+        <div>
+          <h3>Tanishk Yadav</h3>
+          <p>MS Financial Engineering at NYU Tandon, graduating May 2027, and looking for full-time quantitative research roles. My master's thesis measures, in real time, when US debt dynamics turn self-reinforcing.</p>
+          <div class="actions"><a class="btn btn-small btn-primary" href="/">See all my work</a><a class="btn btn-small" href="/thesis">The thesis</a><a class="btn btn-small" href="/Tanishk_Yadav_Resume.pdf">Resume</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker">More research</p><h2>Other papers</h2></div></div>
+    <div class="grid-2"><article class="card">
+  <a href="/research/concentrated-sectors" tabindex="-1" aria-hidden="true"><div class="thumb"><picture><source srcset="/assets/img/research/cs-tci.webp" type="image/webp"><img src="/assets/img/research/cs-tci.png" alt="Total connectedness of S&amp;P 500 sector returns (a) and range volatility (b). The filtered TVP-VAR uses only data available on each date; the 200-day rolling window invents a drop when the April 2025 tariff shock leaves the window." class="" loading="lazy" decoding="async"></picture></div></a>
+  <div class="card-body">
+    <div class="card-meta"><span class="chip chip-journal">Journal submission</span><span>September 2026</span></div>
+    <h3><a href="/research/concentrated-sectors">Concentrated Sectors Transmit Less</a></h3>
+    <p>A one-point rise in a sector&#x27;s top-three share lowers its net shock transmission by 0.47 points (t&nbsp;=&nbsp;-3.6), and none of 110 apparent Granger lead-lag links survives robust tests.</p>
+    <div class="card-links"><a href="/research/concentrated-sectors">Read</a><a href="/papers/yadav-2026-concentrated-sectors-transmit-less.pdf">PDF</a><a href="https://github.com/tanishhky/sp500-sector-analysis">Code</a></div>
+  </div>
+</article><article class="card">
+  <a href="/research/ratewalk" tabindex="-1" aria-hidden="true"><div class="thumb"><picture><source srcset="/assets/img/research/rw-replication.webp" type="image/webp"><img src="/assets/img/research/rw-replication.png" alt="Out-of-sample log-loss by country. Conditioning on the inflation regime raises it; empirical-Bayes shrinkage lowers it, in all three." class="" loading="lazy" decoding="async"></picture></div></a>
+  <div class="card-body">
+    <div class="card-meta"><span class="chip chip-working">Working paper</span><span>July 2026</span></div>
+    <h3><a href="/research/ratewalk">RateWalk: Forecasting Fed Decisions</a></h3>
+    <p>Naive inflation-regime conditioning overfits; empirical-Bayes shrinkage fixes it in the US, UK and Germany, and a blend with a market proxy reaches log-loss 1.056 and a 72.7% hit rate.</p>
+    <div class="card-links"><a href="/research/ratewalk">Read</a><a href="/papers/yadav-2026-ratewalk.pdf">PDF</a><a href="https://github.com/tanishhky/RateWalk">Code</a></div>
+  </div>
+</article><article class="card">
+  <a href="/research/volatility-managed-factors" tabindex="-1" aria-hidden="true"><div class="thumb"><picture><source srcset="/assets/img/research/vm-sharpe-bars.webp" type="image/webp"><img src="/assets/img/research/vm-sharpe-bars.png" alt="Annualized Sharpe ratio of each factor, original vs volatility-managed, 1963&nbsp;to&nbsp;2026." class="" loading="lazy" decoding="async"></picture></div></a>
+  <div class="card-body">
+    <div class="card-meta"><span class="chip chip-ssrn">SSRN preprint</span><span>July 2026</span></div>
+    <h3><a href="/research/volatility-managed-factors">Volatility-Managed Factor Portfolios</a></h3>
+    <p>Volatility timing pays only on crash-prone factors: momentum earns 8.9% a year of alpha (t&nbsp;=&nbsp;5.0) and its Sharpe rises from 0.51&nbsp;to&nbsp;0.89; size, value and investment gain nothing.</p>
+    <div class="card-links"><a href="/research/volatility-managed-factors">Read</a><a href="/papers/yadav-2026-volatility-managed-factor-portfolios.pdf">PDF</a><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7113079">SSRN</a><a href="https://github.com/tanishhky/Equity-Factor-Volatility-Analysis">Code</a></div>
+  </div>
+</article><article class="card">
+  <a href="/research/regime-detection" tabindex="-1" aria-hidden="true"><div class="thumb"><svg class="schematic" viewBox="0 0 900 280" role="img" aria-label="Four stress detectors feed a max-of-top-2 consensus, which drives sector baskets and a de-risking overlay">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#676773"/></marker></defs>
+<rect class="box" x="10" y="20" width="240" height="46" rx="9"/><text class="label" x="130" y="48" text-anchor="middle">CUSUM on z-scored returns</text><path class="arrow" d="M250 43 C 300 43, 300 136, 330 136"/><rect class="box" x="10" y="82" width="240" height="46" rx="9"/><text class="label" x="130" y="110" text-anchor="middle">Cross-sector correlation</text><path class="arrow" d="M250 105 C 300 105, 300 136, 330 136"/><rect class="box" x="10" y="144" width="240" height="46" rx="9"/><text class="label" x="130" y="172" text-anchor="middle">Market breadth</text><path class="arrow" d="M250 167 C 300 167, 300 136, 330 136"/><rect class="box" x="10" y="206" width="240" height="46" rx="9"/><text class="label" x="130" y="234" text-anchor="middle">Return skewness</text><path class="arrow" d="M250 229 C 300 229, 300 136, 330 136"/>
+<rect class="box-accent" x="330" y="96" width="230" height="80" rx="11"/>
+<text class="label" x="445" y="128" text-anchor="middle">Max-of-top-2 consensus</text>
+<text class="label-sm" x="445" y="151" text-anchor="middle">acts only when two detectors agree</text>
+<path class="arrow" d="M560 136 H 610" marker-end="url(#ah)"/>
+<rect class="box" x="612" y="40" width="278" height="76" rx="11"/>
+<text class="label" x="751" y="72" text-anchor="middle">Sector baskets</text>
+<text class="label-sm" x="751" y="95" text-anchor="middle">GARCH-t volatility terciles, OU half-life</text>
+<rect class="box" x="612" y="156" width="278" height="76" rx="11"/>
+<text class="label" x="751" y="188" text-anchor="middle">Capital-preservation overlay</text>
+<text class="label-sm" x="751" y="211" text-anchor="middle">de-risk to implicit cash</text>
+<path class="arrow" d="M751 116 V 154" marker-end="url(#ah)"/>
+</svg></div></a>
+  <div class="card-body">
+    <div class="card-meta"><span class="chip chip-ssrn">SSRN preprint</span><span>July 2026</span></div>
+    <h3><a href="/research/regime-detection">Multi-Scale Regime Detection</a></h3>
+    <p>Four independent stress signals that must agree before de-risking: maximum drawdown -6.2% vs -41.7% for SPY, and the same calibration transfers to factor and international portfolios.</p>
+    <div class="card-links"><a href="/research/regime-detection">Read</a><a href="/papers/yadav-2026-multi-scale-regime-detection.pdf">PDF</a><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6484679">SSRN</a><a href="https://github.com/tanishhky/regime-adaptive-portfolio">Code</a></div>
+  </div>
+</article></div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>&copy; 2026 Tanishk Yadav. New York, NY.</span>
+    <nav aria-label="Footer">
+      <a href="mailto:tanishkyadav@nyu.edu">Email</a><a href="https://www.linkedin.com/in/tanishkyadav">LinkedIn</a><a href="https://github.com/tanishhky">GitHub</a><a href="https://ssrn.com/author=8715020">SSRN</a><a href="https://scholar.google.com/citations?user=XKyUOj0AAAAJ">Google Scholar</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/js/site.js?v=20260927" defer></script>
+</body>
+</html>
