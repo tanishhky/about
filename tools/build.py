@@ -746,7 +746,7 @@ def main():
             {"source": "/resume", "destination": "/Tanishk_Yadav_Resume.pdf", "permanent": False},
             {"source": "/papers", "destination": "/research", "permanent": False},
             {"source": "/systems", "destination": "/projects", "permanent": False},
-        ] + [{"source": f"/{alias}", "destination": dest, "permanent": False} for alias, dest in C.SHORT_LINKS.items()],
+        ] + [{"source": f"/{alias}", "destination": f"{dest}?via={alias}", "permanent": False} for alias, dest in C.SHORT_LINKS.items()],
         "headers": [
             {"source": "/assets/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=604800"}]},
             {"source": "/papers/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600"}]},
