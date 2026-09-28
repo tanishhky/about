@@ -359,33 +359,126 @@ THESIS = {
     "results_note": "Results will appear here once they pass the thesis quality gate: every claim is tested, stated conditionally, and reviewed by my advisor before it is published anywhere.",
 }
 
-# ---------------------------------------------------------------- systems
-SYSTEMS = [
+# ---------------------------------------------------------------- projects (systems)
+# Each project has its own page at /projects/<slug>; GitHub is linked only from that page.
+PROJECTS = [
     {
-        "name": "ChronoFund",
+        "slug": "chronofund",
+        "name": "ChronoFund: Point-in-Time Fundamentals Engine",
+        "short": "ChronoFund",
         "tag": "Point-in-time data engine",
-        "text": "SEC EDGAR, XBRL and Bloomberg fundamentals dated to the second the SEC accepted each filing. Four independent layers enforce the cutoff, and any violation fails at parse time rather than months later inside an inflated backtest. Survivorship-free, 65 tests.",
-        "link": "https://github.com/tanishhky/chronofund-fundamental-engine",
+        "card": "SEC EDGAR, XBRL and Bloomberg fundamentals dated to the second the SEC accepted each filing. Four independent layers enforce the cutoff, and any violation fails at parse time rather than months later inside an inflated backtest. Survivorship-free, 65 tests.",
+        "lede": "A backtest is only as honest as its data. ChronoFund dates every fundamental to the second the SEC accepted the filing, so a strategy can never see a number before the market could.",
+        "facts": [
+            ("4 layers", "independent checks that enforce the as-of cutoff"),
+            ("65 tests", "across cutoff logic, company-ID mapping, schema validation and parsers"),
+            ("10 req/s", "rate-limited SEC ingestion with retries"),
+            ("0 fills", "nothing forward-filled; delisted firms stay in the universe"),
+        ],
+        "points": [
+            "Filings are gated on the SEC acceptance timestamp, not the filing date or the period end: a fiscal 2016 report filed in February 2017 is invisible on 31 December 2016.",
+            "Four independent layers (filing index, filing selection, fact selection, Bloomberg column gating) each enforce the cutoff; a violation raises an error at parse time instead of silently inflating a backtest months later.",
+            "Priority-ordered accounting-tag mapping for XBRL, typed Parquet tables for company master records, filings and statements, and Bloomberg PDF and XLSX parsers with period-end gating.",
+            "Survivorship-free by design: delisted firms are kept and nothing is forward-filled.",
+        ],
+        "stack": "Python, SEC EDGAR, XBRL, Bloomberg exports, pandas, Parquet, pytest",
+        "limits": ["It is a data layer, not a strategy. The Regime-Aware Factor Strategy is the first thing built on it."],
+        "github": "https://github.com/tanishhky/chronofund-fundamental-engine",
+        "extra_links": [],
+        "related": ["regime-aware", "concentrated-sectors"],
     },
     {
-        "name": "Regime-Aware Factor Strategy",
+        "slug": "regime-aware",
+        "name": "Regime-Aware Fundamental Factor Strategy",
+        "short": "Regime-Aware Factor Strategy",
         "tag": "Fundamental equity backtest",
-        "text": "A walk-forward regime-switching fundamental strategy on ChronoFund data, 2008 to 2026, net of 2/15 fees. Fama-French five-factor attribution reports alpha decay rather than hiding it: 8.37% (t = 2.73) in 2008 to 2017, fading to an insignificant 2.42% over the full period.",
-        "link": "https://github.com/tanishhky/Regime-Aware-Factor-Backtest",
+        "card": "A walk-forward regime-switching fundamental strategy on ChronoFund data, 2008 to 2026, net of 2/15 fees. Fama-French five-factor attribution reports alpha decay rather than hiding it: 8.37% (t = 2.73) in 2008 to 2017, fading to an insignificant 2.42% over the full period.",
+        "lede": "A walk-forward, regime-switching fundamental equity strategy on point-in-time data, 2008 to 2026, and an honest account of where its return came from.",
+        "facts": [
+            ("-39.7% vs -51.5%", "maximum drawdown vs SPY, 2008 to 2026, net of 2/15 fees with a high-water mark"),
+            ("8.37%", "Fama-French five-factor alpha in 2008 to 2017 (t = 2.73), net of fees"),
+            ("2.42%", "the same alpha over the full period, not significant (t = 0.91)"),
+            ("0.85", "market beta; the edge over SPY is beta and a small-cap tilt, not residual alpha"),
+        ],
+        "points": [
+            "Four-state hidden Markov regime sizing over a composite of four fundamentals: ROIC, free-cash-flow margin, leverage aversion and revenue growth.",
+            "Point-in-time fundamentals from ChronoFund; delistings are penalized with a forced liquidation after 20 consecutive missing-price days, so dead firms cannot flatter the result.",
+            "Fama-French five-factor attribution on daily excess returns, split by sub-period to show the alpha decaying.",
+        ],
+        "stack": "Python, hmmlearn, statsmodels, pandas, SEC EDGAR via ChronoFund",
+        "limits": [
+            "Sharpe is 0.61 vs 0.57 for SPY: the strategy survives crises through regime sizing, not stock selection.",
+            "The first-half alpha does not persist; it is reported as decay, not as an edge.",
+        ],
+        "github": "https://github.com/tanishhky/Regime-Aware-Factor-Backtest",
+        "extra_links": [],
+        "related": ["chronofund", "volatility-managed-factors"],
     },
     {
-        "name": "PinSight",
-        "tag": "0DTE options engine",
-        "text": "Infers the risk-neutral density of SPY same-day options and runs a scheduled live paper-trading loop. Every decision is a pure function of an as-of timestamp, and a test proves past decisions cannot change when future data is appended.",
-        "link": "https://github.com/tanishhky/PinSight",
+        "slug": "pinsight",
+        "name": "PinSight: 0DTE Options Engine and No-Lookahead Paper Trader",
+        "short": "PinSight",
+        "tag": "Options engine",
+        "card": "Infers the risk-neutral density of SPY same-day options and runs a scheduled live paper-trading loop. Every decision is a pure function of an as-of timestamp, and a test proves past decisions cannot change when future data is appended.",
+        "lede": "Infers the risk-neutral density of SPY same-day options and runs a scheduled live paper-trading loop, built as the reference implementation of a no-lookahead architecture.",
+        "facts": [
+            ("3 runs a day", "scheduled at 09:35, 12:30 and 16:10 ET, plus a continuous poll"),
+            ("20 tests", "including a future-data injection test"),
+            ("4 layers", "every read is stamped with the moment it became knowable"),
+        ],
+        "points": [
+            "Risk-neutral densities from SPY option chains (Breeden-Litzenberger with SVI smoothing), model-free moments, and contract pricing against the density.",
+            "Every decision is a pure function of state and an as-of timestamp; a test appends future snapshots and proves past decisions do not change.",
+            "Market price and model probability are separate quantities throughout: Kelly sizing needs an explicit probability estimate and never falls back to the quoted price.",
+            "A structured event log records every fit, signal and trade, and a read-only dashboard shows the live state.",
+        ],
+        "stack": "Python, yfinance option chains, pandas, Parquet, pytest, macOS launchd",
+        "limits": ["No trading performance is claimed. The paper record was reset after model-error and stale-quote fixes, and it is not a track record."],
+        "github": "https://github.com/tanishhky/PinSight",
+        "extra_links": [],
+        "related": ["voledge", "driftedge"],
     },
     {
-        "name": "DriftEdge",
-        "tag": "Prediction-market engine",
-        "text": "Sizes Polymarket and Kalshi binary contracts with Kelly on an empirical-Bayes win probability whose prior is a zero-edge bet, so no evidence means no position. Deterministic replay audits every strategy change; 64 tests with CI.",
-        "link": "https://github.com/tanishhky/DriftEdge",
+        "slug": "driftedge",
+        "name": "DriftEdge: Prediction-Market Engine",
+        "short": "DriftEdge",
+        "tag": "Prediction markets",
+        "card": "Sizes Polymarket and Kalshi binary contracts with Kelly on an empirical-Bayes win probability whose prior is a zero-edge bet, so no evidence means no position. Deterministic replay audits every strategy change; 64 tests with CI.",
+        "lede": "A research and paper-trading platform for Polymarket and Kalshi binary contracts, where the price is never mistaken for the probability.",
+        "facts": [
+            ("64 tests", "with continuous integration"),
+            ("5 min / 30 s", "market and top-orderbook polling cadence"),
+            ("Zero size", "for any bet with no evidence of edge"),
+        ],
+        "points": [
+            "Kelly sizing on an empirical-Bayes win probability. The prior is the gambler's-ruin probability of hitting the target before the stop, under which Kelly's expected value is exactly zero; realized trades update it.",
+            "Venue-outcome settlement clears positions stuck on resolved markets whose orderbooks no longer exist.",
+            "Deterministic no-lookahead replay over recorded orderbooks audits every change. One audit cleared a suspected code regression and traced the losses to a daemon failure and an edgeless strategy, which was retired.",
+        ],
+        "stack": "Python, Polymarket and Kalshi APIs, pandas, Parquet, pytest, GitHub Actions",
+        "limits": ["Paper trading only. No trading performance is claimed; the engineering and the audit discipline are the point."],
+        "github": "https://github.com/tanishhky/DriftEdge",
+        "extra_links": [],
+        "related": ["pinsight", "ratewalk"],
     },
 ]
+SYSTEMS = PROJECTS  # backwards-compatible name
+
+# Short links: tanishkyadav.me/<alias> redirects to the project's page.
+SHORT_LINKS = {
+    "concentrated-sectors": "/research/concentrated-sectors",
+    "sp500": "/research/concentrated-sectors",
+    "ratewalk": "/research/ratewalk",
+    "volatility-managed-factors": "/research/volatility-managed-factors",
+    "vol-managed": "/research/volatility-managed-factors",
+    "voledge": "/research/voledge",
+    "regime-detection": "/research/regime-detection",
+    "regime-adaptive": "/research/regime-detection",
+    "chronofund": "/projects/chronofund",
+    "regime-aware": "/projects/regime-aware",
+    "pinsight": "/projects/pinsight",
+    "driftedge": "/projects/driftedge",
+}
 
 # ---------------------------------------------------------------- experience and education
 EXPERIENCE = [

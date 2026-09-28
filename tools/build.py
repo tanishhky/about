@@ -42,7 +42,7 @@ ICON = {
 MOON = '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>'
 SUN = '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
 
-NAV = [("Research", "/research"), ("Thesis", "/thesis"), ("Systems", "/#systems"), ("CV", "/cv"), ("Writing", "/writing")]
+NAV = [("Research", "/research"), ("Thesis", "/thesis"), ("Projects", "/projects"), ("CV", "/cv"), ("Writing", "/writing")]
 
 
 # ------------------------------------------------------------------ layout
@@ -193,13 +193,10 @@ def thumb(p):
     return f'<div class="thumb">{inner}</div>'
 
 
-def paper_card(p):
-    links = [f'<a href="/research/{p["slug"]}">Read</a>', f'<a href="{p["pdf"]}">PDF</a>']
-    if p["ssrn"]:
-        links.append(f'<a href="{p["ssrn"]}">SSRN</a>')
-    links.append(f'<a href="{p["code"]}">Code</a>')
+def paper_card(p, thumbnail=True):
+    links = [f'<a href="/research/{p["slug"]}">Read the paper</a>', f'<a href="{p["pdf"]}">PDF</a>']
     return f"""<article class="card">
-  <a href="/research/{p["slug"]}" tabindex="-1" aria-hidden="true">{thumb(p)}</a>
+  {f'<a href="/research/{p["slug"]}" tabindex="-1" aria-hidden="true">{thumb(p)}</a>' if thumbnail else ''}
   <div class="card-body">
     <div class="card-meta">{chip(p)}<span>{e(p["date"])}</span></div>
     <h3><a href="/research/{p["slug"]}">{e(p["short"])}</a></h3>
@@ -207,6 +204,27 @@ def paper_card(p):
     <div class="card-links">{"".join(links)}</div>
   </div>
 </article>"""
+
+
+def project_card(pr):
+    return f"""<article class="card">
+  <div class="card-body">
+    <div class="card-meta"><span class="chip chip-plain">{e(pr["tag"])}</span></div>
+    <h3><a href="/projects/{pr["slug"]}">{e(pr["short"])}</a></h3>
+    <p>{e(pr["card"])}</p>
+    <div class="card-links"><a href="/projects/{pr["slug"]}">See the project</a></div>
+  </div>
+</article>"""
+
+
+def any_card(slug):
+    for p in C.PAPERS:
+        if p["slug"] == slug:
+            return paper_card(p, thumbnail=False)
+    for pr in C.PROJECTS:
+        if pr["slug"] == slug:
+            return project_card(pr)
+    raise KeyError(slug)
 
 
 def contact_section():
@@ -259,12 +277,7 @@ def page_home():
     stats = "".join(f'<div class="stat"><div class="stat-num">{e(n)}</div><div class="stat-label">{e(l)}</div></div>' for n, l in H["stats"])
     pillars = "".join(f'<div class="pillar"><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t, d in C.THESIS["pillars"])
     scale = "".join(f'<div class="stat"><div class="stat-num">{e(n)}</div><div class="stat-label">{e(l)}</div></div>' for n, l in C.THESIS["scale"])
-    systems = "".join(
-        f'<article class="card"><div class="card-body"><div class="card-meta"><span class="chip chip-plain">{e(s["tag"])}</span></div>'
-        f'<h3><a href="{s["link"]}">{e(s["name"])}</a></h3><p>{e(s["text"])}</p>'
-        f'<div class="card-links"><a href="{s["link"]}">Code on GitHub</a></div></div></article>'
-        for s in C.SYSTEMS
-    )
+    systems = "".join(project_card(pr) for pr in C.PROJECTS)
     principles = "".join(f'<div class="principle"><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t, d in C.PRINCIPLES)
     exp = C.EXPERIENCE[0]
     posts = "".join(
@@ -307,7 +320,6 @@ def page_home():
         <div class="actions">
           <a class="btn btn-primary" href="/research/{feat["slug"]}">Read the paper {ICON["arrow"]}</a>
           <a class="btn" href="{feat["pdf"]}">{ICON["pdf"]} PDF</a>
-          <a class="btn" href="{feat["code"]}">{ICON["code"]} Code</a>
         </div>
       </div>
     </article>
@@ -336,10 +348,11 @@ def page_home():
   </div>
 </section>
 
-<section id="systems">
+<section id="projects">
   <div class="wrap">
-    <div class="section-head"><div><p class="kicker">Systems</p><h2>The engineering underneath</h2>
-    <p>Research is only as honest as its data pipeline. These are the engines and live systems behind the papers.</p></div></div>
+    <div class="section-head"><div><p class="kicker">Projects</p><h2>The engineering underneath</h2>
+    <p>Research is only as honest as its data pipeline. These are the engines and live systems behind the papers.</p></div>
+    <a class="section-link" href="/projects">All projects {ICON["arrow"].replace('<svg', '<svg style="width:15px;height:15px;display:inline;vertical-align:-2px"')}</a></div>
     <div class="grid-2">{systems}</div>
   </div>
 </section>
@@ -500,6 +513,75 @@ def page_paper(p):
                   og_image=f"/assets/img/og/{p['slug']}.png", og_type="article", extra_head=citation_meta(p), active="Research")
 
 
+def page_projects_index():
+    body = f"""
+<section class="paper-head">
+  <div class="wrap">
+    <p class="kicker">Projects</p>
+    <h1>Projects</h1>
+    <p class="lede" style="margin-top:16px">The engines and live systems behind the research. Each page explains what the system does, how it is built, what it does not show, and links its code.</p>
+  </div>
+</section>
+<section style="padding-top:8px;border-top:0">
+  <div class="wrap"><div class="grid-2">{"".join(project_card(pr) for pr in C.PROJECTS)}</div></div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker">Research</p><h2>The papers these systems support</h2></div>
+    <a class="section-link" href="/research">All research</a></div>
+    <div class="grid-2">{"".join(paper_card(p) for p in C.PAPERS[:2])}</div>
+  </div>
+</section>
+"""
+    return layout("/projects", "Projects: Tanishk Yadav",
+                  "Point-in-time data engines, backtests and live paper-trading systems by Tanishk Yadav, each with its code.",
+                  body, active="Projects")
+
+
+def page_project(pr):
+    facts = "".join(f'<div class="result"><div class="result-num">{e(n)}</div><div class="result-label">{e(l)}</div></div>' for n, l in pr["facts"])
+    extra = "".join(f'<a class="btn" href="{u}">{ICON["ext"]} {e(t)}</a>' for t, u in pr["extra_links"])
+    related = "".join(any_card(r) for r in pr["related"])
+    body = f"""
+<section class="paper-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="/projects">Projects</a> / {e(pr["short"])}</p>
+    <div class="card-meta"><span class="chip chip-plain">{e(pr["tag"])}</span></div>
+    <h1>{e(pr["name"])}</h1>
+    <p class="byline"><a href="/">Tanishk Yadav</a>, NYU Tandon School of Engineering</p>
+    <div class="actions"><a class="btn btn-primary" href="{pr["github"]}">{ICON["code"]} Code on GitHub</a>{extra}</div>
+  </div>
+</section>
+<section style="padding-top:0;border-top:0">
+  <div class="wrap">
+    <p class="question narrow">{e(pr["lede"])}</p>
+    <div class="block"><h2>Key facts</h2><div class="results n{len(pr["facts"])}">{facts}</div></div>
+    <div class="block prose"><h2>How it works</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in pr["points"])}</ul></div>
+    <div class="block prose"><h2>Built with</h2><p>{e(pr["stack"])}</p></div>
+    <div class="block prose"><h2>What it does not show</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in pr["limits"])}</ul></div>
+    <div class="block">
+      <div class="author-box">
+        <picture><source srcset="/assets/img/headshot-720.webp" type="image/webp"><img src="/assets/img/headshot-720.jpg" alt="" loading="lazy"></picture>
+        <div>
+          <h3>Tanishk Yadav</h3>
+          <p>MS Financial Engineering at NYU Tandon, graduating May 2027, and looking for full-time quantitative research roles. My master's thesis measures, in real time, when US debt dynamics turn self-reinforcing.</p>
+          <div class="actions"><a class="btn btn-small btn-primary" href="/">See all my work</a><a class="btn btn-small" href="/thesis">The thesis</a><a class="btn btn-small" href="{S["resume"]}">Resume</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="section-head"><div><p class="kicker">Related</p><h2>Related work</h2></div></div>
+    <div class="grid-2">{related}</div>
+  </div>
+</section>
+"""
+    return layout(f"/projects/{pr['slug']}", f"{pr['short']}: Tanishk Yadav", pr["card"], body,
+                  og_image=f"/assets/img/og/{pr['slug']}.png", active="Projects")
+
+
 def page_thesis():
     T = C.THESIS
     pillars = "".join(f'<div class="pillar"><h3>{e(t)}</h3><p>{e(d)}</p></div>' for t, d in T["pillars"])
@@ -574,6 +656,7 @@ def page_cv():
   <div class="cv-section cv-grid"><h2>Education</h2><div class="timeline">{edu}</div></div>
   <div class="cv-section cv-grid"><h2>Thesis</h2><div><h3><a href="/thesis" style="color:var(--ink);text-decoration:none">{e(C.THESIS["title"])}</a></h3><p class="tl-org">{e(C.THESIS["meta"])}</p></div></div>
   <div class="cv-section cv-grid"><h2>Research</h2><ul class="pub-list">{pubs}</ul></div>
+  <div class="cv-section cv-grid"><h2>Projects</h2><ul class="pub-list">{"".join(f'<li><a class="pub-title" href="/projects/{pr["slug"]}">{e(pr["name"])}</a><br><span class="small">{e(pr["tag"])}</span></li>' for pr in C.PROJECTS)}</ul></div>
   <div class="cv-section cv-grid"><h2>Experience</h2><div class="timeline">{exp}</div></div>
   <div class="cv-section cv-grid"><h2>Skills</h2><dl class="skills" style="margin:0">{skills}</dl></div>
   <div class="cv-section cv-grid"><h2>Certifications</h2><div class="certs">{certs}</div></div>
@@ -639,12 +722,16 @@ def main():
     }
     for p in C.PAPERS:
         pages[f"research/{p['slug']}.html"] = page_paper(p)
+    pages["projects.html"] = page_projects_index()
+    for pr in C.PROJECTS:
+        pages[f"projects/{pr['slug']}.html"] = page_project(pr)
     for rel, text in pages.items():
         for bad in ("—", "–"):
             assert bad not in text, f"dash character in {rel}"
         write(rel, text)
 
-    urls = ["/", "/research", "/thesis", "/cv", "/writing"] + [f"/research/{p['slug']}" for p in C.PAPERS]
+    urls = (["/", "/research", "/projects", "/thesis", "/cv", "/writing"] + [f"/research/{p['slug']}" for p in C.PAPERS]
+            + [f"/projects/{pr['slug']}" for pr in C.PROJECTS])
     today = date.today().isoformat()
     sm = "".join(f"<url><loc>{BASE}{u if u != '/' else '/'}</loc><lastmod>{today}</lastmod></url>" for u in urls)
     write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')
@@ -658,7 +745,8 @@ def main():
             {"source": "/resumes/:file*", "destination": "/Tanishk_Yadav_Resume.pdf", "permanent": False},
             {"source": "/resume", "destination": "/Tanishk_Yadav_Resume.pdf", "permanent": False},
             {"source": "/papers", "destination": "/research", "permanent": False},
-        ],
+            {"source": "/systems", "destination": "/projects", "permanent": False},
+        ] + [{"source": f"/{alias}", "destination": dest, "permanent": False} for alias, dest in C.SHORT_LINKS.items()],
         "headers": [
             {"source": "/assets/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=604800"}]},
             {"source": "/papers/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600"}]},
