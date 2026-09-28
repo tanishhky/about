@@ -59,12 +59,12 @@ PAPERS = [
         "short": "Concentrated Sectors Transmit Less",
         "chip": "Journal submission",
         "chip_kind": "journal",
-        "status": "Submitted to Studies in Nonlinear Dynamics & Econometrics, September 2026. Not yet peer reviewed.",
+        "status": "Submitted to Studies in Nonlinear Dynamics & Econometrics, September 2026; SSRN preprint 6475898. Not yet peer reviewed.",
         "date": "September 2026",
         "pub_date": "2026/09/23",
         "pdf": "/papers/yadav-2026-concentrated-sectors-transmit-less.pdf",
         "code": "https://github.com/tanishhky/sp500-sector-analysis",
-        "ssrn": None,
+        "ssrn": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6475898",
         "card_finding": "A one-point rise in a sector's top-three share lowers its net shock transmission by 0.47 points (t = -3.6), and none of 110 apparent Granger lead-lag links survives robust tests.",
         "question": "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025. Did that concentration change the way shocks travel between the eleven sectors?",
         "abstract": (
@@ -102,11 +102,11 @@ PAPERS = [
         ],
         "limits": [
             "The concentration effect is a relationship in levels; it does not appear in first differences.",
-            "An earlier version of this project, circulated on SSRN, reported Granger results that did not survive robust tests. This manuscript supersedes it, and the repository lists each retracted claim.",
+            "An earlier version of this project on SSRN reported Granger results that did not survive robust tests. The SSRN entry now carries this manuscript, and the repository lists each retracted claim.",
         ],
         "keywords": ["connectedness", "market concentration", "TVP-VAR", "Granger causality", "heteroskedasticity-robust inference", "granularity"],
         "jel": "C12, C23, C32, G12, L11",
-        "bibtex": "@unpublished{yadav2026concentrated,\n  title  = {Concentrated Sectors Transmit Less: Within-Sector Concentration and Time-Varying Connectedness in the {S\\&P} 500, 2018 to 2026},\n  author = {Yadav, Tanishk},\n  year   = {2026},\n  note   = {Manuscript submitted to Studies in Nonlinear Dynamics \\& Econometrics}\n}",
+        "bibtex": "@unpublished{yadav2026concentrated,\n  title  = {Concentrated Sectors Transmit Less: Within-Sector Concentration and Time-Varying Connectedness in the {S\\&P} 500, 2018 to 2026},\n  author = {Yadav, Tanishk},\n  year   = {2026},\n  note   = {Manuscript submitted to Studies in Nonlinear Dynamics \\& Econometrics. SSRN preprint 6475898}\n}",
     },
     {
         "slug": "ratewalk",

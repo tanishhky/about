@@ -330,7 +330,7 @@ def page_home():
   <div class="wrap">
     <div class="section-head">
       <div><p class="kicker">Research</p><h2>Papers, each with its code</h2>
-      <p>Three SSRN preprints, two working papers, and the journal submission above. Every result is out of sample, and every paper reports what did not work.</p></div>
+      <p>Two SSRN preprints and two working papers, alongside the journal submission above. Every result is out of sample, and every paper reports what did not work.</p></div>
       <a class="section-link" href="/research">All research {ICON["arrow"].replace('<svg', '<svg style="width:15px;height:15px;display:inline;vertical-align:-2px"')}</a>
     </div>
     <div class="grid-2">{"".join(paper_card(p) for p in others)}</div>
