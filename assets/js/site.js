@@ -50,4 +50,25 @@
       }
     });
   });
+  // Analytics: GA runs on every page, but it cannot see inside a PDF or follow a
+  // visitor off the site, so record which papers get opened and which repos,
+  // SSRN pages and profiles get clicked. Custom names avoid double counting with
+  // GA's own enhanced-measurement events.
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest ? ev.target.closest("a[href]") : null;
+    if (!a || typeof window.gtag !== "function") return;
+    var url = a.href;
+    var name = null;
+    if (/\.pdf($|[?#])/i.test(url)) name = "pdf_open";
+    else if (/github\.com/i.test(url)) name = "github_click";
+    else if (/ssrn\.com/i.test(url)) name = "ssrn_click";
+    else if (/linkedin\.com/i.test(url)) name = "linkedin_click";
+    else if (/^mailto:/i.test(url)) name = "email_click";
+    if (!name) return;
+    window.gtag("event", name, {
+      link_url: url,
+      link_text: (a.textContent || "").trim().slice(0, 100),
+      page_path: location.pathname
+    });
+  });
 })();

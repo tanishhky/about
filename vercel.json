@@ -34,62 +34,62 @@
     },
     {
       "source": "/concentrated-sectors",
-      "destination": "/research/concentrated-sectors",
+      "destination": "/research/concentrated-sectors?via=concentrated-sectors",
       "permanent": false
     },
     {
       "source": "/sp500",
-      "destination": "/research/concentrated-sectors",
+      "destination": "/research/concentrated-sectors?via=sp500",
       "permanent": false
     },
     {
       "source": "/ratewalk",
-      "destination": "/research/ratewalk",
+      "destination": "/research/ratewalk?via=ratewalk",
       "permanent": false
     },
     {
       "source": "/volatility-managed-factors",
-      "destination": "/research/volatility-managed-factors",
+      "destination": "/research/volatility-managed-factors?via=volatility-managed-factors",
       "permanent": false
     },
     {
       "source": "/vol-managed",
-      "destination": "/research/volatility-managed-factors",
+      "destination": "/research/volatility-managed-factors?via=vol-managed",
       "permanent": false
     },
     {
       "source": "/voledge",
-      "destination": "/research/voledge",
+      "destination": "/research/voledge?via=voledge",
       "permanent": false
     },
     {
       "source": "/regime-detection",
-      "destination": "/research/regime-detection",
+      "destination": "/research/regime-detection?via=regime-detection",
       "permanent": false
     },
     {
       "source": "/regime-adaptive",
-      "destination": "/research/regime-detection",
+      "destination": "/research/regime-detection?via=regime-adaptive",
       "permanent": false
     },
     {
       "source": "/chronofund",
-      "destination": "/projects/chronofund",
+      "destination": "/projects/chronofund?via=chronofund",
       "permanent": false
     },
     {
       "source": "/regime-aware",
-      "destination": "/projects/regime-aware",
+      "destination": "/projects/regime-aware?via=regime-aware",
       "permanent": false
     },
     {
       "source": "/pinsight",
-      "destination": "/projects/pinsight",
+      "destination": "/projects/pinsight?via=pinsight",
       "permanent": false
     },
     {
       "source": "/driftedge",
-      "destination": "/projects/driftedge",
+      "destination": "/projects/driftedge?via=driftedge",
       "permanent": false
     }
   ],
