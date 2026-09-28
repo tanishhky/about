@@ -26,6 +26,71 @@
       "source": "/papers",
       "destination": "/research",
       "permanent": false
+    },
+    {
+      "source": "/systems",
+      "destination": "/projects",
+      "permanent": false
+    },
+    {
+      "source": "/concentrated-sectors",
+      "destination": "/research/concentrated-sectors",
+      "permanent": false
+    },
+    {
+      "source": "/sp500",
+      "destination": "/research/concentrated-sectors",
+      "permanent": false
+    },
+    {
+      "source": "/ratewalk",
+      "destination": "/research/ratewalk",
+      "permanent": false
+    },
+    {
+      "source": "/volatility-managed-factors",
+      "destination": "/research/volatility-managed-factors",
+      "permanent": false
+    },
+    {
+      "source": "/vol-managed",
+      "destination": "/research/volatility-managed-factors",
+      "permanent": false
+    },
+    {
+      "source": "/voledge",
+      "destination": "/research/voledge",
+      "permanent": false
+    },
+    {
+      "source": "/regime-detection",
+      "destination": "/research/regime-detection",
+      "permanent": false
+    },
+    {
+      "source": "/regime-adaptive",
+      "destination": "/research/regime-detection",
+      "permanent": false
+    },
+    {
+      "source": "/chronofund",
+      "destination": "/projects/chronofund",
+      "permanent": false
+    },
+    {
+      "source": "/regime-aware",
+      "destination": "/projects/regime-aware",
+      "permanent": false
+    },
+    {
+      "source": "/pinsight",
+      "destination": "/projects/pinsight",
+      "permanent": false
+    },
+    {
+      "source": "/driftedge",
+      "destination": "/projects/driftedge",
+      "permanent": false
     }
   ],
   "headers": [

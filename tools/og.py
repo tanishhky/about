@@ -60,6 +60,8 @@ def main():
     shoot(page('<span class="chip">MS thesis, in progress</span>', "The U.S. Sovereign Debt Doom Loop",
                "A point-in-time framework for identification, market pricing, and policy response. Advisor: Prof. David Shimko.",
                headshot), "thesis")
+    for pr in C.PROJECTS:
+        shoot(page(f'<span class="chip working">{html.escape(pr["tag"])}</span>', pr["short"], pr["lede"], headshot), pr["slug"])
     for p in C.PAPERS:
         f0 = p["figures"][0][0]
         right = fig(f0) if not f0.startswith("svg:") else headshot
