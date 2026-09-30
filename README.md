@@ -21,9 +21,14 @@ Old URLs redirect (`/credentials`, `/resumes/*`); see `vercel.json`.
 All content lives in `tools/content.py`. After editing it:
 
 ```bash
-python3 tools/build.py   # regenerates every HTML page, sitemap.xml, robots.txt, vercel.json
-python3 tools/og.py      # re-renders social preview images (needs Google Chrome)
+python3 tools/cardfigs.py  # charts for the social cards of pages without a paper figure (needs pandas, matplotlib)
+python3 tools/og.py        # re-renders social preview images (needs Google Chrome)
+python3 tools/build.py     # regenerates every HTML page, sitemap.xml, robots.txt, vercel.json
 ```
+
+Run them in that order: `build.py` stamps each social image's content hash onto its `og:image` URL, so LinkedIn and other link previews fetch the new image instead of a cached one. After a deploy, paste the changed URLs into LinkedIn's Post Inspector (linkedin.com/post-inspector) to refresh previews that were already shared.
+
+Every social card shows the page's own work: the first paper figure, or for the four systems, the thesis and Multi-Scale Regime Detection a chart from `tools/cardfigs.py` built on real project output (snapshots in `tools/carddata/`; `--refresh` rebuilds them from the sibling repositories, a live SPY option chain and FRED). Only the home card carries the headshot. The thesis card plots public OMB data for context, never a thesis result.
 
 Then commit the generated files; Vercel serves the repository as-is.
 

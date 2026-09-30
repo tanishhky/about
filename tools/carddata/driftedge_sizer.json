@@ -1,0 +1,8 @@
+{
+ "entry": 0.35,
+ "target": 0.6,
+ "stop": 0.2,
+ "prior_p0": 0.37499999999999994,
+ "kelly_fraction": 0.25,
+ "cap": 0.02
+}
