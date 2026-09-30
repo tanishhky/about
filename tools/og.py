@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Render 1200x630 social preview images into assets/img/og/ with headless Chrome.
 
-Usage: python3 tools/og.py   (needs Google Chrome; run after build.py)
+Usage: python3 tools/og.py   (needs Google Chrome; run after tools/cardfigs.py and before build.py,
+which stamps each card's content hash onto its og:image URL so LinkedIn fetches the new image)
+
+Every card's right side shows the page's own work: a paper figure, or for pages without one a chart
+from tools/cardfigs.py. Only the home card carries the headshot.
 """
 import html
+import json
 import os
 import subprocess
 import sys
@@ -22,6 +27,10 @@ body{width:1200px;height:630px;background:#faf9f6;color:#16161a;font-family:Inte
 .l{flex:1;padding:64px 56px 56px 72px;display:flex;flex-direction:column}
 .r{width:520px;background:#fff;border-left:1px solid #e4e1da;display:grid;place-items:center;padding:28px}
 .r img{width:100%;height:auto;max-height:560px;object-fit:contain}
+.r.chart{display:flex;flex-direction:column;justify-content:flex-start;place-items:stretch;padding:30px 26px 16px 26px}
+.r.chart .ct{font-family:Newsreader,serif;font-weight:500;font-size:28px;line-height:1.15;color:#16161a}
+.r.chart .cs{font-size:17px;line-height:1.35;color:#676773;margin-top:6px}
+.r.chart svg{width:100%;height:auto;margin-top:6px}
 .chip{align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:20px;padding:6px 14px;border-radius:999px;background:#f2ebf8;color:#57068c}
 .chip.ssrn{background:#e6f2f1;color:#0b5f5f}.chip.working{background:#f5efdd;color:#5a4a1a}
 h1{font-family:Newsreader,serif;font-weight:500;font-size:54px;line-height:1.08;letter-spacing:-.015em;margin-top:26px}
@@ -50,21 +59,55 @@ def shoot(html_text, name):
     print("wrote", os.path.relpath(out, ROOT))
 
 
+def card_chart(slug, title, sub):
+    """Right panel with a chart from tools/cardfigs.py, inlined so its text uses the page fonts."""
+    with open(os.path.join(ROOT, "assets", "img", "cards", slug + ".svg")) as fh:
+        svg = fh.read()
+    svg = svg[svg.index("<svg"):]
+    return f'<div class="r chart"><div class="ct">{html.escape(title)}</div><div class="cs">{html.escape(sub)}</div>{svg}</div>'
+
+
+def chart_captions():
+    with open(os.path.join(ROOT, "tools", "carddata", "facts.json")) as fh:
+        f = json.load(fh)
+    cf, ps, th = f["chronofund"], f["pinsight"], f["thesis"]
+    from datetime import date
+    fmt = lambda iso: f"{date.fromisoformat(iso[:10]).day} {date.fromisoformat(iso[:10]):%b %Y}"
+    return {
+        "chronofund": ("When annual reports became knowable",
+                       f"{cf['n']:,} 10-K filings from {cf['companies']} companies, {cf['first']} to {cf['last']}, "
+                       "dated to the SEC acceptance timestamp"),
+        "regime-aware": ("Drawdown from peak, 2008 to 2026",
+                         "Strategy net of 2/15 fees with a high-water mark, against SPY"),
+        "pinsight": ("SPY risk-neutral density",
+                     f"Options expiring {fmt(ps['expiry'])}, quotes at the {fmt(ps['last_quote'])} close, "
+                     "fitted by PinSight"),
+        "driftedge": ("No evidence, no position",
+                      "Entry at 35c, target 60c, stop 20c. DriftEdge's own estimator and sizer on hypothetical trades"),
+        "regime-detection": ("Maximum drawdown, calibration unchanged",
+                             "Cross-asset test from the paper: the SPY calibration applied as is"),
+        "thesis": ("Federal interest outlays as a share of receipts",
+                   f"Fiscal years {th['first']} to {th['last']}. Public OMB data via FRED; context, not a thesis result"),
+    }
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     fig = lambda f: f'<div class="r"><img src="file://{ROOT}/assets/img/research/{f}.png"></div>'
     headshot = f'<div class="r" style="padding:0"><img src="file://{ROOT}/assets/img/headshot-720.jpg" style="width:100%;height:100%;max-height:none;object-fit:cover"></div>'
+    cap = chart_captions()
+    chart = lambda slug: card_chart(slug, *cap[slug])
     shoot(page('<span class="chip">MS Financial Engineering, NYU Tandon, 2027</span>', C.HERO["tagline"],
-               "Rates, equity factors, volatility and market structure. A journal submission, three SSRN preprints, and an MS thesis on the US sovereign debt doom loop.",
+               "Rates, equity factors, volatility and market structure. Three SSRN preprints, two working papers, and an MS thesis on the US sovereign debt doom loop.",
                headshot), "home")
     shoot(page('<span class="chip">MS thesis, in progress</span>', "The U.S. Sovereign Debt Doom Loop",
                "A point-in-time framework for identification, market pricing, and policy response. Advisor: Prof. David Shimko.",
-               headshot), "thesis")
+               chart("thesis")), "thesis")
     for pr in C.PROJECTS:
-        shoot(page(f'<span class="chip working">{html.escape(pr["tag"])}</span>', pr["short"], pr["lede"], headshot), pr["slug"])
+        shoot(page(f'<span class="chip working">{html.escape(pr["tag"])}</span>', pr["short"], pr["lede"], chart(pr["slug"])), pr["slug"])
     for p in C.PAPERS:
         f0 = p["figures"][0][0]
-        right = fig(f0) if not f0.startswith("svg:") else headshot
+        right = fig(f0) if not f0.startswith("svg:") else chart(p["slug"])
         kind = {"journal": "", "ssrn": " ssrn", "working": " working"}[p["chip_kind"]]
         shoot(page(f'<span class="chip{kind}">{html.escape(p["chip"])}</span>', p["short"], p["card_finding"], right), p["slug"])
 

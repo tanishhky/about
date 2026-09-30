@@ -6,6 +6,7 @@ Writes index.html, research.html, research/*.html, thesis.html, cv.html, writing
 404.html, sitemap.xml, robots.txt and vercel.json into the repository root.
 No dependencies beyond the Python standard library.
 """
+import hashlib
 import html
 import json
 import os
@@ -46,6 +47,15 @@ NAV = [("Research", "/research"), ("Thesis", "/thesis"), ("Projects", "/projects
 
 
 # ------------------------------------------------------------------ layout
+def versioned(asset):
+    """Append a short content hash so link-preview caches (LinkedIn, Slack, X) fetch a changed image."""
+    path = os.path.join(ROOT, asset.lstrip("/"))
+    if not os.path.exists(path):
+        return asset
+    with open(path, "rb") as fh:
+        return f"{asset}?v={hashlib.sha256(fh.read()).hexdigest()[:10]}"
+
+
 def layout(path, title, description, body, og_image="/assets/img/og/home.png", og_type="website", extra_head="", active=None):
     url = BASE + (path if path != "/" else "/")
     nav = "".join(
@@ -65,7 +75,7 @@ def layout(path, title, description, body, og_image="/assets/img/og/home.png", o
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{BASE}{og_image}">
+<meta property="og:image" content="{BASE}{versioned(og_image)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -309,7 +319,7 @@ def page_home():
 
 <section id="latest">
   <div class="wrap">
-    <div class="section-head"><div><p class="kicker">Latest research</p><h2>Just submitted to a journal</h2></div></div>
+    <div class="section-head"><div><p class="kicker">Latest research</p><h2>The newest paper</h2></div></div>
     <article class="card feature">
       <a class="thumb" href="/research/{feat["slug"]}" tabindex="-1" aria-hidden="true">{picture(feat["figures"][0][0], feat["figures"][0][1], loading="eager")}</a>
       <div class="card-body">
@@ -330,7 +340,7 @@ def page_home():
   <div class="wrap">
     <div class="section-head">
       <div><p class="kicker">Research</p><h2>Papers, each with its code</h2>
-      <p>Two SSRN preprints and two working papers, alongside the journal submission above. Every result is out of sample, and every paper reports what did not work.</p></div>
+      <p>Two more SSRN preprints and two working papers, alongside the paper above. Every result is out of sample, and every paper reports what did not work.</p></div>
       <a class="section-link" href="/research">All research {ICON["arrow"].replace('<svg', '<svg style="width:15px;height:15px;display:inline;vertical-align:-2px"')}</a>
     </div>
     <div class="grid-2">{"".join(paper_card(p) for p in others)}</div>
@@ -388,7 +398,7 @@ def page_home():
     return layout(
         "/",
         "Tanishk Yadav: Quantitative Research",
-        "MS Financial Engineering at NYU Tandon (May 2027). Point-in-time quantitative research across rates, equity factors, volatility and market structure: a journal submission, three SSRN preprints, and an MS thesis on the US sovereign debt doom loop.",
+        "MS Financial Engineering at NYU Tandon (May 2027). Point-in-time quantitative research across rates, equity factors, volatility and market structure: three SSRN preprints, two working papers, and an MS thesis on the US sovereign debt doom loop.",
         body,
         extra_head=person_jsonld(),
     )
@@ -401,7 +411,7 @@ def page_research_index():
   <div class="wrap">
     <p class="kicker">Research</p>
     <h1>Research</h1>
-    <p class="lede" style="margin-top:16px">Five papers across market structure, rates, factor investing, volatility, and risk overlays. Each links its full PDF and its code. Status words are exact: a journal submission is under review, SSRN preprints and working papers are not peer reviewed.</p>
+    <p class="lede" style="margin-top:16px">Five papers across market structure, rates, factor investing, volatility, and risk overlays. Each links its full PDF and its code. Status words are exact: SSRN preprints and working papers are not peer reviewed.</p>
   </div>
 </section>
 <section style="padding-top:8px;border-top:0">
