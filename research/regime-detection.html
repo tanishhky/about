@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20260927">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261009">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="citation_title" content="Multi-Scale Regime Detection with Fuzzy Aggregation for Adaptive Sector Portfolio Management">
 <meta name="citation_author" content="Yadav, Tanishk">
@@ -36,6 +36,7 @@
 <meta name="citation_keywords" content="CUSUM">
 <meta name="citation_keywords" content="walk-forward validation">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ScholarlyArticle", "headline": "Multi-Scale Regime Detection with Fuzzy Aggregation for Adaptive Sector Portfolio Management", "name": "Multi-Scale Regime Detection with Fuzzy Aggregation for Adaptive Sector Portfolio Management", "author": {"@type": "Person", "name": "Tanishk Yadav", "url": "https://www.tanishkyadav.me/"}, "datePublished": "2026-07-13", "abstract": "We propose a multi-scale regime detection framework that fuses four orthogonal stress detectors (CUSUM sequential analysis on z-score returns, rolling cross-sector correlation, market breadth, and rolling return skewness) into a unified stress probability via sigmoid-membership fuzzy inference. The aggregator uses a max-of-top-2 rule: it returns the second-largest membership, so at least two orthogonal detectors must agree before the system acts, structurally suppressing single-detector false alarms. The composite signal drives an adaptive sector portfolio that classifies eleven S&P 500 sector ETFs into three baskets by GARCH(1,1)-t conditional-volatility terciles and Ornstein-Uhlenbeck recovery half-life, with implicit cash allocation as the primary risk-reduction mechanism. In a walk-forward backtest (2009 to 2025, quarterly recalibration, 10 bps per trade, zero look-ahead), the framework is best understood as a capital-preservation overlay: it holds maximum drawdown to -6.2% (versus -41.7% for SPY) at 4.6% annualized volatility, for a Sharpe of 0.97 (versus SPY's 0.58) and Calmar 0.94. Benchmarked honestly, simple trend rules achieve higher raw Sharpe on the SPY universe; the architecture's distinctive value is generalization: applied unchanged to factor portfolios and international equities it scores Sharpe 1.21 and 1.04 against 0.51 and 0.11 for equal-weight.", "keywords": "regime detection, fuzzy consensus, capital preservation, CUSUM, walk-forward validation", "url": "https://www.tanishkyadav.me/research/regime-detection", "encoding": {"@type": "MediaObject", "contentUrl": "https://www.tanishkyadav.me/papers/yadav-2026-multi-scale-regime-detection.pdf", "encodingFormat": "application/pdf"}, "creativeWorkStatus": "SSRN preprint"}</script>
+<script>try{var q=location.search;if(/[?&]notrack=1(&|$)/.test(q))localStorage.setItem("notrack","1");if(/[?&]notrack=0(&|$)/.test(q))localStorage.removeItem("notrack");if(localStorage.getItem("notrack")==="1")window["ga-disable-G-87P07T86WH"]=true}catch(e){}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-87P07T86WH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-87P07T86WH");</script>
 </head>
@@ -157,6 +158,6 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/js/site.js?v=20260927" defer></script>
+<script src="/assets/js/site.js?v=20261009" defer></script>
 </body>
 </html>

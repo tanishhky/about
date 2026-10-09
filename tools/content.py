@@ -480,6 +480,17 @@ SHORT_LINKS = {
     "driftedge": "/projects/driftedge",
 }
 
+# Short tracked forms for LinkedIn text, served as /li/<alias> (see build.py). Every short
+# link plus the section pages. Links where LinkedIn hides the URL (Featured, Projects,
+# Publications) use the full UTM form from utm() directly.
+LINKEDIN_TEXT_LINKS = dict(SHORT_LINKS, thesis="/thesis", cv="/cv", research="/research", projects="/projects")
+
+
+def utm(source, medium, campaign, content=None):
+    """Query string GA4 reads as session source, medium, campaign and ad content."""
+    q = f"utm_source={source}&utm_medium={medium}&utm_campaign={campaign}"
+    return q + (f"&utm_content={content}" if content else "")
+
 # ---------------------------------------------------------------- experience and education
 EXPERIENCE = [
     {

@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 import content as C  # noqa: E402
 
-VERSION = "20260927"
+VERSION = "20261009"
 S = C.SITE
 BASE = S["base"]
 
@@ -87,7 +87,8 @@ def layout(path, title, description, body, og_image="/assets/img/og/home.png", o
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v={VERSION}">
 <script>try{{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
-{extra_head}<script async src="https://www.googletagmanager.com/gtag/js?id={S["ga"]}"></script>
+{extra_head}<script>try{{var q=location.search;if(/[?&]notrack=1(&|$)/.test(q))localStorage.setItem("notrack","1");if(/[?&]notrack=0(&|$)/.test(q))localStorage.removeItem("notrack");if(localStorage.getItem("notrack")==="1")window["ga-disable-{S["ga"]}"]=true}}catch(e){{}}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={S["ga"]}"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag("js",new Date());gtag("config","{S["ga"]}");</script>
 </head>
 <body>
@@ -756,7 +757,12 @@ def main():
             {"source": "/resume", "destination": "/Tanishk_Yadav_Resume.pdf", "permanent": False},
             {"source": "/papers", "destination": "/research", "permanent": False},
             {"source": "/systems", "destination": "/projects", "permanent": False},
-        ] + [{"source": f"/{alias}", "destination": f"{dest}?via={alias}", "permanent": False} for alias, dest in C.SHORT_LINKS.items()],
+        ] + [{"source": f"/{alias}", "destination": f"{dest}?via={alias}", "permanent": False} for alias, dest in C.SHORT_LINKS.items()]
+        # LinkedIn text links (About, posts, contact info) show their URL, so they use these
+        # short tracked forms: tanishkyadav.me/li and tanishkyadav.me/li/<alias>.
+        + [{"source": "/li", "destination": "/?" + C.utm("linkedin", "social", "li-profile", "home"), "permanent": False}]
+        + [{"source": f"/li/{alias}", "destination": f"{dest}?" + C.utm("linkedin", "social", "li-text", alias), "permanent": False}
+           for alias, dest in C.LINKEDIN_TEXT_LINKS.items()],
         "headers": [
             {"source": "/assets/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=604800"}]},
             {"source": "/papers/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=3600"}]},
