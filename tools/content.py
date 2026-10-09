@@ -405,6 +405,11 @@ PROJECTS = [
             "Point-in-time fundamentals from ChronoFund; delistings are penalized with a forced liquidation after 20 consecutive missing-price days, so dead firms cannot flatter the result.",
             "Fama-French five-factor attribution on daily excess returns, split by sub-period to show the alpha decaying.",
         ],
+        "figures": [
+            ("ra-growth", "Value of 100 invested on 26 February 2008, net of the 2/15 fee structure with a high-water mark, against SPY. The strategy ends at 900 and SPY at 773 (daily data to 21 August 2026)."),
+            ("ra-drawdown", "Drawdown from the previous peak, daily. The strategy fell 30.5% in 2008 to 2009 against SPY's 51.5%, but 39.7% in 2022 to 2023 against SPY's 24.5%: its shallower worst drawdown comes from the earlier crisis, not from the recent one."),
+            ("ra-relative", "Strategy wealth divided by SPY wealth, minus one. The lead peaked at +123% in March 2020 and has faded to +16%, the same decay the five-factor attribution reports as alpha falling from 8.37% in 2008 to 2017 to an insignificant 2.42% over the full period."),
+        ],
         "stack": "Python, hmmlearn, statsmodels, pandas, SEC EDGAR via ChronoFund",
         "limits": [
             "Sharpe is 0.61 vs 0.57 for SPY: the strategy survives crises through regime sizing, not stock selection.",
