@@ -37,3 +37,11 @@ Content rules: status words are exact ("Journal submission", "SSRN preprint", "W
 ## Design
 
 Paper-and-ink palette with an NYU violet accent, Newsreader for headings, Inter for text, JetBrains Mono for numbers. Light and dark themes, WCAG-AA contrast, keyboard navigation, and every page works without JavaScript.
+
+## Tracking
+
+- Google Analytics (`SITE["ga"]`) runs on every page. `assets/js/site.js` adds events for PDF opens and outbound clicks.
+- Resume and cover-letter links carry `utm_source/utm_medium/utm_campaign`; the campaign is a random per-application code whose mapping to company and role stays private and local, never in this repo.
+- LinkedIn: links where LinkedIn hides the URL (Featured, Projects, Publications) use the full `utm()` query from `tools/content.py`; visible text uses `tanishkyadav.me/li` (home) or `tanishkyadav.me/li/<alias>` (any short link, thesis, cv, research, projects), generated as redirects in `vercel.json`.
+- Vercel merges an incoming query string into redirect destinations, so tags on a short link survive the redirect.
+- Owner opt-out: open any page with `?notrack=1` once per browser to stop counting your own visits (`?notrack=0` undoes it).

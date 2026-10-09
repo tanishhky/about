@@ -71,4 +71,16 @@
       page_path: location.pathname
     });
   });
+  // Owner opt-out: ?notrack=1 turns Google Analytics off in this browser (the flag is
+  // read in <head> before GA loads), ?notrack=0 turns it back on. Say which, briefly.
+  var nt = /[?&]notrack=([01])(&|$)/.exec(location.search);
+  if (nt) {
+    var note = document.createElement("div");
+    note.setAttribute("role", "status");
+    note.textContent = nt[1] === "1" ? "Analytics is now off in this browser." : "Analytics is back on in this browser.";
+    note.style.cssText = "position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:50;" +
+      "padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--bg);font:500 14px/1.3 Inter,system-ui,sans-serif;";
+    document.body.appendChild(note);
+    setTimeout(function () { note.remove(); }, 4000);
+  }
 })();

@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20260927">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261009">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="citation_title" content="VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments">
 <meta name="citation_author" content="Yadav, Tanishk">
@@ -37,6 +37,7 @@
 <meta name="citation_keywords" content="volatility targeting">
 <meta name="citation_keywords" content="walk-forward backtesting">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ScholarlyArticle", "headline": "VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments", "name": "VolEdge: Measuring and Trading the Variance Risk Premium with Model-Free Risk-Neutral Moments", "author": {"@type": "Person", "name": "Tanishk Yadav", "url": "https://www.tanishkyadav.me/"}, "datePublished": "2026-07-07", "abstract": "VolEdge is a full-stack research platform built around a single thesis: the gap between what options price and what the underlying realizes is the risk premium, and that gap can be measured and traded. The platform extracts the risk-neutral distribution model-free via Bakshi-Kapadia-Madan (BKM) moments and compares it, horizon-matched, against the physical distribution estimated from realized returns; the spread Q minus P is surfaced for variance, skew, and kurtosis. A no-look-ahead walk-forward engine then backtests premium-driven strategies. We report two honest results on free data (2019 to 2024, net of modeled costs): a GARCH(1,1) volatility-targeted strategy beat SPY buy-and-hold on a risk-adjusted basis (Sharpe 0.85 vs. 0.68) with 41% lower maximum drawdown, while a naive long-only variance-premium harvest lost money (Sharpe -0.16), empirically confirming the premium as compensation for crash risk rather than harvestable alpha. The BKM extractor is validated against Black-Scholes chains of known volatility, and the backtest engine reproduces buy-and-hold to 0.000 pp at any rebalance frequency.", "keywords": "variance risk premium, risk-neutral moments, BKM, volatility targeting, walk-forward backtesting", "url": "https://www.tanishkyadav.me/research/voledge", "encoding": {"@type": "MediaObject", "contentUrl": "https://www.tanishkyadav.me/papers/yadav-2026-voledge.pdf", "encodingFormat": "application/pdf"}, "creativeWorkStatus": "Working paper"}</script>
+<script>try{var q=location.search;if(/[?&]notrack=1(&|$)/.test(q))localStorage.setItem("notrack","1");if(/[?&]notrack=0(&|$)/.test(q))localStorage.removeItem("notrack");if(localStorage.getItem("notrack")==="1")window["ga-disable-G-87P07T86WH"]=true}catch(e){}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-87P07T86WH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-87P07T86WH");</script>
 </head>
@@ -158,6 +159,6 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/js/site.js?v=20260927" defer></script>
+<script src="/assets/js/site.js?v=20261009" defer></script>
 </body>
 </html>

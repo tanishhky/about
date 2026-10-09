@@ -91,6 +91,91 @@
       "source": "/driftedge",
       "destination": "/projects/driftedge?via=driftedge",
       "permanent": false
+    },
+    {
+      "source": "/li",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=li-profile&utm_content=home",
+      "permanent": false
+    },
+    {
+      "source": "/li/concentrated-sectors",
+      "destination": "/research/concentrated-sectors?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=concentrated-sectors",
+      "permanent": false
+    },
+    {
+      "source": "/li/sp500",
+      "destination": "/research/concentrated-sectors?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=sp500",
+      "permanent": false
+    },
+    {
+      "source": "/li/ratewalk",
+      "destination": "/research/ratewalk?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=ratewalk",
+      "permanent": false
+    },
+    {
+      "source": "/li/volatility-managed-factors",
+      "destination": "/research/volatility-managed-factors?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=volatility-managed-factors",
+      "permanent": false
+    },
+    {
+      "source": "/li/vol-managed",
+      "destination": "/research/volatility-managed-factors?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=vol-managed",
+      "permanent": false
+    },
+    {
+      "source": "/li/voledge",
+      "destination": "/research/voledge?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=voledge",
+      "permanent": false
+    },
+    {
+      "source": "/li/regime-detection",
+      "destination": "/research/regime-detection?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=regime-detection",
+      "permanent": false
+    },
+    {
+      "source": "/li/regime-adaptive",
+      "destination": "/research/regime-detection?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=regime-adaptive",
+      "permanent": false
+    },
+    {
+      "source": "/li/chronofund",
+      "destination": "/projects/chronofund?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=chronofund",
+      "permanent": false
+    },
+    {
+      "source": "/li/regime-aware",
+      "destination": "/projects/regime-aware?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=regime-aware",
+      "permanent": false
+    },
+    {
+      "source": "/li/pinsight",
+      "destination": "/projects/pinsight?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=pinsight",
+      "permanent": false
+    },
+    {
+      "source": "/li/driftedge",
+      "destination": "/projects/driftedge?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=driftedge",
+      "permanent": false
+    },
+    {
+      "source": "/li/thesis",
+      "destination": "/thesis?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=thesis",
+      "permanent": false
+    },
+    {
+      "source": "/li/cv",
+      "destination": "/cv?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=cv",
+      "permanent": false
+    },
+    {
+      "source": "/li/research",
+      "destination": "/research?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=research",
+      "permanent": false
+    },
+    {
+      "source": "/li/projects",
+      "destination": "/projects?utm_source=linkedin&utm_medium=social&utm_campaign=li-text&utm_content=projects",
+      "permanent": false
     }
   ],
   "headers": [

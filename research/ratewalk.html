@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20260927">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261009">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <meta name="citation_title" content="RateWalk: Forecasting Fed Rate Decisions with a Shrunk Markov Chain">
 <meta name="citation_author" content="Yadav, Tanishk">
@@ -37,6 +37,7 @@
 <meta name="citation_keywords" content="forecast evaluation">
 <meta name="citation_keywords" content="point-in-time data">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ScholarlyArticle", "headline": "RateWalk: Forecasting Fed Rate Decisions with a Shrunk Markov Chain", "name": "RateWalk: Forecasting Fed Rate Decisions with a Shrunk Markov Chain", "author": {"@type": "Person", "name": "Tanishk Yadav", "url": "https://www.tanishkyadav.me/"}, "datePublished": "2026-07-04", "abstract": "I ask whether a memoryless Markov chain on the Federal Reserve's policy moves can forecast the next rate decision out of sample, and whether conditioning the chain on the inflation regime improves it. Under strict no-look-ahead discipline, with CPI read at its real ALFRED release date so revisions never leak, the answer is a clean bias-variance story. A first-order chain beats a climatology baseline. Naive conditioning on the CPI regime overfits and hurts, because it splits sparse transition data across regimes. Shrinking each regime row toward the pooled chain (an empirical-Bayes Dirichlet prior) recovers a small but consistent edge that replicates across the United States, the United Kingdom, and Germany, survives a data-driven shrinkage strength, and sits on a broad parameter plateau rather than a tuned point. Against the market's own pricing, proxied by a walk-forward-calibrated Treasury-curve signal, the chain wins overall (log-loss 1.06 vs. 1.20) but the decomposition is sharper: the market is better on 82% of actual move months, the chain on 85% of holds, and a no-look-ahead adaptive blend beats both. The edge lives in probabilistic calibration: a duration-timing strategy built on the signal does not beat a constant-duration benchmark risk-adjusted. I report the negatives as part of the result.", "keywords": "Federal Reserve, Markov chain, empirical Bayes, forecast evaluation, point-in-time data", "url": "https://www.tanishkyadav.me/research/ratewalk", "encoding": {"@type": "MediaObject", "contentUrl": "https://www.tanishkyadav.me/papers/yadav-2026-ratewalk.pdf", "encodingFormat": "application/pdf"}, "creativeWorkStatus": "Working paper"}</script>
+<script>try{var q=location.search;if(/[?&]notrack=1(&|$)/.test(q))localStorage.setItem("notrack","1");if(/[?&]notrack=0(&|$)/.test(q))localStorage.removeItem("notrack");if(localStorage.getItem("notrack")==="1")window["ga-disable-G-87P07T86WH"]=true}catch(e){}</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-87P07T86WH"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-87P07T86WH");</script>
 </head>
@@ -158,6 +159,6 @@
     </nav>
   </div>
 </footer>
-<script src="/assets/js/site.js?v=20260927" defer></script>
+<script src="/assets/js/site.js?v=20261009" defer></script>
 </body>
 </html>
