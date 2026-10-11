@@ -498,7 +498,7 @@ EXPERIENCE = [
         "place": "New York, NY",
         "span": "Jun 2026 to present",
         "roles": [
-            ("Course Assistant, FRE-GY 6103 Valuation for Financial Engineering (Prof. David Shimko)", "Sep 2026 to present"),
+            ("Course Assistant, Valuation for Financial Engineering (Prof. David Shimko)", "Sep 2026 to present"),
             ("Contributor, Valuation Principles, Prof. Shimko's graduate valuation textbook (Wiley, in preparation)", "Jun 2026 to present"),
         ],
         "points": [
