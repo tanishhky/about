@@ -97,7 +97,7 @@ def main():
     headshot = f'<div class="r" style="padding:0"><img src="file://{ROOT}/assets/img/headshot-720.jpg" style="width:100%;height:100%;max-height:none;object-fit:cover"></div>'
     cap = chart_captions()
     chart = lambda slug: card_chart(slug, *cap[slug])
-    shoot(page('<span class="chip">MS Financial Engineering, NYU Tandon, 2027</span>', C.HERO["tagline"],
+    shoot(page('<span class="chip">MS Financial Engineering, NYU, 2027</span>', C.HERO["tagline"],
                "Rates, equity factors, volatility and market structure. Three SSRN preprints, two working papers, and an MS thesis on the US sovereign debt doom loop.",
                headshot), "home")
     shoot(page('<span class="chip">MS thesis, in progress</span>', "The U.S. Sovereign Debt Doom Loop",
