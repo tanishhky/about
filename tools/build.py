@@ -269,7 +269,7 @@ def person_jsonld():
         "image": BASE + "/assets/img/headshot-720.jpg",
         "email": "mailto:" + S["email"],
         "jobTitle": "MS Financial Engineering candidate",
-        "affiliation": {"@type": "CollegeOrUniversity", "name": "New York University, Tandon School of Engineering"},
+        "affiliation": {"@type": "CollegeOrUniversity", "name": "New York University"},
         "alumniOf": [
             {"@type": "CollegeOrUniversity", "name": "New York University"},
             {"@type": "CollegeOrUniversity", "name": "SRM University-AP"},
@@ -399,7 +399,7 @@ def page_home():
     return layout(
         "/",
         "Tanishk Yadav: Quantitative Research",
-        "MS Financial Engineering at NYU Tandon (May 2027). Point-in-time quantitative research across rates, equity factors, volatility and market structure: three SSRN preprints, two working papers, and an MS thesis on the US sovereign debt doom loop.",
+        "MS Financial Engineering at New York University (May 2027). Point-in-time quantitative research across rates, equity factors, volatility and market structure: three SSRN preprints, two working papers, and an MS thesis on the US sovereign debt doom loop.",
         body,
         extra_head=person_jsonld(),
     )
@@ -506,7 +506,7 @@ def page_paper(p):
         <picture><source srcset="/assets/img/headshot-720.webp" type="image/webp"><img src="/assets/img/headshot-720.jpg" alt="" loading="lazy"></picture>
         <div>
           <h3>Tanishk Yadav</h3>
-          <p>MS Financial Engineering at NYU Tandon, graduating May 2027, and looking for full-time quantitative research roles. My master's thesis measures, in real time, when US debt dynamics turn self-reinforcing.</p>
+          <p>MS Financial Engineering at New York University, graduating May 2027, and looking for full-time quantitative research roles. My master's thesis measures, in real time, when US debt dynamics turn self-reinforcing.</p>
           <div class="actions"><a class="btn btn-small btn-primary" href="/">See all my work</a><a class="btn btn-small" href="/thesis">The thesis</a><a class="btn btn-small" href="{S["resume"]}">Resume</a></div>
         </div>
       </div>
@@ -559,7 +559,7 @@ def page_project(pr):
     <p class="crumbs"><a href="/projects">Projects</a> / {e(pr["short"])}</p>
     <div class="card-meta"><span class="chip chip-plain">{e(pr["tag"])}</span></div>
     <h1>{e(pr["name"])}</h1>
-    <p class="byline"><a href="/">Tanishk Yadav</a>, NYU Tandon School of Engineering</p>
+    <p class="byline"><a href="/">Tanishk Yadav</a>, New York University</p>
     <div class="actions"><a class="btn btn-primary" href="{pr["github"]}">{ICON["code"]} Code on GitHub</a>{extra}</div>
   </div>
 </section>
@@ -575,7 +575,7 @@ def page_project(pr):
         <picture><source srcset="/assets/img/headshot-720.webp" type="image/webp"><img src="/assets/img/headshot-720.jpg" alt="" loading="lazy"></picture>
         <div>
           <h3>Tanishk Yadav</h3>
-          <p>MS Financial Engineering at NYU Tandon, graduating May 2027, and looking for full-time quantitative research roles. My master's thesis measures, in real time, when US debt dynamics turn self-reinforcing.</p>
+          <p>MS Financial Engineering at New York University, graduating May 2027, and looking for full-time quantitative research roles. My master's thesis measures, in real time, when US debt dynamics turn self-reinforcing.</p>
           <div class="actions"><a class="btn btn-small btn-primary" href="/">See all my work</a><a class="btn btn-small" href="/thesis">The thesis</a><a class="btn btn-small" href="{S["resume"]}">Resume</a></div>
         </div>
       </div>
@@ -603,7 +603,7 @@ def page_thesis():
   <div class="wrap">
     <div class="card-meta"><span class="chip chip-journal">MS thesis, in progress</span><span class="status-line">Expected May 2027</span></div>
     <h1>{e(T["title"])}</h1>
-    <p class="byline"><a href="/">Tanishk Yadav</a>, NYU Tandon School of Engineering. Advisor: <a href="{S["shimko"]}">Prof. David Shimko</a>.</p>
+    <p class="byline"><a href="/">Tanishk Yadav</a>, New York University. Advisor: <a href="{S["shimko"]}">Prof. David Shimko</a>.</p>
   </div>
 </section>
 <section style="padding-top:0;border-top:0">
@@ -626,7 +626,7 @@ def page_thesis():
 </section>
 """
     return layout("/thesis", "Master's Thesis: The U.S. Sovereign Debt Doom Loop",
-                  "An MS thesis by Tanishk Yadav (NYU Tandon, advisor Prof. David Shimko): a point-in-time framework for identifying, pricing, and responding to a self-reinforcing US debt loop.",
+                  "An MS thesis by Tanishk Yadav (New York University, advisor Prof. David Shimko): a point-in-time framework for identifying, pricing, and responding to a self-reinforcing US debt loop.",
                   body, og_image="/assets/img/og/thesis.png", active="Thesis")
 
 
@@ -675,7 +675,7 @@ def page_cv():
 {contact_section()}
 """
     return layout("/cv", "CV: Tanishk Yadav",
-                  "Education, research, experience, skills and certifications of Tanishk Yadav, MS Financial Engineering at NYU Tandon (May 2027).",
+                  "Education, research, experience, skills and certifications of Tanishk Yadav, MS Financial Engineering at New York University (May 2027).",
                   body, active="CV")
 
 
