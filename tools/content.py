@@ -22,7 +22,7 @@ SITE = {
 }
 
 HERO = {
-    "kicker": "MS Financial Engineering, NYU Tandon, May 2027",
+    "kicker": "MS Financial Engineering, New York University, May 2027",
     "tagline": "Quantitative research that only uses what was knowable at the time.",
     "lede_html": (
         "I work on rates, equity factors, volatility, and market structure, and I build the point-in-time "
@@ -322,7 +322,7 @@ PAPERS = [
 # ---------------------------------------------------------------- thesis (description only)
 THESIS = {
     "title": "The U.S. Sovereign Debt Doom Loop: A Point-in-Time Framework for Identification, Market Pricing, and Policy Response",
-    "meta": "MS thesis, NYU Tandon School of Engineering. Advisor: Prof. David Shimko. In progress, expected May 2027.",
+    "meta": "MS thesis, New York University. Advisor: Prof. David Shimko. In progress, expected May 2027.",
     "question": "When do US debt dynamics turn self-reinforcing, and what does each way out cost?",
     "framing": (
         "Higher debt can push rates up, and higher rates push debt service and future debt up further. The thesis "
@@ -494,7 +494,7 @@ def utm(source, medium, campaign, content=None):
 # ---------------------------------------------------------------- experience and education
 EXPERIENCE = [
     {
-        "org": "New York University, Tandon School of Engineering",
+        "org": "New York University",
         "place": "New York, NY",
         "span": "Jun 2026 to present",
         "roles": [
@@ -502,8 +502,8 @@ EXPERIENCE = [
             ("Contributor, Valuation Principles, Prof. Shimko's graduate valuation textbook (Wiley, in preparation)", "Jun 2026 to present"),
         ],
         "points": [
-            "Designated lead of the course's four assistants across two sections; resolve modeling questions on mortgage-pool prepayment and default, level-payment amortization, and Treasury curve bootstrapping, and fix ambiguous project specifications.",
-            "Restructured the textbook's Monte Carlo and variance-reduction material and built its figures, companion Python notebooks, Excel models, and a 164-page solutions manual; the chapters serve as the course text.",
+            "Picked by the professor to lead the course's four assistants across two sections; resolve modeling questions on mortgage-pool prepayment and default, level-payment amortization, and Treasury curve bootstrapping, and flag ambiguous project specifications for revision.",
+            "Restructured the book's Monte Carlo and variance-reduction material, built its figures, companion Python notebooks, and five Excel models, reconciled the 164-page solutions manual, and proposed additions the author approved into the text; the chapters are the course's text.",
         ],
     },
     {
@@ -528,9 +528,9 @@ EXPERIENCE = [
 
 EDUCATION = [
     {
-        "school": "New York University, Tandon School of Engineering",
-        "place": "Brooklyn, NY",
-        "degree": "Master of Science in Financial Engineering",
+        "school": "New York University",
+        "place": "New York, NY",
+        "degree": "Master of Science in Financial Engineering, Tandon School of Engineering",
         "dates": "Sep 2025 to May 2027",
         "notes": ["MS thesis in progress (see Thesis), advised by Prof. David Shimko"],
         "coursework": [
