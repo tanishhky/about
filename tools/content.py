@@ -55,58 +55,62 @@ PRINCIPLES = [
 PAPERS = [
     {
         "slug": "concentrated-sectors",
-        "title": "Concentrated Sectors Transmit Less: Within-Sector Concentration and Time-Varying Connectedness in the S&P 500, 2018 to 2026",
-        "short": "Concentrated Sectors Transmit Less",
-        "chip": "SSRN preprint",
-        "chip_kind": "ssrn",
-        "status": "SSRN preprint 6475898, revised September 2026 to this manuscript. Not peer reviewed.",
-        "date": "September 2026",
-        "pub_date": "2026/09/23",
-        "pdf": "/papers/yadav-2026-concentrated-sectors-transmit-less.pdf",
+        "title": "Too Big to Co-Move: Concentration and Sector Connectedness Around the World",
+        "short": "Too Big to Co-Move",
+        "chip": "Working paper",
+        "chip_kind": "working",
+        "status": "Working paper, October 2026. An earlier version of this project is on SSRN (abstract 6475898). Not peer reviewed.",
+        "date": "October 2026",
+        "pub_date": "2026/10/13",
+        "pdf": "/papers/yadav-2026-too-big-to-co-move.pdf",
         "code": "https://github.com/tanishhky/sp500-sector-analysis",
-        "ssrn": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6475898",
-        "card_finding": "A one-point rise in a sector's top-three share lowers its net shock transmission by 0.47 points (t = -3.6), and none of 110 apparent Granger lead-lag links survives robust tests.",
-        "question": "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025. Did that concentration change the way shocks travel between the eleven sectors?",
+        "ssrn": None,
+        "card_finding": "Concentrated sectors co-move less with the rest of the market: a one-point rise in top-three share lowers monthly R\u00b2 by 0.75 points (permutation p = 0.04), though concentration does not explain why markets disconnected.",
+        "question": "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025, and by August 2026 connectedness among the eleven sectors had reached its lowest level in the sample. Does concentration explain the disconnection?",
         "abstract": (
-            "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025. "
-            "This paper asks how that concentration changed the way shocks travel between the eleven GICS sectors, "
-            "using daily returns and range volatilities of the Select Sector SPDR funds from October 2018 to August "
-            "2026, a point-in-time constituent panel, and a filtered TVP-VAR connectedness model. Sector "
-            "connectedness is contemporaneous: classical Granger tests appear to find 90 of 110 significant links, "
-            "but they are oversized under GARCH errors, heteroskedasticity-robust tests leave none, and lagged "
-            "cross-sector returns have negative out-of-sample R² for every sector. Total connectedness peaked "
-            "at 88.9% in March 2020 and fell to a sample low of 53.7% in August 2026. With sector and month fixed "
-            "effects, a one-point rise in a sector's top-three share lowers its net directional connectedness by "
-            "0.47 points (t = -3.6), and by 0.66 points on uncapped constituent returns. Concentrated sectors also "
-            "co-move less with the rest of the market, consistent with granular firm-level shocks dominating their "
-            "returns."
+            "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025, and by "
+            "August 2026 connectedness among the eleven GICS sectors had reached its lowest level in the sample. This "
+            "paper asks whether concentration explains the disconnection, using daily returns of the Select Sector SPDR "
+            "funds from October 2018 to August 2026, an uncapped constituent panel with point-in-time membership, a "
+            "filtered TVP-VAR, and constituent panels for ten other major markets. Concentrated sectors co-move less "
+            "with the rest of the market. On uncapped U.S. returns, a one-point rise in a sector's top-three share "
+            "lowers its monthly R\u00b2 against the other ten sectors by 0.75 points, and the result holds when "
+            "concentration paths are randomly reassigned across sectors (p = 0.04). The mechanism is granular: in every "
+            "market studied, a sector's three largest firms co-move less with the market than the rest of the sector, "
+            "in 78% of 933 sector-years. The link between concentration and co-movement reappears in Japan, Canada and, "
+            "more weakly, the United Kingdom, but not in the other seven markets. Everywhere, the shift in weight "
+            "toward the largest firms is small in aggregate, and sector co-movement fell after 2025 in eight of eleven "
+            "markets, including several where concentration fell. Net directional connectedness, the usual way to read "
+            "such results, depends on how the variance decomposition is normalized and overstates the link. "
+            "Concentration explains which sectors are least connected, not why markets disconnected."
         ),
         "results": [
-            ("-0.47 pts", "net shock transmission per one-point rise in a sector's top-three share (t = -3.6), sector and month fixed effects"),
-            ("-0.66 pts", "the same effect on uncapped constituent-built returns (t = -4.8)"),
+            ("-0.75 pts", "monthly R\u00b2 against the other ten sectors per one-point rise in top-three share, uncapped U.S. returns (permutation p = 0.04)"),
+            ("78%", "of 933 sector-years, across eleven markets, in which a sector's three largest firms co-move less with the market than the rest of the sector"),
+            ("3 of 10", "other markets where the concentration link reappears: Japan, Canada and, more weakly, the United Kingdom"),
+            ("< 1 pt", "change in U.S. average squared correlation from holding top-three weights at 2018 levels, against a 28-point fall since 2018"),
             ("88.9%", "peak total connectedness (16 March 2020); sample low 53.7% (August 2026)"),
             ("0 of 110", "Granger lead-lag links surviving heteroskedasticity-robust tests; classical tests appear to find 90"),
-            ("21-31%", "false-rejection rate of the classical Granger test at a nominal 5% under GARCH errors, from a data-calibrated Monte Carlo"),
-            ("78", "since-removed firms recovered for the point-in-time constituent panel"),
         ],
         "figures": [
-            ("cs-tci", "Total connectedness of S&P 500 sector returns (a) and range volatility (b). The filtered TVP-VAR uses only data available on each date; the 200-day rolling window invents a drop when the April 2025 tariff shock leaves the window."),
-            ("cs-concentration-link", "Within-sector concentration and net shock transmission, between sectors (a) and within sectors after two-way fixed effects (b)."),
-            ("cs-net-heatmap", "Net directional connectedness by sector, monthly means of daily TVP-VAR estimates. Red sectors transmit shocks; blue sectors receive them."),
+            ("cs-tci", "Total connectedness index, daily. Panel (a): returns, filtered TVP-VAR and a 200-day rolling VAR. Panel (b): log range volatility, filtered TVP-VAR."),
+            ("cs-concentration-link", "Top-three share and co-movement with the rest of the market, uncapped constituent returns. Panel (a): change in sector R\u00b2 against the change in top-three share, 2018-19 to 2025-26. Panel (b): binned scatter after removing sector and month fixed effects."),
+            ("cs-granular-world", "Granular pattern and sector co-movement in eleven markets. Panel (a): R\u00b2 of each sector's three largest firms and of the rest of the sector on the market's other sectors. Panel (b): mean squared pairwise correlation among sector returns by year."),
         ],
         "methods": [
             "Filtered TVP-VAR connectedness with forgetting factors (Antonakakis, Chatziantoniou and Gabauer 2020), so every date uses only data available on that date",
-            "Point-in-time S&P 500 constituent panel: historical membership, split-consistent share counts, the 2023 GICS reclassification, dual-class deduplication",
-            "Panel regressions with sector and month fixed effects and Driscoll-Kraay standard errors",
-            "Granger tests with heteroskedasticity-robust Wald statistics and Benjamini-Hochberg control, plus a Monte Carlo that measures the classical test's size",
+            "Uncapped constituent returns on point-in-time S&P 500 membership: historical share counts, the 2023 GICS reclassification, dual-class deduplication, 78 since-removed firms recovered; the same design for ten other markets",
+            "Panel regressions with sector and month fixed effects, Driscoll-Kraay errors, a wild cluster bootstrap and a permutation test that reassigns concentration paths across sectors",
+            "Firm-level decomposition of every sector into its three largest firms and the rest, plus a counterfactual that holds top-three weights at their 2018 levels",
         ],
         "limits": [
-            "The concentration effect is a relationship in levels; it does not appear in first differences.",
-            "An earlier version of this project on SSRN reported Granger results that did not survive robust tests. The SSRN entry now carries this manuscript, and the repository lists each retracted claim.",
+            "The cross-market link is weak: it appears in Japan, Canada and, more weakly, the United Kingdom, not in the other seven markets, and other-market panels use current index membership.",
+            "Concentration explains which sectors are least connected, not why markets disconnected: holding top-three weights at 2018 levels moves the U.S. result by less than one point.",
+            "The usual net-directional reading depends on how the variance decomposition is normalized and overstates the link. An earlier version of this project, on SSRN, reported net transmission and Granger results that do not survive scalar normalization, permutation inference and robust tests.",
         ],
-        "keywords": ["connectedness", "market concentration", "TVP-VAR", "Granger causality", "heteroskedasticity-robust inference", "granularity"],
+        "keywords": ["connectedness", "market concentration", "granularity", "normalization", "randomization inference", "TVP-VAR"],
         "jel": "C12, C23, C32, G12, L11",
-        "bibtex": "@article{yadav2026concentrated,\n  title   = {Concentrated Sectors Transmit Less: Within-Sector Concentration and Time-Varying Connectedness in the {S\\&P} 500, 2018 to 2026},\n  author  = {Yadav, Tanishk},\n  year    = {2026},\n  journal = {SSRN Electronic Journal},\n  note    = {Preprint, abstract 6475898}\n}",
+        "bibtex": "@unpublished{yadav2026toobig,\n  title  = {Too Big to Co-Move: Concentration and Sector Connectedness Around the World},\n  author = {Yadav, Tanishk},\n  year   = {2026},\n  note   = {Working paper}\n}",
     },
     {
         "slug": "ratewalk",
@@ -607,6 +611,6 @@ POSTS = [
         "url": "https://www.linkedin.com/posts/tanishkyadav_sector-level-analysis-and-clustering-of-s-ugcPost-7447846466427162624-z4sa",
         "image": "assets/img/writing/sp500-clustering-post.png",
         "summary": "The first version of the S&P 500 sector project: concentration measures, clustering, and lead-lag tests across 68 sub-sectors.",
-        "note": "Correction: this post's Granger and clustering results did not survive later testing. The project was rebuilt as Concentrated Sectors Transmit Less, which lists every retracted claim.",
+        "note": "Correction: this post's Granger and clustering results did not survive later testing. The project was rebuilt as Too Big to Co-Move, which lists every retracted claim.",
     },
 ]
