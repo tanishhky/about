@@ -549,6 +549,15 @@ def page_projects_index():
                   body, active="Projects")
 
 
+def project_figures(pr):
+    """Result figures drawn from the project's own output (tools/projectfigs.py); optional per project."""
+    figs = pr.get("figures")
+    if not figs:
+        return ""
+    body = "".join(f'<div style="margin-top:{0 if i == 0 else 28}px">{figure(f, c, i + 1)}</div>' for i, (f, c) in enumerate(figs))
+    return f'<div class="block"><h2>Results</h2>{body}</div>\n    '
+
+
 def page_project(pr):
     facts = "".join(f'<div class="result"><div class="result-num">{e(n)}</div><div class="result-label">{e(l)}</div></div>' for n, l in pr["facts"])
     extra = "".join(f'<a class="btn" href="{u}">{ICON["ext"]} {e(t)}</a>' for t, u in pr["extra_links"])
@@ -567,7 +576,7 @@ def page_project(pr):
   <div class="wrap">
     <p class="question narrow">{e(pr["lede"])}</p>
     <div class="block"><h2>Key facts</h2><div class="results n{len(pr["facts"])}">{facts}</div></div>
-    <div class="block prose"><h2>How it works</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in pr["points"])}</ul></div>
+    {project_figures(pr)}<div class="block prose"><h2>How it works</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in pr["points"])}</ul></div>
     <div class="block prose"><h2>Built with</h2><p>{e(pr["stack"])}</p></div>
     <div class="block prose"><h2>What it does not show</h2><ul>{"".join(f"<li>{e(x)}</li>" for x in pr["limits"])}</ul></div>
     <div class="block">
