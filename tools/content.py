@@ -57,14 +57,14 @@ PAPERS = [
         "slug": "concentrated-sectors",
         "title": "Too Big to Co-Move: Concentration and Sector Connectedness Around the World",
         "short": "Too Big to Co-Move",
-        "chip": "Working paper",
-        "chip_kind": "working",
-        "status": "Working paper, October 2026. An earlier version of this project is on SSRN (abstract 6475898). Not peer reviewed.",
+        "chip": "SSRN preprint",
+        "chip_kind": "ssrn",
+        "status": "SSRN preprint 6475898, October 2026. Not peer reviewed.",
         "date": "October 2026",
         "pub_date": "2026/10/13",
         "pdf": "/papers/yadav-2026-too-big-to-co-move.pdf",
         "code": "https://github.com/tanishhky/sp500-sector-analysis",
-        "ssrn": None,
+        "ssrn": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6475898",
         "card_finding": "Concentrated sectors co-move less with the rest of the market: a one-point rise in top-three share lowers monthly R\u00b2 by 0.75 points (permutation p = 0.04), though concentration does not explain why markets disconnected.",
         "question": "The ten largest firms rose from 24% to 41% of S&P 500 market capitalization between 2018 and 2025, and by August 2026 connectedness among the eleven sectors had reached its lowest level in the sample. Does concentration explain the disconnection?",
         "abstract": (
@@ -106,11 +106,11 @@ PAPERS = [
         "limits": [
             "The cross-market link is weak: it appears in Japan, Canada and, more weakly, the United Kingdom, not in the other seven markets, and other-market panels use current index membership.",
             "Concentration explains which sectors are least connected, not why markets disconnected: holding top-three weights at 2018 levels moves the U.S. result by less than one point.",
-            "The usual net-directional reading depends on how the variance decomposition is normalized and overstates the link. An earlier version of this project, on SSRN, reported net transmission and Granger results that do not survive scalar normalization, permutation inference and robust tests.",
+            "The usual net-directional reading depends on how the variance decomposition is normalized and overstates the link: under the scalar normalization the concentration effect on net connectedness disappears.",
         ],
         "keywords": ["connectedness", "market concentration", "granularity", "normalization", "randomization inference", "TVP-VAR"],
         "jel": "C12, C23, C32, G12, L11",
-        "bibtex": "@unpublished{yadav2026toobig,\n  title  = {Too Big to Co-Move: Concentration and Sector Connectedness Around the World},\n  author = {Yadav, Tanishk},\n  year   = {2026},\n  note   = {Working paper}\n}",
+        "bibtex": "@article{yadav2026toobig,\n  title   = {Too Big to Co-Move: Concentration and Sector Connectedness Around the World},\n  author  = {Yadav, Tanishk},\n  year    = {2026},\n  journal = {SSRN Electronic Journal},\n  note    = {Preprint, abstract 6475898}\n}",
     },
     {
         "slug": "ratewalk",
@@ -170,54 +170,57 @@ PAPERS = [
     },
     {
         "slug": "volatility-managed-factors",
-        "title": "Volatility-Managed Factor Portfolios: A Replication and Extension on the Fama-French Five Factors and Momentum",
-        "short": "Volatility-Managed Factor Portfolios",
+        "title": "Calm Months, Crash Months: Why Volatility Management Pays for Momentum and Not the Market",
+        "short": "Calm Months, Crash Months",
         "chip": "SSRN preprint",
         "chip_kind": "ssrn",
-        "status": "SSRN preprint 7113079, July 2026. Not peer reviewed.",
-        "date": "July 2026",
-        "pub_date": "2026/07/29",
-        "pdf": "/papers/yadav-2026-volatility-managed-factor-portfolios.pdf",
+        "status": "SSRN preprint 7113079, September 2026. Not peer reviewed.",
+        "date": "September 2026",
+        "pub_date": "2026/09/28",
+        "pdf": "/papers/yadav-2026-calm-months-crash-months.pdf",
         "code": "https://github.com/tanishhky/Equity-Factor-Volatility-Analysis",
         "ssrn": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7113079",
-        "card_finding": "Volatility timing pays only on crash-prone factors: momentum earns 8.9% a year of alpha (t = 5.0) and its Sharpe rises from 0.51 to 0.89; size, value and investment gain nothing.",
-        "question": "Moreira and Muir (2017) showed that scaling factor exposure by inverse recent variance raises Sharpe ratios. Does it hold across the Fama-French five factors and momentum, and after costs?",
+        "card_finding": "Built with only past data, capped leverage and trading costs, volatility management lifts momentum's Sharpe ratio from 0.43 to 0.94 and helps none of the other five factors. A closed-form formula for momentum's market beta explains why.",
+        "question": "Scaling a factor's exposure by the inverse of its recent variance raises many Sharpe ratios in Moreira and Muir (2017), but in real time most of the gains disappear and momentum survives. Why momentum, and why not the market, for which the rule was first proposed?",
         "abstract": (
-            "We replicate and extend Moreira and Muir (2017) by volatility-managing the Fama-French five factors "
-            "plus the momentum factor over 1963 to 2026, using daily data from the Kenneth French Data Library. "
-            "Each factor's exposure is scaled by the inverse of its prior-month realized variance, so the leverage "
-            "decision uses only past information. Regressing the managed factor on the original (the Moreira-Muir "
-            "spanning test, with Newey-West standard errors) gives an honest, factor-dependent answer: volatility "
-            "timing earns large and statistically significant alpha on the crash-prone factors, momentum (8.9% per "
-            "year, t = 5.0) and profitability (RMW, 2.3% per year, t = 2.9), while it adds nothing for size, value, "
-            "or investment, and the market factor's managed alpha is positive but insignificant over the full "
-            "sample. Volatility-managed momentum raises the annualized Sharpe ratio from 0.51 to 0.89 (0.81 net of "
-            "a 14 basis point per turn transaction cost). The results are consistent with Barroso and Santa-Clara "
-            "(2015): the factors that benefit are those whose left-tail crashes cluster in high-volatility states. "
-            "We treat the study as performance attribution rather than a live strategy, reporting turnover and "
-            "net-of-cost Sharpe throughout."
+            "Built with only past data, capped leverage and trading costs, volatility management improves momentum, "
+            "from a Sharpe ratio of 0.43 to 0.94 over July 1973 to August 2026, but none of the other Fama-French "
+            "factors. We explain why. Sorting stocks on past returns loads momentum on the market in proportion to the "
+            "market's own return over the formation window. Using Tweedie's formula, we derive this beta in closed form "
+            "from two cross-sectional quantities, the dispersion of stock betas and the density of past returns at the "
+            "portfolio breakpoints, and test it on CRSP with no fitted parameter. Against realized betas from 1932 to "
+            "2025, the prediction has a slope of 0.92 (standard error 0.19) and 79% of the explanatory power of an "
+            "in-sample regression: it captures how momentum's beta moves, while the realized level sits 0.20 below the "
+            "prediction. Months after market declines are 29% of the sample and supply 71% of the covariance through "
+            "which timing adds to momentum's return. If the market's premium rises with its variance, the same logic "
+            "implies that the market should not be volatility-timed; in our sample it is not improved by it."
         ),
         "results": [
-            ("8.9% / yr", "managed momentum alpha (t = 5.0)"),
-            ("0.51 to 0.89", "momentum Sharpe ratio; 0.81 after 14 bp per-turn costs"),
-            ("2.3% / yr", "managed profitability (RMW) alpha (t = 2.9)"),
-            ("Nothing", "for size, value, or investment; market alpha positive but insignificant"),
+            ("0.43 to 0.94", "momentum's Sharpe ratio in real time, net of costs, July 1973 to August 2026 (Holm-adjusted p = 0.023)"),
+            ("0 of 5", "other factors whose Sharpe ratio improves significantly; the market's falls from 0.51 to 0.48"),
+            ("76 to 23", "momentum's largest loss at equal volatility, in percentage points"),
+            ("0.92", "slope of realized on predicted momentum beta, CRSP 1932 to 2025, no fitted parameter (standard error 0.19)"),
+            ("29% / 71%", "share of months that follow market declines, and their share of the covariance through which timing adds to momentum's return"),
+            ("0.78 to 0.97", "managed momentum's Sharpe ratio across variance signals, block lengths, caps, scaling rules and start dates"),
         ],
         "figures": [
-            ("vm-sharpe-bars", "Annualized Sharpe ratio of each factor, original vs volatility-managed, 1963 to 2026."),
+            ("vm-terciles", "Annualized mean factor return by tercile of the real-time managed exposure, before and after the published samples end. Turbulent months are the third with the lowest exposure, that is, the highest prior variance."),
+            ("vm-formation-beta", "Realized market beta of French's momentum in the month after formation, within each decile of the predicted beta, July 1932 to December 2025, with 95% intervals. Dashed: the exact prediction; solid: the fitted relation."),
         ],
         "methods": [
-            "Daily Kenneth French data, 1963 to 2026",
-            "Exposure scaled by inverse prior-month realized variance, so leverage uses only past data",
-            "Moreira-Muir spanning regressions with Newey-West standard errors",
-            "Turnover and 14 bp per-turn transaction costs reported throughout",
+            "Every position uses only data available at the end of the prior month: an expanding-window scale constant, exposure capped at 1.5, and 14 basis points per unit of exposure change",
+            "Variance from daily returns with a one-month half-life, chosen for momentum on 1973 to 2016 data among 24 variants fixed in advance",
+            "Sharpe ratios compared with the Ledoit-Wolf studentized block bootstrap, Holm-adjusted across the six factors",
+            "A closed-form formula for momentum's market beta via Tweedie's formula, tested on CRSP with no fitted parameter; the test was registered before the data were downloaded",
         ],
         "limits": [
-            "This is performance attribution, not a live strategy; as in Moreira and Muir, the scaling constant is set over the full sample.",
+            "The formula captures how momentum's beta moves, not its level: realized betas sit 0.20 below the prediction, so a joint test of an exact prediction rejects.",
+            "After the published samples end the gain is smaller, 0.21 to 0.44 over 116 months, and the change between the periods is not significant (p = 0.24).",
+            "Net figures charge costs on changes in exposure, not on the trading inside each factor portfolio.",
         ],
-        "keywords": ["volatility-managed portfolios", "factor timing", "momentum", "Fama-French", "Newey-West"],
-        "jel": None,
-        "bibtex": "@article{yadav2026volmanaged,\n  title   = {Volatility-Managed Factor Portfolios: A Replication and Extension on the {Fama-French} Five Factors and Momentum},\n  author  = {Yadav, Tanishk},\n  year    = {2026},\n  journal = {SSRN Electronic Journal},\n  note    = {Preprint, abstract 7113079}\n}",
+        "keywords": ["volatility-managed portfolios", "momentum", "time-varying beta", "Tweedie's formula", "factor timing"],
+        "jel": "G11, G12, G14",
+        "bibtex": "@article{yadav2026calmmonths,\n  title   = {Calm Months, Crash Months: Why Volatility Management Pays for Momentum and Not the Market},\n  author  = {Yadav, Tanishk},\n  year    = {2026},\n  journal = {SSRN Electronic Journal},\n  note    = {Preprint, abstract 7113079}\n}",
     },
     {
         "slug": "voledge",
