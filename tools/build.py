@@ -701,6 +701,36 @@ def page_writing():
     return layout("/writing", "Writing: Tanishk Yadav", "Project teardowns and plain-English finance explainers by Tanishk Yadav.", body, active="Writing")
 
 
+def page_privacy():
+    body = f"""
+<section class="paper-head">
+  <div class="wrap narrow">
+    <p class="kicker">Privacy</p>
+    <h1>Privacy policy for SecondBrain</h1>
+    <p class="lede" style="margin-top:16px">SecondBrain is a personal automation tool that I, Tanishk Yadav, run on my own computer to organize my own information. It is not offered to anyone else.</p>
+  </div>
+</section>
+<section style="padding-top:8px;border-top:0"><div class="wrap narrow prose">
+  <h2>What it reads</h2>
+  <p>SecondBrain signs in to my own Google accounts with read-only access, and only to these services:</p>
+  <ul>
+    <li><strong>Gmail:</strong> job-alert emails in my inbox, to list new job postings.</li>
+    <li><strong>Google Analytics:</strong> visit statistics for this website.</li>
+    <li><strong>Google Calendar:</strong> my upcoming events, to show deadlines on my own dashboard.</li>
+    <li><strong>Google Health:</strong> my own activity, sleep and health measurements, for personal tracking.</li>
+  </ul>
+  <p>It never sends email, changes calendar events, edits analytics settings or writes any data back to Google.</p>
+  <h2>Where the data goes</h2>
+  <p>The data is processed on my computer and stored in local files there. It is not sold, shared with third parties, or used for advertising. I may review it with the AI assistant I use for my own work. Use of information received from Google APIs follows the Google API Services User Data Policy, including its Limited Use requirements.</p>
+  <h2>Removing access</h2>
+  <p>Access can be revoked at any time from each Google account's security settings, under third-party connections, and the local files can be deleted.</p>
+  <h2>Contact</h2>
+  <p>Questions: <a href="mailto:{S["email"]}">{e(S["email"])}</a>. Last updated 31 October 2026.</p>
+</div></section>
+"""
+    return layout("/privacy", "Privacy policy: Tanishk Yadav", "Privacy policy for SecondBrain, a personal tool that reads the owner's own Google data.", body)
+
+
 def page_404():
     body = """
 <section class="paper-head" style="min-height:50vh">
@@ -730,6 +760,7 @@ def main():
         "cv.html": page_cv(),
         "writing.html": page_writing(),
         "404.html": page_404(),
+        "privacy.html": page_privacy(),
     }
     for p in C.PAPERS:
         pages[f"research/{p['slug']}.html"] = page_paper(p)
